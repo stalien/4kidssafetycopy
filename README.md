@@ -1,16 +1,16 @@
-# [Erlymon Monitor for Android](https://www.erlymon.org/apps)
+# [4kidssafety for Android](http://it-face.com)
 
-[![](https://play.google.com/intl/en_us/badges/images/badge_new.png)](https://play.google.com/store/apps/details?id=org.erlymon.monitor)
+# [![](https://play.google.com/intl/en_us/badges/images/badge_new.png)](https://play.google.com/store/apps/details?id=org.erlymon.monitor)
 
 ## Contacts
 
-Author - Sergey Penkovsky ([dev@erlymon.org](mailto:dev@erlymon.org))
+Author - IT-FACE ([info@it-face.com](mailto:info@it-face.com))
 
-Website - [https://www.erlymon.org/apps](https://www.erlymon.org/apps)
+Website - [http://it-face.com](http://it-face.com)
 
 ## Overview
 
-Erlymon Monitor is an Android  application. It can work with Erlymon/Traccar open source server software.
+4kidssafety is an Android  application. It can work with Traccar open source server software.
 
 ## License
 
