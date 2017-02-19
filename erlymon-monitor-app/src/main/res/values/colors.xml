@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016, Sergey Penkovsky <sergey.penkovsky@gmail.com>
+  ~
+  ~ This file is part of Erlymon Monitor.
+  ~
+  ~ Erlymon Monitor is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Erlymon Monitor is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Erlymon Monitor.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <color name="colorPrimary">#5c9b30</color>
+    <color name="colorRed">#ba2536</color>
+    <color name="colorGrey">#393939</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorPrimaryDark">#96bc35</color>
+    <color name="colorAccent">#5d9c31</color>
+
+    <color name="colorOnlineStatus">#c7fbdb</color>
+    <color name="colorOfflineStatus">#ffccd2</color>
+    <color name="colorUnknownStatus">#feecca</color>
+</resources>
