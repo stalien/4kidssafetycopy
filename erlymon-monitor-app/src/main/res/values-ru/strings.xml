@@ -105,10 +105,10 @@
     <string name="mapBingAerial">Bing Maps Спутник</string>
     <string name="mapCustom">Пользовательская карта</string>
     <string name="aboutTitle">О программе</string>
-    <string name="appLogo">Erlymon Monitor</string>
-    <string name="aboutWeb">Для получения дополнительной информации посетите\nwww.erlymon.org/apps</string>
+    <string name="appLogo">4Kids</string>
+    <string name="aboutWeb">Для получения дополнительной информации посетите\nwww.4kidssafety.ru</string>
     <string name="aboutLicense">Это приложение распростаняется бесплатно, исходный код распростаняется по лицензии GNU General Public License, Version 3.0 и доступен на GitHub.</string>
-    <string name="aboutDescription">Erlymon Monitor это Android-приложение. Совместимо с Erlymon/Traccar сервером мониторинга.</string>
+    <string name="aboutDescription">4kids safety - это Android-приложение, с которым ваши дети будут в безопасности!</string>
     <string name="userTitle">Пользователь</string>
     <string name="errorPermissionWriteStorage">Доступ на запись к внутренней памяти необходим для кеширования карт.</string>
     <string name="errorPermissionCoarseLocation">Доступ к местоположению необходим для отображение авшего местоположения на карте.</string>

@@ -118,10 +118,9 @@
     <string name="mapBingAerial">Bing Maps Aerial</string>
     <string name="mapCustom">Custom Map</string>
     <string name="settingsDevices">Devices</string>
-
-    <string name="aboutDescription">Erlymon Monitor is an Android  application. It can work with Erlymon/Traccar open source server software.</string>
+    <string name="aboutDescription">4kids is an Android  application. It can work with Traccar open source server software.</string>
     <string name="aboutLicense">This application is free and open source, source code is licensed under GNU General Public License, Version 3.0 and available on GitHub.</string>
-    <string name="aboutWeb">For more information visit\nwww.erlymon.org/apps</string>
+    <string name="aboutWeb">For more information visit\nwww.4kidssafety.ru</string>
     <string name="aboutTitle">About</string>
     <string name="userTitle">User</string>
 </resources>

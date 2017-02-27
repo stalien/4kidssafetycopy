@@ -90,6 +90,7 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
         }
         device.name = name.text.toString()
         device.uniqueId = identifier.text.toString()
+
         return device
     }
 

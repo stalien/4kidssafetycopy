@@ -122,9 +122,9 @@
     <string name="userAdmin">Admin</string>
     <string name="aboutTitle">About</string>
     <string name="appLogo">Erlymon Monitor</string>
-    <string name="aboutWeb">Per maggiori informazioni visitate \nwww.erlymon.org/apps</string>
-    <string name="aboutLicense">Questa applicazione e` gratuita e open source, il codice sorgente e` sotto licenza GNU General Public License Version 3.0 e disponibile su GitHub.</string>
-    <string name="aboutDescription">Erlymon Monitor is an Android  application. It can work with Erlymon/Traccar open source server software.</string>
+    <string name="aboutWeb">For more information visit\nwww.4kidssafety.ru</string>
+    <string name="aboutLicense">This application is free and open source, source code is licensed under GNU General Public License, Version 3.0 and available on GitHub.</string>
+    <string name="aboutDescription">4kids safety is an Android  application. It can work with Traccar open source server software.</string>
     <string name="userTitle">User</string>
     <string name="errorPermissionWriteStorage">Write sotrage permissions are needed for show map.</string>
     <string name="errorPermissionCoarseLocation">Coarse location permissions are needed for show your location.</string>

@@ -21,6 +21,7 @@
 <resources>
     <string name="appName">4kidsSafe</string>
     <string name="safety">safety</string>
+
     <string name="settingsAccount">Профил</string>
     <string name="sharedEdit">Редакция</string>
     <string name="sharedRemove">Изтриване</string>
@@ -105,9 +106,9 @@
     <string name="settingsUsers">Потребител</string>
     <string name="aboutTitle">About</string>
     <string name="appLogo">Erlymon Monitor</string>
-    <string name="aboutWeb">For more information visit\nwww.erlymon.org/apps</string>
+    <string name="aboutWeb">For more information visit\nwww.4kidssafety.ru</string>
     <string name="aboutLicense">This application is free and open source, source code is licensed under GNU General Public License, Version 3.0 and available on GitHub.</string>
-    <string name="aboutDescription">Erlymon Monitor is an Android  application. It can work with Erlymon/Traccar open source server software.</string>
+    <string name="aboutDescription">4kids safety is an Android  application. It can work with Traccar open source server software.</string>
     <string name="userTitle">Потребител</string>
     <string name="errorPermissionWriteStorage">Write sotrage permissions are needed for show map.</string>
     <string name="errorPermissionCoarseLocation">Coarse location permissions are needed for show your location.</string>

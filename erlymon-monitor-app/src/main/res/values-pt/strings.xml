@@ -21,7 +21,7 @@
 <resources>
     <string name="appName">4kidsSafety</string>
     <string name="safety">safety</string>
-    <string name="forkids"> kids</string>
+
     <string name="sharedLoading">Carregando…</string>
     <string name="sharedSave">Salvar</string>
     <string name="sharedRemove">Remover</string>
@@ -124,9 +124,9 @@
     <string name="userAdmin">Admin</string>
     <string name="aboutTitle">Sobre</string>
     <string name="appLogo">Erlymon Monitor</string>
-    <string name="aboutWeb">Para mais informações visite\nwww.erlymon.org/apps</string>
-    <string name="aboutLicense">Esta aplicação é livre e de código aberto, o código fonte é licenciado sob a licença GNU General Public Versão 3.0 e disponível no GitHub.</string>
-    <string name="aboutDescription">Erlymon Monitor is an Android  application. It can work with Erlymon/Traccar open source server software.</string>
+    <string name="aboutWeb">For more information visit\nwww.4kidssafety.ru</string>
+    <string name="aboutLicense">This application is free and open source, source code is licensed under GNU General Public License, Version 3.0 and available on GitHub.</string>
+    <string name="aboutDescription">4kids safety is an Android  application. It can work with Traccar open source server software.</string>
     <string name="userTitle">User</string>
     <string name="errorPermissionWriteStorage">Write sotrage permissions are needed for show map.</string>
     <string name="errorPermissionCoarseLocation">Coarse location permissions are needed for show your location.</string>

@@ -27,7 +27,7 @@ object MainPref : KotprefModel() {
     var email: String by stringPrefVar(default = "")
     var password: String by stringPrefVar(default = "")
 
-    var dns: String by stringPrefVar(default = "web.erlymon.org")
+    var dns: String by stringPrefVar(default = "188.120.235.97:8082")
     var sslOrTls: Boolean by booleanPrefVar(default = false)
     var protocolVersion: Float by floatPrefVar(default = 3.4F)
 }

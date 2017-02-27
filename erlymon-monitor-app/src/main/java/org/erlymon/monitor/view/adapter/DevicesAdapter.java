@@ -47,7 +47,6 @@ public class DevicesAdapter extends RealmBaseAdapter<Device> implements ListAdap
         private GridLayout layout;
         private TextView name;
         private TextView identifier;
-
         public ViewHolder(View itemView) {
             layout = (GridLayout) itemView.findViewById(R.id.layout);
             name = (TextView) itemView.findViewById(R.id.name);
