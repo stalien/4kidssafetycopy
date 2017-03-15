@@ -87,7 +87,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="301dp"
             android:padding="10dp"
             android:background="@drawable/family" ></FrameLayout>
     </LinearLayout>
