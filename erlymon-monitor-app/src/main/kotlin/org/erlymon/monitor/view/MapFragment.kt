@@ -71,6 +71,8 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
+
         // Inflate the layout for this fragment
         return inflater!!.inflate(R.layout.fragment_map, container, false)
     }
@@ -86,6 +88,7 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
 
         mapview.isTilesScaledToDpi = true
         mapview.setMultiTouchControls(true)
+
 
         RxView.clicks(myPlace)
                 .compose(RxPermissions.getInstance(context).ensure(Manifest.permission.ACCESS_COARSE_LOCATION))
@@ -111,6 +114,8 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
                         } else {
                             mLocationOverlay?.disableFollowLocation()
                             mLocationOverlay?.disableMyLocation()
+
+
                         }
                     } else {
                         myPlace.isChecked = false
@@ -121,6 +126,13 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
 
     override fun onResume() {
         super.onResume()
+
+        mapview.controller.setZoom(4)
+        mapview.controller.animateTo(GeoPoint(55.7559067, 37.6171875))
+
+
+
+
 
         mRadiusMarkerClusterer = DevicesMarkerClusterer(context)
         mRadiusMarkerClusterer?.setIcon(BitmapFactory.decodeResource(resources, R.drawable.marker_cluster))

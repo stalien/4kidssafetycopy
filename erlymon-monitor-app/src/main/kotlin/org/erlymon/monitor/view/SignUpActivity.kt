@@ -37,10 +37,16 @@ class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
-        setSupportActionBar(toolbar)
+       // setSupportActionBar(toolbar)
+
+        btn_back.setOnClickListener { v ->
+            val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
+            startActivity(intent)
+        }
 
         presenter = UserPresenterImpl(this, this)
         fab_account_save.setOnClickListener { v -> presenter?.onSaveButtonClick() }
+
     }
 
     override fun showData(data: User) {
@@ -64,7 +70,7 @@ class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
     }
 
     override fun showError(error: String) {
-        makeToast(toolbar, error)
+      //  makeToast(toolbar, error)
     }
 
     companion object {

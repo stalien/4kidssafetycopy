@@ -17,7 +17,9 @@
   ~ along with Erlymon Monitor.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.erlymon.monitor">
+    package="org.erlymon.monitor"
+    android:versionCode="5"
+    android:versionName="0.11" >
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -32,7 +34,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".view.SignInActivity"
+            android:name=".view.IntroActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -77,6 +79,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.AboutActivity"
+            android:label="@string/aboutTitle"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".view.SignInActivity"
             android:label="@string/aboutTitle"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>

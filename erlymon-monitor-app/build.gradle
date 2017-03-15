@@ -69,7 +69,8 @@ android {
         applicationId "ru.rusmobilecontent.forkidssafety"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode getVersionCode()
+        versionCode 9
+        //versionCode getVersionCode()
         versionName getVersionName()
         //archivesBaseName = "erlymon-monitor-$versionName"
 
@@ -89,6 +90,7 @@ android {
     }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
+        main { assets.srcDirs = ['src/main/assets', 'src/main/assets/fonts'] }
     }
 
     /*
@@ -104,6 +106,9 @@ android {
 }
 
 dependencies {
+
+
+    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:25.1.0'

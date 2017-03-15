@@ -18,14 +18,17 @@
  */
 package org.erlymon.monitor.view
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.android.synthetic.main.content_about.*
+import kotlinx.android.synthetic.main.content_intro.*
+import kotlinx.android.synthetic.main.content_signin.*
 import org.erlymon.monitor.R
 
-class AboutActivity : AppCompatActivity() {
+class IntroActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here. The action bar will
@@ -44,12 +47,12 @@ class AboutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_about)
+        setContentView(R.layout.activity_intro)
 
-        setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        about_title.setText(about_title.getText().toString() + " " + getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName)
+       btn_enter.setOnClickListener { v ->
+            val intent = Intent(this@IntroActivity, SignInActivity::class.java)
+            startActivity(intent)
+        }
+
     }
-
-
 }

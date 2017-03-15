@@ -46,6 +46,8 @@ import org.erlymon.monitor.view.fragment.SettingsDialogFragment
 class SignInActivity : BaseActivity<SignInPresenter>(), SignInView, SettingsDialogFragment.ServerConfigListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)
 
@@ -53,6 +55,7 @@ class SignInActivity : BaseActivity<SignInPresenter>(), SignInView, SettingsDial
 
         sign_in_email.setText(MainPref.email)
         sign_in_password.setText(MainPref.password);
+
         RxView.clicks(sign_in_button)
                 .compose(RxPermissions.getInstance(this).ensure(Manifest.permission.WRITE_EXTERNAL_STORAGE))
                 .subscribe({ granted ->
@@ -87,7 +90,7 @@ class SignInActivity : BaseActivity<SignInPresenter>(), SignInView, SettingsDial
                     }
                 }
             }
-            popupMenu.show()
+          popupMenu.show()
         }
     }
 
@@ -120,7 +123,8 @@ class SignInActivity : BaseActivity<SignInPresenter>(), SignInView, SettingsDial
     }
 
     override fun showError(error: String) {
-        makeToast(ll_sign_in, error)
+     //Тут ошибки всякие
+       // makeToast(ll_sign_in, error)
     }
 
     override fun getEmail(): String {
