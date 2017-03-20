@@ -47,6 +47,11 @@ public class Device extends RealmObject implements Parcelable {
     @Expose
     private String uniqueId;
 
+    @Since(3.0)
+    @SerializedName("category")
+    @Expose
+    private String category;
+
     @Since(3.3)
     @SerializedName("status")
     @Expose
@@ -85,6 +90,15 @@ public class Device extends RealmObject implements Parcelable {
     public void setName(String name) {
         this.name = name;
     }
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+
 
     public String getUniqueId() {
         return uniqueId;
@@ -134,7 +148,7 @@ public class Device extends RealmObject implements Parcelable {
         long tmpLastUpdate = in.readLong();
         lastUpdate = tmpLastUpdate != -1 ? new Date(tmpLastUpdate) : null;
         positionId = in.readByte() == 0x00 ? null : in.readLong();
-        dataId = in.readByte() == 0x00 ? null : in.readLong();
+       dataId = in.readByte() == 0x00 ? null : in.readLong();
     }
 
     @Override

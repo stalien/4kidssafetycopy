@@ -23,7 +23,9 @@
         <item
             android:id="@+id/nav_map"
             android:icon="@drawable/ic_map"
-            android:title="@string/mapTitle" />
+            android:title="@string/mapTitle"
+            android:color="@color/colorAccent"
+            android:tint="@color/colorAccent"/>
         <item
             android:id="@+id/nav_devices"
             android:icon="@drawable/ic_devices"
@@ -45,14 +47,14 @@
                 android:icon="@drawable/ic_account"
                 android:title="@string/settingsAccount" />
             <item
-                android:id="@+id/nav_about"
-                android:icon="@drawable/ic_about"
-                android:title="@string/aboutTitle" />
-            <item
-                android:id="@+id/nav_sign_out"
-                android:icon="@drawable/ic_exit"
-                android:title="@string/logoutSubmit"
-                />
-        </menu>
-    </item>
-</menu>
+                 android:id="@+id/nav_about"
+                 android:icon="@drawable/ic_about"
+                 android:title="Поделиться" />
+             <item
+                 android:id="@+id/nav_sign_out"
+                 android:icon="@drawable/ic_exit"
+                 android:title="@string/logoutSubmit"
+                 />
+         </menu>
+     </item>
+ </menu>
