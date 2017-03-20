@@ -24,6 +24,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v7.widget.PopupMenu
+import android.widget.AutoCompleteTextView
 import com.jakewharton.rxbinding.view.RxView
 import com.tbruyelle.rxpermissions.RxPermissions
 import io.realm.Realm
@@ -52,14 +53,19 @@ class SignInActivity : BaseActivity<SignInPresenter>(), SignInView, SettingsDial
         setContentView(R.layout.activity_signin)
 
         presenter = SignInPresenterImpl(this, this, R.string.sharedLoading)
+//кавабанга
+      sign_in_email.setText(MainPref.email)
+       sign_in_password.setText(MainPref.password);
+        //sign_in_email.setText("")
+        //sign_in_password.setText("");
 
-        sign_in_email.setText(MainPref.email)
-        sign_in_password.setText(MainPref.password);
 
         RxView.clicks(sign_in_button)
                 .compose(RxPermissions.getInstance(this).ensure(Manifest.permission.WRITE_EXTERNAL_STORAGE))
                 .subscribe({ granted ->
                     if (granted) {
+                        MainPref.email = email
+                        MainPref.password = password
                         presenter?.onCreateSession()
                     } else {
                         makeToast(sign_in_button, getString(R.string.errorPermissionWriteStorage))
