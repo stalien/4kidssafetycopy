@@ -91,6 +91,7 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
         device.name = name.text.toString()
         device.uniqueId = identifier.text.toString()
         device.category = "arrow"
+        device.status = ""
         return device
     }
 
