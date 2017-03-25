@@ -86,10 +86,10 @@
         </FrameLayout>
 
         <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="301dp"
             android:padding="10dp"
-            android:background="@drawable/family" ></FrameLayout>
+            android:background="@drawable/family"
+            android:layout_height="336dp"
+            android:layout_width="match_parent"></FrameLayout>
     </LinearLayout>
 
 

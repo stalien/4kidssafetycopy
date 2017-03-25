@@ -72,6 +72,7 @@ class ServerActivity : BaseActivity<ServerPresenter>(), ServerView {
         fab_account_save.setOnClickListener {
             presenter?.onSaveButtonClick()
         }
+
     }
 
     override fun showData(server: Server) {

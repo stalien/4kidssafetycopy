@@ -147,12 +147,12 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
     }
 
     override fun onPause() {
-        mLocationOverlay?.disableFollowLocation()
-        mLocationOverlay?.disableMyLocation()
+        //mLocationOverlay?.disableFollowLocation()
+       // mLocationOverlay?.disableMyLocation()
 
-        mapview.overlays.remove(mLocationOverlay)
-        mapview.overlays.remove(mRadiusMarkerClusterer)
-        markers.clear()
+      //  mapview.overlays.remove(mLocationOverlay)
+       // mapview.overlays.remove(mRadiusMarkerClusterer)
+       // markers.clear()
         super.onPause()
     }
 

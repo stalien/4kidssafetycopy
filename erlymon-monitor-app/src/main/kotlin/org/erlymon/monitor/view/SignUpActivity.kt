@@ -45,8 +45,8 @@ class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
         }
 
         presenter = UserPresenterImpl(this, this)
-        fab_account_save.setOnClickListener { v -> presenter?.onSaveButtonClick() }
-
+        btn_save.setOnClickListener { v -> presenter?.onSaveButtonClick() }
+        //fab_account_save.setOnClickListener { v -> presenter?.onSaveButtonClick() }
     }
 
     override fun showData(data: User) {
@@ -60,6 +60,11 @@ class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
         return 0
     }
 
+
+
+   /* fun isEmailValid(email: CharSequence): Boolean {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }*/
     override fun getUser(): User? {
         val user = User()
         user.id = 0;
