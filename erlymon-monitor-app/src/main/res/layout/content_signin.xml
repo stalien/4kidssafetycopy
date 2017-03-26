@@ -97,11 +97,12 @@
                 android:orientation="vertical">
 
                 <android.support.design.widget.TextInputLayout
+                    android:theme="@style/EditTextHint"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <AutoCompleteTextView
-
+                        android:theme="@style/EditTextHint"
                         android:id="@+id/sign_in_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -120,9 +121,11 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:theme="@style/EditTextHint">
 
                     <EditText
+                        android:theme="@style/EditTextHint"
                         android:id="@+id/sign_in_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
