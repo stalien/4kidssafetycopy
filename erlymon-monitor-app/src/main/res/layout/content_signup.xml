@@ -74,6 +74,7 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/email"
+                    android:textColor="@color/colorWhite"
                     android:theme="@style/EditTextHint"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

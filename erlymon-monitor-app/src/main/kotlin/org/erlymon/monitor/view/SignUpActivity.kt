@@ -30,6 +30,9 @@ import org.erlymon.core.presenter.UserPresenter
 import org.erlymon.core.presenter.UserPresenterImpl
 import org.erlymon.core.view.UserView
 import org.erlymon.monitor.R
+import android.widget.EditText
+
+
 
 
 class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
@@ -65,12 +68,24 @@ class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
    /* fun isEmailValid(email: CharSequence): Boolean {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }*/
+   fun isEmailValid(email: CharSequence): Boolean {
+       return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+
+   }
+
     override fun getUser(): User? {
         val user = User()
+
+        val em = email.text.toString()
+        if (isEmailValid(em)) {
+
         user.id = 0;
         user.name = name.text.toString()
         user.email = email.text.toString()
         user.password = password.text.toString()
+        }
+
+        //else {а что если косорукий дурак не знает, как вводить почту?}
         return user;
     }
 
