@@ -48,7 +48,6 @@ class SignInActivity : BaseActivity<SignInPresenter>(), SignInView, SettingsDial
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)
 
@@ -75,6 +74,7 @@ class SignInActivity : BaseActivity<SignInPresenter>(), SignInView, SettingsDial
         sign_up_button.setOnClickListener { v ->
             val intent = Intent(this@SignInActivity, SignUpActivity::class.java)
             startActivity(intent)
+
         }
 
         serverConfig.setOnClickListener { v ->
@@ -100,7 +100,7 @@ class SignInActivity : BaseActivity<SignInPresenter>(), SignInView, SettingsDial
         }
     }
 
-    override fun onResume() {
+    override fun onResume() {sign_in_email.setText(MainPref.email)
         super.onResume()
         presenter?.onGetServer()
     }

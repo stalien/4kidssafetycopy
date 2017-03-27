@@ -31,8 +31,8 @@ import org.erlymon.core.presenter.UserPresenterImpl
 import org.erlymon.core.view.UserView
 import org.erlymon.monitor.R
 import android.widget.EditText
-
-
+import kotlinx.android.synthetic.main.content_signin.*
+import org.erlymon.monitor.MainPref
 
 
 class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
@@ -45,6 +45,7 @@ class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
         btn_back.setOnClickListener { v ->
             val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
             startActivity(intent)
+
         }
 
         presenter = UserPresenterImpl(this, this)
@@ -83,9 +84,13 @@ class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
         user.name = name.text.toString()
         user.email = email.text.toString()
         user.password = password.text.toString()
+        MainPref.email = email.text.toString()
+
         }
 
-        //else {а что если косорукий дурак не знает, как вводить почту?}
+        else {// ошибка валидации
+
+        }
         return user;
     }
 
