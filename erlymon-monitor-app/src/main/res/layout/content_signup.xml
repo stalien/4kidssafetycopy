@@ -57,6 +57,7 @@
 
                 <EditText
                     android:theme="@style/EditTextHint"
+                    android:textColor="@color/colorWhite"
                     android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -90,6 +91,7 @@
 
                 <EditText
                     android:theme="@style/EditTextHint"
+                    android:textColor="@color/colorWhite"
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
