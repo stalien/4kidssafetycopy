@@ -18,24 +18,59 @@
   ~ along with Erlymon Monitor.  If not, see <http://www.gnu.org/licenses/>.
   -->
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="false"
+    android:columnCount="3"
     android:orientation="vertical"
     android:paddingLeft="5dp"
     android:paddingRight="5dp"
+    android:rowCount="2"
     android:useDefaultMargins="true">
+
+    <QuickContactBadge
+        android:id="@+id/quickContactBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_gravity="center_vertical"
+        android:layout_rowSpan="2"
+        android:maxHeight="51dp"
+        android:maxWidth="51dp"
+        android:minHeight="50dp"
+        android:minWidth="50dp"
+        android:src="@drawable/ic_users"
+        app:srcCompat="@drawable/bg_label" />
+
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_row="0"
-        android:layout_gravity="center_vertical" />
+        android:layout_column="1"
+        android:layout_gravity="center_vertical"
+        android:layout_row="0" />
 
     <TextView
         android:id="@+id/identifier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_row="1"
-        android:layout_gravity="center_vertical" />
+        android:layout_column="1"
+        android:layout_gravity="center_vertical"
+        android:layout_row="1" />
+
+    <ImageView
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="2"
+        android:layout_gravity="center|end"
+        android:layout_rowSpan="2"
+        android:alpha="0.5"
+        android:clickable="true"
+        android:visibility="visible"
+        app:srcCompat="@drawable/ic_settings" />
+
 </GridLayout>

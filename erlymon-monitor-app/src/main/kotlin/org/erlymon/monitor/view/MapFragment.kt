@@ -88,6 +88,7 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
 
         mapview.isTilesScaledToDpi = true
         mapview.setMultiTouchControls(true)
+        mapview.setBuiltInZoomControls(true)
 
 
         RxView.clicks(myPlace)
@@ -129,6 +130,7 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
 
         mapview.controller.setZoom(4)
         mapview.controller.animateTo(GeoPoint(55.7559067, 37.6171875))
+//        mapview.controller.animateTo(GeoPoint(position.latitude, position.longitude))
 
 
 
@@ -147,12 +149,12 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
     }
 
     override fun onPause() {
-        //mLocationOverlay?.disableFollowLocation()
-       // mLocationOverlay?.disableMyLocation()
+        mLocationOverlay?.disableFollowLocation()
+        mLocationOverlay?.disableMyLocation()
 
-      //  mapview.overlays.remove(mLocationOverlay)
-       // mapview.overlays.remove(mRadiusMarkerClusterer)
-       // markers.clear()
+//        mapview.overlays.remove(mLocationOverlay)
+//        mapview.overlays.remove(mRadiusMarkerClusterer)
+//        markers.clear()
         super.onPause()
     }
 
@@ -172,7 +174,14 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
                 markers.put(device.id, marker)
 
             }
+
             marker.title = device.name
+//            marker.title = position.fixTime.toString()
+//            marker.snippet = device.id.toString()
+            marker.snippet = ("id=" + device.id +
+                                 ", uniqueId='" + device.uniqueId + '\'' +
+                                ", status='" + device.status + '\'' +
+                                 ", lastUpdate=" + position.outdated)
             if (position.fixTime != null) {
                 marker.snippet = position.fixTime.toString()
             }
