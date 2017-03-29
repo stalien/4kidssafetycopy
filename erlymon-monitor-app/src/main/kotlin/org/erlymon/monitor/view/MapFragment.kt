@@ -27,13 +27,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.jakewharton.rxbinding.view.RxView
 import com.tbruyelle.rxpermissions.RxPermissions
 import io.realm.Realm
 import io.realm.RealmChangeListener
 import io.realm.RealmResults
-import kotlinx.android.synthetic.main.content_devices.*
 
 import org.osmdroid.bonuspack.clustering.RadiusMarkerClusterer
 import org.osmdroid.util.GeoPoint
@@ -41,15 +39,15 @@ import org.slf4j.LoggerFactory
 import java.util.*
 
 import kotlinx.android.synthetic.main.fragment_map.*
-import org.erlymon.core.model.data.*
+import org.erlymon.core.model.data.Device
+import org.erlymon.core.model.data.Event
+import org.erlymon.core.model.data.Position
 import org.erlymon.core.presenter.MapPresenter
 import org.erlymon.core.presenter.MapPresenterImpl
 import org.erlymon.core.presenter.UsersListPresenterImpl
 import org.erlymon.core.view.MapView
-import org.erlymon.monitor.MainPref
 import org.erlymon.monitor.R
 import org.erlymon.monitor.view.map.marker.MarkerWithLabel
-import org.osmdroid.api.IMapController
 import org.osmdroid.util.BoundingBoxE6
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
@@ -67,12 +65,9 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
         }
     }
 
-
-
     private var mRadiusMarkerClusterer: DevicesMarkerClusterer? = null
     private var markers: MutableMap<Long, MarkerWithLabel> = HashMap()
     private var mLocationOverlay: MyLocationNewOverlay? = null
-
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -89,34 +84,11 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
 
         presenter = MapPresenterImpl(context, this)
 
-        arrowDrawable = resources.getDrawable(R.drawable.ic_arrow_offline)
+        arrowDrawable = resources.getDrawable(R.drawable.ic_arrow)
 
         mapview.isTilesScaledToDpi = true
         mapview.setMultiTouchControls(true)
-        mapview.minZoomLevel = 4
-
-
-//        mapview.setBuiltInZoomControls(true)
-
-        btnZoomIn.setOnClickListener {
-
-        mapview.controller.zoomIn()
-        MainPref.defaultZoom = mapview.zoomLevel
-//        makeToast(mapview, "zoomIn")
-
-        }
-
-        btnZoomOut.setOnClickListener {
-
-
-            if (mapview.canZoomOut()) {
-                mapview.controller.zoomOut()
-                MainPref.defaultZoom = mapview.zoomLevel
-                makeToast(mapview, "zoomLevel: " + mapview.zoomLevel)
-            }
-            else  makeToast(mapview, "maximum_zoomOut" + mapview.minZoomLevel)
-
-        }
+        mapview.setBuiltInZoomControls(true)
 
 
         RxView.clicks(myPlace)
@@ -129,16 +101,13 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
                             mLocationOverlay?.runOnFirstFix {
                                 mapview.post {
                                     try {
-                                        mapview.controller.setZoom(MainPref.defaultZoom)
+                                        mapview.controller.setZoom(15)
                                         mapview.controller.animateTo(GeoPoint(
                                                 mLocationOverlay!!.lastFix.latitude,
                                                 mLocationOverlay!!.lastFix.longitude
                                         ))
                                         mapview.postInvalidate()
                                     } catch (e: Exception) {
-
-                                        // try find position error
-                                        //makeToast(myPlace, error(e))
 
                                     }
                                 }
@@ -159,10 +128,9 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
     override fun onResume() {
         super.onResume()
 
-//        mapview.controller.setZoom(MainPref.defaultZoom)
-//      mapview.controller.animateTo(GeoPoint(55.7559067, 37.6171875))
-
-        mapview.controller.animateTo(GeoPoint(MainPref.defaultLatitude.toDouble(), MainPref.defaultLongitude.toDouble()))
+        mapview.controller.setZoom(4)
+        mapview.controller.animateTo(GeoPoint(55.7559067, 37.6171875))
+//        mapview.controller.animateTo(GeoPoint(position.latitude, position.longitude))
 
 
 
@@ -170,7 +138,6 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
 
         mRadiusMarkerClusterer = DevicesMarkerClusterer(context)
         mRadiusMarkerClusterer?.setIcon(BitmapFactory.decodeResource(resources, R.drawable.marker_cluster))
-
         mapview.overlays.add(mRadiusMarkerClusterer)
 
         mLocationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(activity), mapview)
@@ -193,7 +160,6 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
 
     fun animateTo(geoPoint: GeoPoint, zoom: Int) {
         mapview.controller.setZoom(zoom)
-//        MainPref.defaultZoom = zoom
         mapview.controller.animateTo(geoPoint)
         mapview.postInvalidate()
     }
@@ -215,30 +181,16 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
             marker.snippet = ("id=" + device.id +
                                  ", uniqueId='" + device.uniqueId + '\'' +
                                 ", status='" + device.status + '\'' +
-                                ", accuracy=" + position.accuracy)
+                                 ", lastUpdate=" + position.outdated)
             if (position.fixTime != null) {
                 marker.snippet = position.fixTime.toString()
             }
 
             marker.setIcon(arrowDrawable)
-            marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
             if (position.course != null) {
-               // marker.rotation = position.course
+                marker.rotation = position.course
             }
             marker.position = GeoPoint(position.latitude, position.longitude)
-
-// override default lattitude & longitude
-            MainPref.defaultLatitude = position.latitude.toString()
-            MainPref.defaultLongitude = position.longitude.toString()
-//
-
-// marker is tranparent when device is offline
-
-            if (device.status == "offline"){
-                marker.alpha = 0.2F
-            } else marker.alpha = 1F
-//
-
         } catch (e: Exception) {
             logger.warn(Log.getStackTraceString(e))
         }
