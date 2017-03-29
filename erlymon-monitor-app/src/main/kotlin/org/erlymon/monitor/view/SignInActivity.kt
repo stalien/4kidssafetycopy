@@ -130,7 +130,7 @@ class SignInActivity : BaseActivity<SignInPresenter>(), SignInView, SettingsDial
 
     override fun showError(error: String) {
      //Тут ошибки всякие
-       // makeToast(ll_sign_in, error)
+        makeToast(ll_sign_in, error)
     }
 
     override fun getEmail(): String {

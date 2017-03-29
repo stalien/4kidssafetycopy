@@ -128,6 +128,7 @@ class PositionsActivity : BaseActivity<PositionsPresenter>(), PositionsView, Dat
 
         mapview.isTilesScaledToDpi = true
         mapview.setMultiTouchControls(true)
+
         mapview.setLayerType(MapView.LAYER_TYPE_SOFTWARE, null)
 
         fab_load_positions.setOnClickListener{

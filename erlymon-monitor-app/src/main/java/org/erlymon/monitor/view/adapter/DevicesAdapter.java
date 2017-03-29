@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ListAdapter;
+import android.widget.QuickContactBadge;
 import android.widget.TextView;
 
 import org.erlymon.core.model.data.Device;
@@ -45,10 +46,12 @@ public class DevicesAdapter extends RealmBaseAdapter<Device> implements ListAdap
      */
     class ViewHolder {
         private GridLayout layout;
+        private QuickContactBadge quickContactBadge;
         private TextView name;
         private TextView identifier;
         public ViewHolder(View itemView) {
             layout = (GridLayout) itemView.findViewById(R.id.layout);
+            quickContactBadge = (QuickContactBadge) itemView.findViewById(R.id.quickContactBadge);
             name = (TextView) itemView.findViewById(R.id.name);
             identifier = (TextView) itemView.findViewById(R.id.identifier);
         }
@@ -68,7 +71,8 @@ public class DevicesAdapter extends RealmBaseAdapter<Device> implements ListAdap
         Device item = adapterData.get(position);
         viewHolder.name.setText(item.getName());
         viewHolder.identifier.setText(item.getUniqueId());
-        viewHolder.layout.setBackgroundResource(getStatusColorId(item.getStatus()));
+ //       viewHolder.layout.setBackgroundResource(getStatusColorId(item.getStatus()));
+        viewHolder.quickContactBadge.setBackgroundResource(getStatusColorId(item.getStatus()));
         return convertView;
     }
 

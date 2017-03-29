@@ -20,17 +20,21 @@
 
 <resources>
     <string-array name="send_command">
+        <item>@string/deviceIdentification</item>
+        <item>@string/voiceMonitoring</item>
+        <item>@string/modePowerSaving</item>
+        <item>@string/positionSingle</item>
         <item>@string/positionPeriodic</item>
-        <item>@string/positionStop</item>
-        <item>@string/engineStop</item>
-        <item>@string/engineResume</item>
+        <item>@string/rebootDevice</item>
     </string-array>
 
     <string-array name="send_command_value" translatable="false">
+        <item>deviceIdentification</item>
+        <item>voiceMonitoring</item>
+        <item>modePowerSaving</item>
+        <item>positionSingle</item>
         <item>positionPeriodic</item>
-        <item>positionStop</item>
-        <item>engineStop</item>
-        <item>engineResume</item>
+        <item>rebootDevice</item>
     </string-array>
 
 

@@ -123,7 +123,7 @@ public class SendCommandDialogFragment extends BaseDialogFragment {
                                 try {
                                     if (cmdType.equals("positionPeriodic")) {
                                         int freq = Integer.parseInt(String.valueOf(frequency.getText()));
-                                        freq *= Integer.parseInt(String.valueOf(unit.getText()));
+//                                        freq *= Integer.parseInt(String.valueOf(unit.getText()));
                                         Map<String, Object> attrs = new HashMap<>();
                                         attrs.put("frequency", freq);
                                         command.setAttributes(attrs);

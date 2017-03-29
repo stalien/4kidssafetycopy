@@ -85,6 +85,11 @@
     <string name="commandUnit">Ед. изм</string>
     <string name="engineResume">Запустить двигатель</string>
     <string name="engineStop">Остановить двигатель</string>
+    <string name="rebootDevice">Перезагрузить устройство</string>
+    <string name="positionSingle">Запрос позиции</string>
+    <string name="modePowerSaving">Выключить</string>
+    <string name="voiceMonitoring">Прослушивание</string>
+    <string name="deviceIdentification">Найти</string>
     <string name="errorSendCommand">Команда не выполнена</string>
     <string name="positionPeriodic">Periodic Reporting</string>
     <string name="positionStop">Stop Reporting</string>
