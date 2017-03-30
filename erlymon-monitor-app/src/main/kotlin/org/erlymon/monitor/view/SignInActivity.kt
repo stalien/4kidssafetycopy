@@ -100,7 +100,9 @@ class SignInActivity : BaseActivity<SignInPresenter>(), SignInView, SettingsDial
         }
     }
 
-    override fun onResume() {sign_in_email.setText(MainPref.email)
+    override fun onResume() {
+        sign_in_email.setText(MainPref.email)
+        sign_in_password.setText(MainPref.password)
         super.onResume()
         presenter?.onGetServer()
     }

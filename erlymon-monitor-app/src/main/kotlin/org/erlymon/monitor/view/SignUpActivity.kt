@@ -85,7 +85,7 @@ class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
         user.email = email.text.toString()
         user.password = password.text.toString()
         MainPref.email = email.text.toString()
-
+         MainPref.password = ""
         }
 
         else {// ошибка валидации
