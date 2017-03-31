@@ -40,6 +40,8 @@
     <string name="sharedRegistryNewAccount">Регистрация пользователя завершена успешно</string>
     <string name="serverConfigHost">DNS или IP:PORT</string>
     <string name="deviceIdentifier">Идентификатор</string>
+    <string name="deviceCategory">Категория</string>
+    <string name="deviceSim">Номер SIM карты</string>
     <string name="userName">Имя</string>
     <string name="loginTitle">Вход</string>
     <string name="userPassword">Пароль</string>

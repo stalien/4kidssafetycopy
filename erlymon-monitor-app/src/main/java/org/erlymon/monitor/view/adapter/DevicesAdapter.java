@@ -49,11 +49,13 @@ public class DevicesAdapter extends RealmBaseAdapter<Device> implements ListAdap
         private QuickContactBadge quickContactBadge;
         private TextView name;
         private TextView identifier;
+        private TextView sim;
         public ViewHolder(View itemView) {
             layout = (GridLayout) itemView.findViewById(R.id.layout);
             quickContactBadge = (QuickContactBadge) itemView.findViewById(R.id.quickContactBadge);
             name = (TextView) itemView.findViewById(R.id.name);
             identifier = (TextView) itemView.findViewById(R.id.identifier);
+            sim = (TextView) itemView.findViewById(R.id.sim);
         }
     }
 

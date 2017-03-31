@@ -18,6 +18,7 @@
  */
 package org.erlymon.monitor.view
 
+import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
@@ -290,6 +291,7 @@ class MainActivity : BaseActivity<MainPresenter>(),
         intent.putExtra("deviceId", device.id)
         val dialogFragment = SendCommandDialogFragment.newInstance(device.id)
         dialogFragment.show(supportFragmentManager, "send_command_dialog")
+
     }
 
     override fun onEditUser(user: User) {

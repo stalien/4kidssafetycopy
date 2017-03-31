@@ -19,9 +19,11 @@
 package org.erlymon.core.presenter;
 
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.erlymon.core.model.Model;
 import org.erlymon.core.model.ModelImpl;
@@ -177,6 +179,7 @@ public class MainPresenterImpl implements MainPresenter {
                 .subscribe(new Observer<Void>() {
                     @Override
                     public void onCompleted() {
+
 
                     }
 

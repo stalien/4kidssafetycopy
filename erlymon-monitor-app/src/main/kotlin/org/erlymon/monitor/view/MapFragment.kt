@@ -32,6 +32,7 @@ import com.tbruyelle.rxpermissions.RxPermissions
 import io.realm.Realm
 import io.realm.RealmChangeListener
 import io.realm.RealmResults
+import kotlinx.android.synthetic.main.content_devices.*
 
 import org.osmdroid.bonuspack.clustering.RadiusMarkerClusterer
 import org.osmdroid.util.GeoPoint
@@ -39,13 +40,12 @@ import org.slf4j.LoggerFactory
 import java.util.*
 
 import kotlinx.android.synthetic.main.fragment_map.*
-import org.erlymon.core.model.data.Device
-import org.erlymon.core.model.data.Event
-import org.erlymon.core.model.data.Position
+import org.erlymon.core.model.data.*
 import org.erlymon.core.presenter.MapPresenter
 import org.erlymon.core.presenter.MapPresenterImpl
 import org.erlymon.core.presenter.UsersListPresenterImpl
 import org.erlymon.core.view.MapView
+import org.erlymon.monitor.MainPref
 import org.erlymon.monitor.R
 import org.erlymon.monitor.view.map.marker.MarkerWithLabel
 import org.osmdroid.util.BoundingBoxE6
@@ -84,7 +84,7 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
 
         presenter = MapPresenterImpl(context, this)
 
-        arrowDrawable = resources.getDrawable(R.drawable.ic_arrow)
+        arrowDrawable = resources.getDrawable(R.drawable.ic_arrow_offline)
 
         mapview.isTilesScaledToDpi = true
         mapview.setMultiTouchControls(true)
@@ -101,13 +101,16 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
                             mLocationOverlay?.runOnFirstFix {
                                 mapview.post {
                                     try {
-                                        mapview.controller.setZoom(15)
+                                        mapview.controller.setZoom(18)
                                         mapview.controller.animateTo(GeoPoint(
                                                 mLocationOverlay!!.lastFix.latitude,
                                                 mLocationOverlay!!.lastFix.longitude
                                         ))
                                         mapview.postInvalidate()
                                     } catch (e: Exception) {
+
+                                        // try find position error
+                                        makeToast(myPlace, error(e))
 
                                     }
                                 }
@@ -128,9 +131,10 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
     override fun onResume() {
         super.onResume()
 
-        mapview.controller.setZoom(4)
-        mapview.controller.animateTo(GeoPoint(55.7559067, 37.6171875))
-//        mapview.controller.animateTo(GeoPoint(position.latitude, position.longitude))
+        mapview.controller.setZoom(12)
+//      mapview.controller.animateTo(GeoPoint(55.7559067, 37.6171875))
+
+        mapview.controller.animateTo(GeoPoint(MainPref.defaultLatitude.toDouble(), MainPref.defaultLongitude.toDouble()))
 
 
 
@@ -181,16 +185,29 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
             marker.snippet = ("id=" + device.id +
                                  ", uniqueId='" + device.uniqueId + '\'' +
                                 ", status='" + device.status + '\'' +
-                                 ", lastUpdate=" + position.outdated)
+                                 ", address=" + position.address + ", date=" + device.lastUpdate)
             if (position.fixTime != null) {
                 marker.snippet = position.fixTime.toString()
             }
 
             marker.setIcon(arrowDrawable)
             if (position.course != null) {
-                marker.rotation = position.course
+               // marker.rotation = position.course
             }
             marker.position = GeoPoint(position.latitude, position.longitude)
+
+// override default lattitude & longitude
+            MainPref.defaultLatitude = position.latitude.toString()
+            MainPref.defaultLongitude = position.longitude.toString()
+//
+
+// marker is tranparent when device is offline
+
+            if (device.status == "offline"){
+                marker.alpha = 0.2F
+            } else marker.alpha = 1F
+//
+
         } catch (e: Exception) {
             logger.warn(Log.getStackTraceString(e))
         }

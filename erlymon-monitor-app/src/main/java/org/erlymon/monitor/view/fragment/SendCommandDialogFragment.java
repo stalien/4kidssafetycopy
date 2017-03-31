@@ -29,6 +29,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.Toast;
 
 import org.erlymon.core.model.data.Command;
 import org.erlymon.monitor.R;
@@ -132,6 +133,8 @@ public class SendCommandDialogFragment extends BaseDialogFragment {
                                     logger.warn(Log.getStackTraceString(e));
                                 }
                                 mListener.onSendCommand(command);
+    // toast "command sent'
+                                Toast.makeText(view.getContext(), "Команда '" +cmdType+ "' отправлена", Toast.LENGTH_SHORT).show();
                             }
                         }
                 )

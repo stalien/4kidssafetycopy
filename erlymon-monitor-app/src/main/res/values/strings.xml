@@ -37,6 +37,8 @@
     <string name="deviceTitle">Device</string>
     <string name="settingsAccount">Account</string>
     <string name="deviceIdentifier">Identifier</string>
+    <string name="deviceCategory">Category</string>
+    <string name="deviceSim">Phone number</string>
     <string name="loginTitle">Login</string>
     <string name="registerTitle">Register</string>
     <string name="sharedEdit">Edit</string>

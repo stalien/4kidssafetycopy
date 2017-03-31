@@ -63,7 +63,8 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
         logger.debug("DEVICE ID: " + device?.id + " DEVICE: " + device?.toString())
         name.setText(device?.name)
         identifier.setText(device?.uniqueId)
-        category.setText("default")
+        category.setText(device?.category)
+        sim.setText(device?.phone)
         fab_device_save.setOnClickListener {
             presenter?.onSaveButtonClick()
         }
@@ -91,7 +92,8 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
         device.name = name.text.toString()
         device.uniqueId = identifier.text.toString()
         device.category = "arrow"
-        device.status = ""
+        device.status = "unknown"
+        device.phone = sim.text.toString()
         return device
     }
 

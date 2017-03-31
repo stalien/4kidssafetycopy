@@ -47,6 +47,13 @@ public class Device extends RealmObject implements Parcelable {
     @Expose
     private String uniqueId;
 
+//
+    @Since(3.0)
+    @SerializedName("phone")
+    @Expose
+    private String phone;
+//
+
     @Since(3.0)
     @SerializedName("category")
     @Expose
@@ -108,13 +115,21 @@ public class Device extends RealmObject implements Parcelable {
         this.uniqueId = uniqueId;
     }
 
+    //
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+    //
+
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    public void setStatus(String status) { this.status = status; }
 
     public Date getLastUpdate() {
         return lastUpdate;
@@ -144,6 +159,7 @@ public class Device extends RealmObject implements Parcelable {
         id = in.readByte() == 0x00 ? null : in.readLong();
         name = in.readString();
         uniqueId = in.readString();
+        phone = in.readString();
         status = in.readString();
         long tmpLastUpdate = in.readLong();
         lastUpdate = tmpLastUpdate != -1 ? new Date(tmpLastUpdate) : null;
@@ -166,6 +182,7 @@ public class Device extends RealmObject implements Parcelable {
         }
         dest.writeString(name);
         dest.writeString(uniqueId);
+        dest.writeString(phone);
         dest.writeString(status);
         dest.writeLong(lastUpdate != null ? lastUpdate.getTime() : -1L);
         if (positionId == null) {
@@ -201,6 +218,7 @@ public class Device extends RealmObject implements Parcelable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", uniqueId='" + uniqueId + '\'' +
+                ", phone='" + phone + '\'' +
                 ", status='" + status + '\'' +
                 ", lastUpdate=" + lastUpdate +
                 ", positionId=" + positionId +
