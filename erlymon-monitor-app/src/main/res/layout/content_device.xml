@@ -29,8 +29,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".view.DeviceActivity"
-    tools:showIn="@layout/activity_device"
-    android:background="@color/colorWhiteDark">
+    tools:showIn="@layout/activity_device">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -42,10 +41,8 @@
             android:orientation="vertical">
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="visible">
+                android:layout_height="wrap_content">
 
                 <EditText
                     android:id="@+id/name"
@@ -59,58 +56,37 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_identifier"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="visible">
+                android:layout_height="wrap_content">
 
                 <EditText
                     android:id="@+id/identifier"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/deviceIdentifier"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:singleLine="true" />
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_sim"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/sim"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/deviceSim"
-                    android:inputType="phone"
-                    android:maxLines="1"
-                    android:singleLine="false" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="visible">
 
                 <EditText
                     android:id="@+id/category"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/deviceCategory"
+                    android:hint="@string/deviceIdentifier"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:singleLine="false"
-                    android:visibility="gone" />
+                    android:singleLine="true" />
+
             </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
 
 
     </ScrollView>
-
-
 </RelativeLayout>
