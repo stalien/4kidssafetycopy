@@ -24,13 +24,14 @@ import com.chibatching.kotpref.KotprefModel
  */
 
 object MainPref : KotprefModel() {
-    var email: String by stringPrefVar(default = "")
-    var password: String by stringPrefVar(default = "")
+    var email: String by stringPref(default = "")
+    var password: String by stringPref(default = "")
 
-    var defaultLatitude: String by stringPrefVar(default = "55.7559067")
-    var defaultLongitude: String by stringPrefVar(default = "37.6171875")
+    var defaultLatitude: String by stringPref(default = "55.7559067")
+    var defaultLongitude: String by stringPref(default = "37.6171875")
+    var defaultZoom: Int by intPref(default = 12)
 
-    var dns: String by stringPrefVar(default = "188.120.235.97:8082")
-    var sslOrTls: Boolean by booleanPrefVar(default = false)
-    var protocolVersion: Float by floatPrefVar(default = 3.4F)
+    var dns: String by stringPref(default = "188.120.235.97:8082")
+    var sslOrTls: Boolean by booleanPref(default = false)
+    var protocolVersion: Float by floatPref(default = 3.4F)
 }

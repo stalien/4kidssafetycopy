@@ -17,6 +17,7 @@
  * along with Erlymon Monitor.  If not, see <http://www.gnu.org/licenses/>.
  */
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 //Retrolambda plugin
 apply plugin: 'me.tatarka.retrolambda'
 // Realm
@@ -56,15 +57,15 @@ dependencies { compile 'uk.co.chrisjenx:calligraphy:2.2.0'
     compile 'io.reactivex:rxjava:1.1.3'
 
     //Retrofit
-    compile 'com.squareup.retrofit2:retrofit:2.0.2'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
 
     //okhttp 3
-    compile 'com.squareup.okhttp3:okhttp:3.1.1'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.1.1'
-    compile "com.squareup.okhttp3:okhttp-urlconnection:3.1.1"
-    compile 'com.squareup.okhttp3:okhttp-ws:3.1.1'
+//    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+//    compile 'com.squareup.okhttp3:logging-interceptor:3.1.1'
+//    compile "com.squareup.okhttp3:okhttp-urlconnection:3.1.1"
+//    compile 'com.squareup.okhttp3:okhttp-ws:3.1.1'
 
     compile "com.appunite:websockets-rxjava:4.0.1"
 
@@ -78,4 +79,8 @@ dependencies { compile 'uk.co.chrisjenx:calligraphy:2.2.0'
 
     // log
     compile 'org.slf4j:slf4j-api:1.7.12'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

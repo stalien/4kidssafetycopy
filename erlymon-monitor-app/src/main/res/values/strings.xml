@@ -44,7 +44,7 @@
     <string name="sharedEdit">Edit</string>
     <string name="sharedRemove">Remove</string>
     <string name="listTitle">List</string>
-    <string name="devicePositionsTitle">Messages</string>
+    <string name="devicePositionsTitle">Track</string>
     <string name="sharedShowOnMapTItle">Show on the map</string>
 
     <string name="positionValid">Valid</string>

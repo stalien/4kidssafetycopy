@@ -21,6 +21,7 @@ package org.erlymon.core.model.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 import com.google.gson.annotations.Until;
@@ -77,6 +78,10 @@ public class Position extends RealmObject implements Parcelable {
 
     @Since(3.0)
     private String address;
+
+    @Since(3.4)
+    private String accuracy;
+
 /*
     @Since(3.0)
     @Until(3.2)
@@ -199,6 +204,12 @@ public class Position extends RealmObject implements Parcelable {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public String getAccuracy() {
+        return accuracy;
+    }
+
+    public void setAccuracy(String accuracy) { this.accuracy = accuracy; }
 /*
     public String getOther() {
         return other;
@@ -236,6 +247,7 @@ public class Position extends RealmObject implements Parcelable {
         speed = in.readByte() == 0x00 ? null : in.readFloat();
         course = in.readByte() == 0x00 ? null : in.readFloat();
         address = in.readString();
+        accuracy = in.readString();
         //other = in.readString();
         //attributes = in.readString();
     }
@@ -304,6 +316,7 @@ public class Position extends RealmObject implements Parcelable {
             dest.writeFloat(course);
         }
         dest.writeString(address);
+        dest.writeString(accuracy);
         //dest.writeString(other);
         //dest.writeString(attributes);
     }
@@ -350,6 +363,7 @@ public class Position extends RealmObject implements Parcelable {
                 ", speed=" + speed +
                 ", course=" + course +
                 ", address='" + address + '\'' +
+                ", accuracy=" + accuracy +
                 '}';
     }
 }

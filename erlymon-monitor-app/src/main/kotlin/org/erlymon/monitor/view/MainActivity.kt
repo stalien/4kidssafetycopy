@@ -41,6 +41,7 @@ import org.erlymon.core.model.data.*
 import org.erlymon.core.presenter.MainPresenter
 import org.erlymon.core.presenter.MainPresenterImpl
 import org.erlymon.core.view.MainView
+import org.erlymon.monitor.MainPref
 import org.erlymon.monitor.R
 import org.erlymon.monitor.view.adapter.CustomFragmentPagerAdapter
 import org.erlymon.monitor.view.adapter.DevicesAdapter
@@ -123,6 +124,7 @@ class MainActivity : BaseActivity<MainPresenter>(),
             }
 
             override fun onPageScrollStateChanged(state: Int) {
+//                Toast.makeText(baseContext, "Scroll", Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -160,7 +162,8 @@ class MainActivity : BaseActivity<MainPresenter>(),
 
     override fun showPosition(position: Position) {
         try {
-            (pagerAdapter?.getItem(0) as MapFragment).animateTo(GeoPoint(position.latitude, position.longitude), 15)
+//            (pagerAdapter?.getItem(0) as MapFragment).animateTo(GeoPoint(position.latitude, position.longitude), 15)
+            (pagerAdapter?.getItem(0) as MapFragment).animateTo(GeoPoint(position.latitude, position.longitude), MainPref.defaultZoom)
             view_pager.setCurrentItem(0)
             nav_view.setCheckedItem(R.id.nav_map)
         } catch (e: Exception) {
@@ -330,15 +333,16 @@ class MainActivity : BaseActivity<MainPresenter>(),
 
     private fun calculateMapCenter() :Pair<GeoPoint, Int> {
         val user = intent.getParcelableExtra<User>("session")
-        if (user.latitude === 0.0 && user.longitude === 0.0 && user.zoom === 0) {
-            val server = intent.getParcelableExtra<Server>("server")
-            if (server.latitude === 0.0 && server.longitude === 0.0 && server.zoom === 0) {
-                return Pair(GeoPoint(server.latitude, server.longitude), server.zoom)
-            }
-        } else {
-            return Pair(GeoPoint(user.latitude, user.longitude), user.zoom)
-        }
-        return Pair(GeoPoint(0, 0), 0)
+//        if (user.latitude === 0.0 && user.longitude === 0.0 && user.zoom === 0) {
+//            val server = intent.getParcelableExtra<Server>("server")
+//            if (server.latitude === 0.0 && server.longitude === 0.0 && server.zoom === 0) {
+//                return Pair(GeoPoint(server.latitude, server.longitude), server.zoom)
+//            }
+//        } else {
+//            return Pair(GeoPoint(user.latitude, user.longitude), user.zoom)
+            return Pair(GeoPoint(MainPref.defaultLatitude.toDouble(), MainPref.defaultLongitude.toDouble()), MainPref.defaultZoom)
+//        }
+//        return Pair(GeoPoint(0, 0), 0)
     }
 
     companion object {

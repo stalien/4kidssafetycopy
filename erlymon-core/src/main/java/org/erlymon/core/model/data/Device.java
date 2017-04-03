@@ -155,6 +155,7 @@ public class Device extends RealmObject implements Parcelable {
         this.dataId = dataId;
     }
 
+
     protected Device(Parcel in) {
         id = in.readByte() == 0x00 ? null : in.readLong();
         name = in.readString();
@@ -164,7 +165,7 @@ public class Device extends RealmObject implements Parcelable {
         long tmpLastUpdate = in.readLong();
         lastUpdate = tmpLastUpdate != -1 ? new Date(tmpLastUpdate) : null;
         positionId = in.readByte() == 0x00 ? null : in.readLong();
-       dataId = in.readByte() == 0x00 ? null : in.readLong();
+        dataId = in.readByte() == 0x00 ? null : in.readLong();
     }
 
     @Override

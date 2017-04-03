@@ -27,6 +27,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.jakewharton.rxbinding.view.RxView
 import com.tbruyelle.rxpermissions.RxPermissions
 import io.realm.Realm
@@ -48,6 +49,7 @@ import org.erlymon.core.view.MapView
 import org.erlymon.monitor.MainPref
 import org.erlymon.monitor.R
 import org.erlymon.monitor.view.map.marker.MarkerWithLabel
+import org.osmdroid.api.IMapController
 import org.osmdroid.util.BoundingBoxE6
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
@@ -88,7 +90,28 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
 
         mapview.isTilesScaledToDpi = true
         mapview.setMultiTouchControls(true)
-        mapview.setBuiltInZoomControls(true)
+        mapview.minZoomLevel = 4
+
+
+//        mapview.setBuiltInZoomControls(true)
+
+        btnZoomIn.setOnClickListener { v ->
+
+        mapview.controller.zoomIn()
+//        makeToast(mapview, "zoomIn")
+
+        }
+
+        btnZoomOut.setOnClickListener { v ->
+
+
+            if (mapview.canZoomOut()) {
+                mapview.controller.zoomOut()
+                makeToast(mapview, "zoomLevel: " + mapview.zoomLevel)
+            }
+            else  makeToast(mapview, "maximum_zoomOut" + mapview.minZoomLevel)
+
+        }
 
 
         RxView.clicks(myPlace)
@@ -131,7 +154,7 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
     override fun onResume() {
         super.onResume()
 
-        mapview.controller.setZoom(12)
+//        mapview.controller.setZoom(MainPref.defaultZoom)
 //      mapview.controller.animateTo(GeoPoint(55.7559067, 37.6171875))
 
         mapview.controller.animateTo(GeoPoint(MainPref.defaultLatitude.toDouble(), MainPref.defaultLongitude.toDouble()))
@@ -164,6 +187,7 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
 
     fun animateTo(geoPoint: GeoPoint, zoom: Int) {
         mapview.controller.setZoom(zoom)
+//        MainPref.defaultZoom = zoom
         mapview.controller.animateTo(geoPoint)
         mapview.postInvalidate()
     }
@@ -185,7 +209,7 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
             marker.snippet = ("id=" + device.id +
                                  ", uniqueId='" + device.uniqueId + '\'' +
                                 ", status='" + device.status + '\'' +
-                                 ", address=" + position.address + ", date=" + device.lastUpdate)
+                                ", accuracy=" + position.accuracy)
             if (position.fixTime != null) {
                 marker.snippet = position.fixTime.toString()
             }
