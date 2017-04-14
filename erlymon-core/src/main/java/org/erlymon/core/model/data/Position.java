@@ -29,6 +29,7 @@ import com.google.gson.annotations.Until;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -88,7 +89,7 @@ public class Position extends RealmObject implements Parcelable {
     private String other;
 
     @Since(3.2)
-    private String attributes;
+    private Map<String, Object> attributes;
 */
     public Position() {
     }
@@ -133,9 +134,7 @@ public class Position extends RealmObject implements Parcelable {
         this.deviceTime = deviceTime;
     }
 
-    public Date getFixTime() {
-        return fixTime;
-    }
+    public Date getFixTime() { return fixTime; }
 
     public void setFixTime(Date fixTime) {
         this.fixTime = fixTime;
@@ -210,6 +209,14 @@ public class Position extends RealmObject implements Parcelable {
     }
 
     public void setAccuracy(String accuracy) { this.accuracy = accuracy; }
+
+//    public void setAttributes(Map<String, Object> attributes) {
+//        this.attributes = attributes;
+//    }
+
+//    public Map<String, Object> getAttributes() { return attributes; }
+
+
 /*
     public String getOther() {
         return other;
@@ -249,7 +256,7 @@ public class Position extends RealmObject implements Parcelable {
         address = in.readString();
         accuracy = in.readString();
         //other = in.readString();
-        //attributes = in.readString();
+//        attributes = in.readString();
     }
 
     @Override

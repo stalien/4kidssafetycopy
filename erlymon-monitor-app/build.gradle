@@ -1,3 +1,4 @@
+//noinspection GradleCompatible
 /*
  * Copyright (c) 2016, Sergey Penkovsky <sergey.penkovsky@gmail.com>
  *
@@ -69,7 +70,7 @@ android {
         applicationId "ru.rusmobilecontent.forkidssafety"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 12
+        versionCode 16
         //versionCode getVersionCode()
         versionName getVersionName()
         //archivesBaseName = "erlymon-monitor-$versionName"
@@ -111,8 +112,8 @@ dependencies {
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.android.support:design:25.1.0'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
 
 
     compile 'com.android.support:multidex:1.0.1'
@@ -134,6 +135,7 @@ dependencies {
 
     // osmdroid
     compile 'com.github.MKergall:osmbonuspack:v5.8.1'
+  //  compile 'org.osmdroid:osmdroid-android:5.6.3'
 
     // realm
     compile 'io.realm:android-adapters:1.4.1'

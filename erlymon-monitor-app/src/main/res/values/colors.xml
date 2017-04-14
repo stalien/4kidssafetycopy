@@ -23,6 +23,7 @@
     <color name="colorRed">#bf190d</color>
     <color name="colorGrey">#393939</color>
     <color name="colorWhite">#f4f8fb</color>
+    <color name="colorWhiteDark">#eeeff2</color>
     <color name="colorPrimaryDark">#96bc35</color>
     <color name="colorAccent">#5d9c31</color>
 

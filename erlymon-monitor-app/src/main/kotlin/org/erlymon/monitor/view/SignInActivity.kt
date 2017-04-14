@@ -71,16 +71,16 @@ class SignInActivity : BaseActivity<SignInPresenter>(), SignInView, SettingsDial
                     }
                 })
 
-        sign_up_button.setOnClickListener { v ->
+        sign_up_button.setOnClickListener {
             val intent = Intent(this@SignInActivity, SignUpActivity::class.java)
             startActivity(intent)
 
         }
 
-        serverConfig.setOnClickListener { v ->
+        serverConfig.setOnClickListener({
             val popupMenu = PopupMenu(this@SignInActivity, serverConfig)
             popupMenu.inflate(R.menu.settings_popupmenu)
-            popupMenu.setOnMenuItemClickListener{ item ->
+            popupMenu.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.action_settings -> {
                         val dialog = SettingsDialogFragment.newInstance(MainPref.dns, MainPref.sslOrTls, MainPref.protocolVersion.toDouble())
@@ -96,8 +96,8 @@ class SignInActivity : BaseActivity<SignInPresenter>(), SignInView, SettingsDial
                     }
                 }
             }
-          popupMenu.show()
-        }
+            popupMenu.show()
+        })
     }
 
     override fun onResume() {

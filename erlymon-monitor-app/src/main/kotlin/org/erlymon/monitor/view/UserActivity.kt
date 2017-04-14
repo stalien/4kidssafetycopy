@@ -64,15 +64,15 @@ class UserActivity : BaseActivity<UserPresenter>(), UserView {
         name.setText(user?.name)
         email.setText(user?.email)
         password.setText(user?.password)
-        admin.setChecked(if (user?.admin != null) (user?.admin as Boolean) else false)
-        admin.setEnabled(session?.admin as Boolean)
+        admin.isChecked = if (user?.admin != null) user.admin else false
+        admin.isEnabled = session?.admin as Boolean
         map.setText(user?.map)
         distanceUnit.setText(user?.distanceUnit)
         speedUnit.setText(user?.speedUnit)
-        latitude.setText(if (user?.latitude != null) user?.latitude.toString() else 0.0.toString())
-        longitude.setText(if (user?.longitude != null) user?.longitude.toString() else 0.0.toString())
-        zoom.setText(if (user?.zoom != null) user?.zoom.toString() else 0.toString())
-        twelveHourFormat.setChecked(if (user?.twelveHourFormat != null) (user?.twelveHourFormat as Boolean) else false)
+        latitude.setText(if (user?.latitude != null) user.latitude.toString() else 0.0.toString())
+        longitude.setText(if (user?.longitude != null) user.longitude.toString() else 0.0.toString())
+        zoom.setText(if (user?.zoom != null) user.zoom.toString() else 0.toString())
+        twelveHourFormat.isChecked = if (user?.twelveHourFormat != null) user.twelveHourFormat else false
 
         fab_account_save.setOnClickListener {
             presenter?.onSaveButtonClick()
@@ -109,9 +109,9 @@ class UserActivity : BaseActivity<UserPresenter>(), UserView {
         user.language = Locale.getDefault().language
         user.distanceUnit = distanceUnit.text.toString()
         user.speedUnit = speedUnit.text.toString()
-        user.latitude = if (latitude.text.length > 0) latitude.text.toString().toDouble() else 0.0
-        user.longitude = if (longitude.text.length > 0) longitude.text.toString().toDouble() else 0.0
-        user.zoom = if (zoom.text.length > 0) zoom.text.toString().toInt() else 0
+        user.latitude = if (latitude.text.isNotEmpty()) latitude.text.toString().toDouble() else 0.0
+        user.longitude = if (longitude.text.isNotEmpty()) longitude.text.toString().toDouble() else 0.0
+        user.zoom = if (zoom.text.isNotEmpty()) zoom.text.toString().toInt() else 0
         user.twelveHourFormat = twelveHourFormat.isChecked
         return user
     }

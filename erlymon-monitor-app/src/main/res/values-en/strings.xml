@@ -42,6 +42,15 @@
     <string name="sharedSave">Save</string>
     <string name="deviceTitle">Device</string>
     <string name="deviceIdentifier">identifier</string>
+
+    <string name="deviceCategory">Category</string>
+    <string name="deviceSim">Phone number</string>
+    <string name="rebootDevice">Reboot Device</string>
+    <string name="positionSingle">Position</string>
+    <string name="modePowerSaving">Power OFF</string>
+    <string name="voiceMonitoring">Voice Monitoring</string>
+    <string name="deviceIdentification">Find Device</string>
+
     <string name="registerTitle">REGISTER</string>
     <string name="sharedRegistryNewAccount">User registration is completed successfully</string>
     <string name="sharedBackPressed">Press again to exit</string>

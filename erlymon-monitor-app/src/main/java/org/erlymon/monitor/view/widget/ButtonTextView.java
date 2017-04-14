@@ -27,7 +27,7 @@ import android.widget.TextView;
 /**
  * Created by Sergey Penkovsky <sergey.penkovsky@gmail.com> on 05.10.15.
  */
-public class ButtonTextView extends TextView {
+public class ButtonTextView extends android.support.v7.widget.AppCompatTextView {
 
     private int actionX, actionY;
 

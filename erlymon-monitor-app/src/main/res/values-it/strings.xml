@@ -66,6 +66,15 @@
     <string name="errorUpdateDevice">Impossibile aggiornare il dispositivo</string>
     <string name="errorPermissionRationale">Contacts permissions are needed for providing email completions.</string>
     -->
+
+    <string name="deviceCategory">Category</string>
+    <string name="deviceSim">Phone number</string>
+    <string name="rebootDevice">Reboot Device</string>
+    <string name="positionSingle">Position</string>
+    <string name="modePowerSaving">Power OFF</string>
+    <string name="voiceMonitoring">Voice Monitoring</string>
+    <string name="deviceIdentification">Find Device</string>
+
     <string name="sharedRegistryNewAccount">Registrazione dell\'utente è stata completata con successo</string>
     <string name="serverConfigUseNewProtocol">Utilizzare il nuovo protocollo</string>
     <string name="serverConfigUseSecure">Usa SSL/TLS</string>

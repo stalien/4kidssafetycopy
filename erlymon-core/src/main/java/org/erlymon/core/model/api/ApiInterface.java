@@ -105,10 +105,10 @@ public interface ApiInterface {
     @POST("commands")
     Observable<Void> createCommand(@Body Command command);
 
-    @POST("permissions")
+    @POST("permissions/devices")
     Observable<Void> createPermission(@Body Permission permission);
 
     //@DELETE("permissions")
-    @HTTP(method = "DELETE", path = "permissions", hasBody = true)
+    @HTTP(method = "DELETE", path = "permissions/devices", hasBody = true)
     Observable<Void> deletePermission(@Body Permission permission);
 }

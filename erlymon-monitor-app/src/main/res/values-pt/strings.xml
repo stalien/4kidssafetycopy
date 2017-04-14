@@ -81,6 +81,15 @@
     <string name="errorUpdateDevice">Falha ao atualizar o dispositivo</string>
     <string name="errorPermissionRationale">Contacts permissions are needed for providing email completions.</string>
     -->
+
+    <string name="deviceCategory">Category</string>
+    <string name="deviceSim">Phone number</string>
+    <string name="rebootDevice">Reboot Device</string>
+    <string name="positionSingle">Position</string>
+    <string name="modePowerSaving">Power OFF</string>
+    <string name="voiceMonitoring">Voice Monitoring</string>
+    <string name="deviceIdentification">Find Device</string>
+
     <string name="positionUnknown">Desconhecido</string>
     <string name="sharedRegistryNewAccount">O registro do usuário é concluído com êxito</string>
     <string name="serverConfigHost">DNS ou IP: PORT</string>

@@ -42,14 +42,14 @@ class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
         setContentView(R.layout.activity_signup)
        // setSupportActionBar(toolbar)
 
-        btn_back.setOnClickListener { v ->
+        btn_back.setOnClickListener {
             val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
             startActivity(intent)
 
         }
 
         presenter = UserPresenterImpl(this, this)
-        btn_save.setOnClickListener { v -> presenter?.onSaveButtonClick() }
+        btn_save.setOnClickListener { presenter?.onSaveButtonClick() }
         //fab_account_save.setOnClickListener { v -> presenter?.onSaveButtonClick() }
     }
 

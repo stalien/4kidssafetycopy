@@ -49,6 +49,7 @@ import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Polyline
 import java.util.*
 
+@Suppress("DEPRECATION")
 class PositionsActivity : BaseActivity<PositionsPresenter>(), PositionsView, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     private var tag: String = ""
     private var pathOverlay: Polyline? = null

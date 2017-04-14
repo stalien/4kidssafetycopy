@@ -48,6 +48,7 @@ class DevicesFragment : BaseFragment<DevicesListPresenter>(), DevicesListView {
         fun onLoadPositions(device: Device)
         fun onShowOnMap(device: Device)
         fun onSendCommand(device: Device)
+        fun onCallDevice(device: Device)
     }
 
     private var listener: OnActionDeviceListener? = null
@@ -129,6 +130,10 @@ class DevicesFragment : BaseFragment<DevicesListPresenter>(), DevicesListView {
                 }
                 R.id.action_send_command -> {
                     listener!!.onSendCommand(device)
+                    return true
+                }
+                R.id.action_call_device -> {
+                    listener!!.onCallDevice(device)
                     return true
                 }
                 else -> return false

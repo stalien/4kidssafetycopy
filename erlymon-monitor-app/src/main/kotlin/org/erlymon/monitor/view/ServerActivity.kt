@@ -57,8 +57,12 @@ class ServerActivity : BaseActivity<ServerPresenter>(), ServerView {
 
         val server = intent.getParcelableExtra<Server>("server")
         logger.debug("SERVER ID: " + server?.id + " SERVER: " + server?.toString())
-        registration.setChecked(if (server?.registration != null) (server?.registration as Boolean) else false)
-        readonly.setChecked(if (server?.readonly != null) (server?.readonly as Boolean) else false)
+        registration.isChecked = if (server?.registration != null) {
+            server.registration
+        } else false
+        readonly.isChecked = if (server?.readonly != null) {
+            server.readonly
+        } else false
         map.setText(server?.map)
         bingKey.setText(server?.bingKey)
         mapUrl.setText(server?.mapUrl)
@@ -67,7 +71,9 @@ class ServerActivity : BaseActivity<ServerPresenter>(), ServerView {
         latitude.setText(server?.latitude.toString())
         longitude.setText(server?.longitude.toString())
         zoom.setText(server?.zoom.toString())
-        twelveHourFormat.setChecked(if (server?.twelveHourFormat != null) (server?.twelveHourFormat as Boolean) else false)
+        twelveHourFormat.isChecked = if (server?.twelveHourFormat != null) {
+            server.twelveHourFormat
+        } else false
 
         fab_account_save.setOnClickListener {
             presenter?.onSaveButtonClick()

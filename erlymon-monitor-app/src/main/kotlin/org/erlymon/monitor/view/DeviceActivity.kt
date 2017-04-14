@@ -30,7 +30,8 @@ import org.erlymon.core.presenter.DevicePresenterImpl
 import org.erlymon.core.view.DeviceView
 import org.erlymon.monitor.R
 import org.slf4j.LoggerFactory
-
+import android.view.View
+import kotlinx.android.synthetic.main.content_intro.*
 
 class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
 
@@ -52,6 +53,33 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_device)
+
+        var status = 1;
+        input_name.visibility = View.VISIBLE
+        input_identifier.visibility = View.GONE
+        input_sim.visibility = View.GONE
+
+        btn_next.setOnClickListener({
+
+
+                if (status == 1) {
+                    status = 2
+                    input_name.visibility = View.GONE
+                    input_identifier.visibility = View.VISIBLE
+                    input_sim.visibility = View.GONE
+                } else {
+                    if (status == 2) {
+                        status = 3
+                        input_name.visibility = View.GONE
+                        input_identifier.visibility = View.GONE
+                        input_sim.visibility = View.VISIBLE
+                        btn_next.setText("СОХРАНИТЬ");
+                    }else{ if (status == 3) {presenter?.onSaveButtonClick()}}
+                }
+
+
+        })
+
 
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -83,6 +111,10 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
         logger.debug("getDeviceId => DEVICE: " + device)
         return if (device != null) device.id else 0
     }
+
+
+
+
 
     override fun getDevice(): Device {
         var device = intent.getParcelableExtra<Device>("device")

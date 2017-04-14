@@ -67,9 +67,12 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
         }
     }
 
+
+
     private var mRadiusMarkerClusterer: DevicesMarkerClusterer? = null
     private var markers: MutableMap<Long, MarkerWithLabel> = HashMap()
     private var mLocationOverlay: MyLocationNewOverlay? = null
+
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -95,18 +98,20 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
 
 //        mapview.setBuiltInZoomControls(true)
 
-        btnZoomIn.setOnClickListener { v ->
+        btnZoomIn.setOnClickListener {
 
         mapview.controller.zoomIn()
+        MainPref.defaultZoom = mapview.zoomLevel
 //        makeToast(mapview, "zoomIn")
 
         }
 
-        btnZoomOut.setOnClickListener { v ->
+        btnZoomOut.setOnClickListener {
 
 
             if (mapview.canZoomOut()) {
                 mapview.controller.zoomOut()
+                MainPref.defaultZoom = mapview.zoomLevel
                 makeToast(mapview, "zoomLevel: " + mapview.zoomLevel)
             }
             else  makeToast(mapview, "maximum_zoomOut" + mapview.minZoomLevel)
@@ -124,7 +129,7 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
                             mLocationOverlay?.runOnFirstFix {
                                 mapview.post {
                                     try {
-                                        mapview.controller.setZoom(18)
+                                        mapview.controller.setZoom(MainPref.defaultZoom)
                                         mapview.controller.animateTo(GeoPoint(
                                                 mLocationOverlay!!.lastFix.latitude,
                                                 mLocationOverlay!!.lastFix.longitude
@@ -133,7 +138,7 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
                                     } catch (e: Exception) {
 
                                         // try find position error
-                                        makeToast(myPlace, error(e))
+                                        //makeToast(myPlace, error(e))
 
                                     }
                                 }
@@ -165,6 +170,7 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
 
         mRadiusMarkerClusterer = DevicesMarkerClusterer(context)
         mRadiusMarkerClusterer?.setIcon(BitmapFactory.decodeResource(resources, R.drawable.marker_cluster))
+
         mapview.overlays.add(mRadiusMarkerClusterer)
 
         mLocationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(activity), mapview)
@@ -215,6 +221,7 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
             }
 
             marker.setIcon(arrowDrawable)
+            marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
             if (position.course != null) {
                // marker.rotation = position.course
             }

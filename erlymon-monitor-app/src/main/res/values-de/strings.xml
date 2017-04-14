@@ -61,6 +61,9 @@
     <string name="sharedRemoveConfirm">Objekt löschen?</string>
     <string name="serverConfigHost">DNS oder IP: PORT</string>
     <string name="deviceIdentifier">Bezeichner</string>
+    <string name="deviceCategory">Category</string>
+    <string name="deviceSim">Phone number</string>
+
     <string name="userName">Name</string>
     <string name="userPassword">Passwort</string>
     <string name="serverConfigUseNewProtocol">Verwenden Sie das neue Protokoll</string>
@@ -84,6 +87,12 @@
     <string name="commandUnit">Einheit</string>
     <string name="engineResume">Engine Resume</string>
     <string name="engineStop">Engine Stop</string>
+    <string name="rebootDevice">Reboot Device</string>
+    <string name="positionSingle">Position</string>
+    <string name="modePowerSaving">Power OFF</string>
+    <string name="voiceMonitoring">Voice Monitoring</string>
+    <string name="deviceIdentification">Find Device</string>
+
     <string name="errorSendCommand">The command is not executed</string>
     <string name="positionPeriodic">Periodic Reporting</string>
     <string name="positionStop">Stop Reporting</string>

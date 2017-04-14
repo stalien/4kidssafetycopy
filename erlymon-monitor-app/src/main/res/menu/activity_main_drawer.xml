@@ -19,8 +19,12 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="single"
+     >
+
+
         <item
+
             android:id="@+id/nav_map"
             android:icon="@drawable/ic_map"
             android:title="@string/mapTitle"
@@ -41,7 +45,8 @@
             <item
                 android:id="@+id/nav_server"
                 android:icon="@drawable/ic_server"
-                android:title="@string/settingsServer" />
+                android:title="@string/settingsServer"
+                android:visible="false" />
             <item
                 android:id="@+id/nav_account"
                 android:icon="@drawable/ic_account"

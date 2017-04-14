@@ -19,6 +19,8 @@
 package org.erlymon.monitor.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
@@ -77,6 +79,7 @@ public class DevicesAdapter extends RealmBaseAdapter<Device> implements ListAdap
         viewHolder.quickContactBadge.setBackgroundResource(getStatusColorId(item.getStatus()));
         return convertView;
     }
+
 
     private int getStatusColorId(String status) {
         switch (status) {

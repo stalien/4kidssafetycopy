@@ -67,6 +67,15 @@
     <string name="errorUpdateDevice">Nem sikerült frissíteni a készüléket</string>
     <string name="errorPermissionRationale">Contacts permissions are needed for providing email completions.</string>
     -->
+
+    <string name="deviceCategory">Category</string>
+    <string name="deviceSim">Phone number</string>
+    <string name="rebootDevice">Reboot Device</string>
+    <string name="positionSingle">Position</string>
+    <string name="modePowerSaving">Power OFF</string>
+    <string name="voiceMonitoring">Voice Monitoring</string>
+    <string name="deviceIdentification">Find Device</string>
+
     <string name="positionAltitude">Magasság</string>
     <string name="positionCourse">Irány</string>
     <string name="positionLatitude">Szélességi fok</string>

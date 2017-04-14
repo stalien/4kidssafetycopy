@@ -21,6 +21,7 @@ package org.erlymon.monitor.view
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -90,7 +91,7 @@ class MainActivity : BaseActivity<MainPresenter>(),
         nav_view.setNavigationItemSelectedListener(this)
 
         (nav_view.menu.findItem(R.id.nav_users) as MenuItem).isVisible = session?.admin!!
-        (nav_view.menu.findItem(R.id.nav_server) as MenuItem).isVisible = session?.admin!!
+        (nav_view.menu.findItem(R.id.nav_server) as MenuItem).isVisible = session.admin!!
 
 
         pagerAdapter = CustomFragmentPagerAdapter(supportFragmentManager)
@@ -290,6 +291,12 @@ class MainActivity : BaseActivity<MainPresenter>(),
         presenter?.onGetPostionByCache()
     }
 
+    override fun onCallDevice(device: Device) {
+        val callIntent = Intent(Intent.ACTION_CALL)
+        callIntent.data = Uri.parse("tel:" + device.phone.toString())
+        startActivity(callIntent)
+    }
+
     override fun onSendCommand(device: Device) {
         intent.putExtra("deviceId", device.id)
         val dialogFragment = SendCommandDialogFragment.newInstance(device.id)
@@ -332,7 +339,7 @@ class MainActivity : BaseActivity<MainPresenter>(),
     }
 
     private fun calculateMapCenter() :Pair<GeoPoint, Int> {
-        val user = intent.getParcelableExtra<User>("session")
+//        val user = intent.getParcelableExtra<User>("session")
 //        if (user.latitude === 0.0 && user.longitude === 0.0 && user.zoom === 0) {
 //            val server = intent.getParcelableExtra<Server>("server")
 //            if (server.latitude === 0.0 && server.longitude === 0.0 && server.zoom === 0) {

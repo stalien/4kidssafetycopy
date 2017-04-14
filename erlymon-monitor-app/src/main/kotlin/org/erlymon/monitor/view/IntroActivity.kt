@@ -49,10 +49,10 @@ class IntroActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intro)
 
-       btn_enter.setOnClickListener { v ->
-            val intent = Intent(this@IntroActivity, SignInActivity::class.java)
-            startActivity(intent)
-        }
+       btn_enter.setOnClickListener({
+           val intent = Intent(this@IntroActivity, SignInActivity::class.java)
+           startActivity(intent)
+       })
 
     }
 }

@@ -40,6 +40,8 @@
     <string name="sharedRegistryNewAccount">Регистрацията е завършена успешно</string>
     <string name="serverConfigHost">DNS или IP:PORT</string>
     <string name="deviceIdentifier">Идентификатор</string>
+    <string name="deviceCategory">Категория</string>
+    <string name="deviceSim">Номер SIM карты</string>
     <string name="userName">Име</string>
     <string name="userPassword">Парола</string>
     <string name="loginTitle">Вход</string>
@@ -85,6 +87,11 @@
     <string name="commandUnit">Мерна единица</string>
     <string name="engineResume">Engine Resume</string>
     <string name="engineStop">Engine Stop</string>
+    <string name="rebootDevice">Перезагрузить устройство</string>
+    <string name="positionSingle">Запрос позиции</string>
+    <string name="modePowerSaving">Выключить</string>
+    <string name="voiceMonitoring">Прослушивание</string>
+    <string name="deviceIdentification">Найти</string>
     <string name="errorSendCommand">The command is not executed</string>
     <string name="positionPeriodic">Periodic Reporting</string>
     <string name="positionStop">Stop Reporting</string>
