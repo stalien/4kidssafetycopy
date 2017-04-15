@@ -140,8 +140,10 @@ class PositionsActivity : BaseActivity<PositionsPresenter>(), PositionsView, Dat
     public override fun onResume() {
         super.onResume()
         pathOverlay = Polyline(this)
-        pathOverlay!!.color = resources.getColor(R.color.colorPrimaryDark)
-        pathOverlay!!.paint.strokeWidth = 10f
+        pathOverlay!!.color = resources.getColor(R.color.colorRed)
+        pathOverlay!!.paint.strokeWidth = 5f
+        pathOverlay!!.title = deviceId.toString()
+//        pathOverlay!!.isGeodesic = true
         mapview.overlays.add(pathOverlay)
     }
 
@@ -194,7 +196,7 @@ class PositionsActivity : BaseActivity<PositionsPresenter>(), PositionsView, Dat
     fun createTrack(positions: Array<out Position>) {
         val points = ArrayList<GeoPoint>()
         for (position in positions) {
-            points.add(GeoPoint(position.latitude!!, position.longitude!!))
+            if (position.accuracy.toFloat().equals(0.0F)) {points.add(GeoPoint(position.latitude!!, position.longitude!!))}
         }
         pathOverlay!!.points = points
         mapview.zoomToBoundingBox(BoundingBoxE6.fromGeoPoints(points))

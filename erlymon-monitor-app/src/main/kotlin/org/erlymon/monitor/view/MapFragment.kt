@@ -21,6 +21,7 @@ package org.erlymon.monitor.view
 import android.Manifest
 import android.content.Context
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
@@ -72,6 +73,7 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
     private var mRadiusMarkerClusterer: DevicesMarkerClusterer? = null
     private var markers: MutableMap<Long, MarkerWithLabel> = HashMap()
     private var mLocationOverlay: MyLocationNewOverlay? = null
+    private var mPosition: Position? = null
 
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
@@ -89,7 +91,7 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
 
         presenter = MapPresenterImpl(context, this)
 
-        arrowDrawable = resources.getDrawable(R.drawable.ic_arrow_offline)
+        arrowDrawable = resources.getDrawable(R.drawable.arrow_offline)
 
         mapview.isTilesScaledToDpi = true
         mapview.setMultiTouchControls(true)
@@ -112,11 +114,16 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
             if (mapview.canZoomOut()) {
                 mapview.controller.zoomOut()
                 MainPref.defaultZoom = mapview.zoomLevel
-                makeToast(mapview, "zoomLevel: " + mapview.zoomLevel)
+//                makeToast(mapview, "zoomLevel: " + mapview.zoomLevel)
             }
-            else  makeToast(mapview, "maximum_zoomOut" + mapview.minZoomLevel)
+//            else  makeToast(mapview, "maximum_zoomOut" + mapview.minZoomLevel)
 
         }
+
+
+
+        mapview.controller.animateTo(GeoPoint(MainPref.defaultLatitude.toDouble(), MainPref.defaultLongitude.toDouble()))
+        mapview.controller.setZoom(MainPref.defaultZoom)
 
 
         RxView.clicks(myPlace)
@@ -210,6 +217,9 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
             }
 
             marker.title = device.name
+            marker.setRaduis(position.accuracy)
+
+
 //            marker.title = position.fixTime.toString()
 //            marker.snippet = device.id.toString()
             marker.snippet = ("id=" + device.id +
@@ -256,6 +266,8 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
         mRadiusMarkerClusterer?.invalidate()
         mapview?.postInvalidate()
     }
+
+
 
     override fun showError(error: String) {
         makeToast(mapview, error)

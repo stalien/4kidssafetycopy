@@ -20,6 +20,7 @@ package org.erlymon.monitor.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 
 import org.slf4j.LoggerFactory
 
@@ -31,6 +32,7 @@ import org.erlymon.core.presenter.UserPresenterImpl
 import org.erlymon.core.view.UserView
 import org.erlymon.monitor.R
 import android.widget.EditText
+import kotlinx.android.synthetic.main.activity_user.*
 import kotlinx.android.synthetic.main.content_signin.*
 import org.erlymon.monitor.MainPref
 
@@ -61,7 +63,7 @@ class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
     }
 
     override fun getUserId(): Long {
-        return 0
+        return 1
     }
 
 
@@ -78,24 +80,30 @@ class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
         val user = User()
 
         val em = email.text.toString()
-        if (isEmailValid(em)) {
+        if (em.isEmpty()) {
 
-        user.id = 0;
-        user.name = name.text.toString()
-        user.email = email.text.toString()
-        user.password = password.text.toString()
-        MainPref.email = email.text.toString()
-         MainPref.password = ""
+            makeToast(btn_save, "пустая строка")
+        } else
+            if (isEmailValid(em)) {
+
+                user.id = 0;
+                user.name = name.text.toString()
+                user.email = email.text.toString()
+                user.password = password.text.toString()
+                MainPref.email = email.text.toString()
+                MainPref.password = ""
+            } else {// ошибка валидации
+                Snackbar.make(btn_save, "ошибка валидации: e-mail", Snackbar.LENGTH_LONG).show()
+ //               makeToast(btn_save, "ошибка валидации")
+            }
+
+
+            return user;
         }
 
-        else {// ошибка валидации
-
-        }
-        return user;
-    }
 
     override fun showError(error: String) {
-      //  makeToast(toolbar, error)
+     //   makeToast(toolbar, error)
     }
 
     companion object {

@@ -20,6 +20,7 @@ package org.erlymon.core.model.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.os.SystemClock;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -81,7 +82,7 @@ public class Position extends RealmObject implements Parcelable {
     private String address;
 
     @Since(3.4)
-    private String accuracy;
+    private Float accuracy;
 
 /*
     @Since(3.0)
@@ -204,11 +205,11 @@ public class Position extends RealmObject implements Parcelable {
         this.address = address;
     }
 
-    public String getAccuracy() {
+    public Float getAccuracy() {
         return accuracy;
     }
 
-    public void setAccuracy(String accuracy) { this.accuracy = accuracy; }
+    public void setAccuracy(Float accuracy) { this.accuracy = accuracy; }
 
 //    public void setAttributes(Map<String, Object> attributes) {
 //        this.attributes = attributes;
@@ -242,8 +243,11 @@ public class Position extends RealmObject implements Parcelable {
         serverTime = tmpServerTime != -1 ? new Date(tmpServerTime) : null;
         long tmpDeviceTime = in.readLong();
         deviceTime = tmpDeviceTime != -1 ? new Date(tmpDeviceTime) : null;
-        long tmpFixTime = in.readLong();
-        fixTime = tmpFixTime != -1 ? new Date(tmpFixTime) : null;
+//        long tmpFixTime = in.readLong();
+        fixTime = new Date(in.readLong());
+
+
+//        fixTime = tmpFixTime != -1 ? new Date(tmpFixTime) : null;
         byte outdatedVal = in.readByte();
         outdated = outdatedVal == 0x02 ? null : outdatedVal != 0x00;
         byte realVal = in.readByte();
@@ -254,7 +258,7 @@ public class Position extends RealmObject implements Parcelable {
         speed = in.readByte() == 0x00 ? null : in.readFloat();
         course = in.readByte() == 0x00 ? null : in.readFloat();
         address = in.readString();
-        accuracy = in.readString();
+        accuracy = in.readFloat();
         //other = in.readString();
 //        attributes = in.readString();
     }
@@ -281,7 +285,7 @@ public class Position extends RealmObject implements Parcelable {
         }
         dest.writeLong(serverTime != null ? serverTime.getTime() : -1L);
         dest.writeLong(deviceTime != null ? deviceTime.getTime() : -1L);
-        dest.writeLong(fixTime != null ? fixTime.getTime() : -1L);
+//        dest.writeLong(fixTime != null ? fixTime.getTime() : -1L);
         if (outdated == null) {
             dest.writeByte((byte) (0x02));
         } else {
@@ -323,7 +327,7 @@ public class Position extends RealmObject implements Parcelable {
             dest.writeFloat(course);
         }
         dest.writeString(address);
-        dest.writeString(accuracy);
+        dest.writeFloat(accuracy);
         //dest.writeString(other);
         //dest.writeString(attributes);
     }
@@ -344,7 +348,8 @@ public class Position extends RealmObject implements Parcelable {
     public static List<String> createList(Position position) {
         List<String> array = new ArrayList<>();
         array.add("" + position.getReal());
-        array.add("" + position.getFixTime().toString());
+//        array.add("" + position.getFixTime().toString());
+        array.add("" + position.getAccuracy().toString());
         array.add("" + position.getLatitude());
         array.add("" + position.getLongitude());
         array.add("" + position.getAltitude());

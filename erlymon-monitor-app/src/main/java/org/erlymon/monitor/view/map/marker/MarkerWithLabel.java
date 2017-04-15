@@ -22,9 +22,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.support.design.widget.Snackbar;
 
 import org.erlymon.core.model.data.Position;
 import org.erlymon.monitor.view.Utils;
+import org.osmdroid.util.TileSystem;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
 
@@ -37,6 +39,8 @@ public class MarkerWithLabel extends Marker {
     String mLabel = null;
     MapView mMapView;
     private Bitmap bmpText;
+    private Position position;
+
 
 
     public MarkerWithLabel(MapView mapView, String label) {
@@ -50,7 +54,8 @@ public class MarkerWithLabel extends Marker {
         textPaint.setTextAlign(Paint.Align.LEFT);
         circlePaint = new Paint();
         circlePaint.setColor(Color.BLUE);
-        circlePaint.setAlpha(5);
+        circlePaint.setAlpha(30);
+        circlePaint.setStyle(Paint.Style.FILL);
 
 /*        public void drawCircle(final Canvas c, final MapView osmv) {
             Paint circlePaint = new Paint();
@@ -70,18 +75,39 @@ public class MarkerWithLabel extends Marker {
         super.setTitle(title);
     }
 
+    public void setRaduis(Float raduis) {
+
+        Canvas canvas = new Canvas();
+        Position position = new Position();
+        MapView mapView ;
+
+        mapView = mMapView;
+
+//        drawCircle(raduis, canvas, mapView);
+        Snackbar.make(mMapView, "радиус: "+ raduis, Snackbar.LENGTH_LONG).show();
+
+
+    }
+
     public void setRelatedObject(Object relatedObject){
 
         super.setRelatedObject(relatedObject);
     }
 
+
+
     public void draw(final Canvas c, final MapView osmv, boolean shadow) {
+//        drawCircle(position, c, osmv);
         draw( c, osmv);
+
     }
 
     public void draw( final Canvas c, final MapView osmv) {
 
         super.draw( c, osmv, false);
+
+ //       Position position = new Position();
+ //       final float radius = position.getAccuracy() * 100.0F / (float) TileSystem.GroundResolution(position.getLatitude(), osmv.getZoomLevel());
 
         if (bmpText == null)
             return;
@@ -90,9 +116,24 @@ public class MarkerWithLabel extends Marker {
 
         Paint textPaint = new Paint();
         c.save();
+
 //        c.drawBitmap(bmpText, p.x - (int)(mAnchorU* bmpText.getWidth()), p.y + (int)(mAnchorV *  mIcon.getIntrinsicHeight()), textPaint);
-        c.drawCircle(p.x, p.y, 0.0F, circlePaint);
+
         c.drawBitmap(bmpText, p.x - (int)(mAnchorU* bmpText.getWidth()), p.y + 20, textPaint);
+//        c.drawCircle(p.x, p.y, 10.0F, circlePaint);
+        c.restore();
+
+    }
+
+    public void drawCircle( Position position, final Canvas c, final MapView osmv) {
+        super.draw( c, osmv, false);
+
+//               Position position = new Position();
+               final float radius = position.getAccuracy() / (float) TileSystem.GroundResolution(mPosition.getLatitude(), osmv.getZoomLevel());
+
+        Point p = this.mPositionPixels;
+        c.save();
+        c.drawCircle(p.x, p.y, radius, circlePaint);
         c.restore();
 
     }
