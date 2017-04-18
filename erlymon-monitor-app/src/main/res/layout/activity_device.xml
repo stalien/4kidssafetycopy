@@ -50,14 +50,14 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:src="@android:drawable/ic_menu_save" />
+
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="bottom|center"
         android:layout_alignParentBottom="true"
-        android:weightSum="1"
-        >
+        android:gravity="bottom|center"
+        android:orientation="horizontal"
+        android:weightSum="1">
 
         <Button
             android:id="@+id/btn_back"
@@ -80,7 +80,7 @@
 
         <Button
             android:id="@+id/btn_next"
-           style="?android:attr/borderlessButtonStyle"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="54dp"
             android:layout_weight="0.22"

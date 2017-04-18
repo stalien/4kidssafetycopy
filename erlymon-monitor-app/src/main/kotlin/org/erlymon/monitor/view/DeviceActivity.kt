@@ -56,6 +56,7 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
 
         var status = 1;
         input_name.visibility = View.VISIBLE
+        input_name.requestFocus();
         input_identifier.visibility = View.GONE
         input_sim.visibility = View.GONE
 
@@ -66,6 +67,7 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
                     status = 2
                     input_name.visibility = View.GONE
                     input_identifier.visibility = View.VISIBLE
+                    input_identifier.requestFocus();
                     input_sim.visibility = View.GONE
                 } else {
                     if (status == 2) {
@@ -73,6 +75,7 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
                         input_name.visibility = View.GONE
                         input_identifier.visibility = View.GONE
                         input_sim.visibility = View.VISIBLE
+                        input_sim.requestFocus();
                         btn_next.setText("СОХРАНИТЬ");
                     }else{ if (status == 3) {presenter?.onSaveButtonClick()}}
                 }
@@ -80,6 +83,29 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
 
         })
 
+        btn_back.setOnClickListener({
+            if (status == 1) {
+                onBackPressed()
+
+            } else {
+                if (status == 2) {
+                    status = 1
+                    input_name.visibility = View.VISIBLE
+                    input_name.requestFocus();
+                    input_identifier.visibility = View.GONE
+                    input_sim.visibility = View.GONE
+                }else{ if (status == 3) {status =2
+
+                    input_name.visibility = View.GONE
+                    input_identifier.visibility = View.VISIBLE
+                    input_identifier.requestFocus();
+                    input_sim.visibility = View.GONE
+                    btn_next.setText("ДАЛЕЕ");
+                }}
+            }
+
+
+        })
 
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
