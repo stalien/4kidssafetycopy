@@ -84,7 +84,7 @@ public class MarkerWithLabel extends Marker {
         mapView = mMapView;
 
 //        drawCircle(raduis, canvas, mapView);
-        Snackbar.make(mMapView, "радиус: "+ raduis, Snackbar.LENGTH_LONG).show();
+//        Snackbar.make(mMapView, "радиус: "+ raduis, Snackbar.LENGTH_LONG).show();
 
 
     }

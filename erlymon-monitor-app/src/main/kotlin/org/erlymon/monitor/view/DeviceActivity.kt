@@ -55,26 +55,26 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
         setContentView(R.layout.activity_device)
 
         var status = 1;
-        input_name.visibility = View.VISIBLE
+        name_layout.visibility = View.VISIBLE
         input_name.requestFocus();
-        input_identifier.visibility = View.GONE
-        input_sim.visibility = View.GONE
+        identifier_layout.visibility = View.GONE
+        sim_layout.visibility = View.GONE
 
         btn_next.setOnClickListener({
 
 
                 if (status == 1) {
                     status = 2
-                    input_name.visibility = View.GONE
-                    input_identifier.visibility = View.VISIBLE
+                    name_layout.visibility = View.GONE
+                    identifier_layout.visibility = View.VISIBLE
                     input_identifier.requestFocus();
-                    input_sim.visibility = View.GONE
+                    sim_layout.visibility = View.GONE
                 } else {
                     if (status == 2) {
                         status = 3
-                        input_name.visibility = View.GONE
-                        input_identifier.visibility = View.GONE
-                        input_sim.visibility = View.VISIBLE
+                        name_layout.visibility = View.GONE
+                        identifier_layout.visibility = View.GONE
+                        sim_layout.visibility = View.VISIBLE
                         input_sim.requestFocus();
                         btn_next.setText("СОХРАНИТЬ");
                     }else{ if (status == 3) {presenter?.onSaveButtonClick()}}
@@ -90,16 +90,16 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
             } else {
                 if (status == 2) {
                     status = 1
-                    input_name.visibility = View.VISIBLE
+                    name_layout.visibility = View.VISIBLE
                     input_name.requestFocus();
-                    input_identifier.visibility = View.GONE
-                    input_sim.visibility = View.GONE
+                    identifier_layout.visibility = View.GONE
+                    sim_layout.visibility = View.GONE
                 }else{ if (status == 3) {status =2
 
-                    input_name.visibility = View.GONE
-                    input_identifier.visibility = View.VISIBLE
+                    name_layout.visibility = View.GONE
+                    identifier_layout.visibility = View.VISIBLE
                     input_identifier.requestFocus();
-                    input_sim.visibility = View.GONE
+                    sim_layout.visibility = View.GONE
                     btn_next.setText("ДАЛЕЕ");
                 }}
             }

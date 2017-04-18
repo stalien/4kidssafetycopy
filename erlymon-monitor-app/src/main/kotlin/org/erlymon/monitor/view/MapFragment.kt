@@ -91,6 +91,7 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
 
         presenter = MapPresenterImpl(context, this)
 
+
         arrowDrawable = resources.getDrawable(R.drawable.arrow_offline)
 
         mapview.isTilesScaledToDpi = true
@@ -229,6 +230,12 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
             if (position.fixTime != null) {
                 marker.snippet = position.fixTime.toString()
             }
+
+            if (device.status == "online"){
+            arrowDrawable = resources.getDrawable(R.drawable.arrow_online)
+//                makeToast(mapview, "online")
+            } else arrowDrawable = resources.getDrawable(R.drawable.arrow_offline)
+
 
             marker.setIcon(arrowDrawable)
             marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
