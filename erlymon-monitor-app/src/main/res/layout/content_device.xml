@@ -92,12 +92,13 @@
                     android:visibility="visible">
 
                     <EditText
-                        android:id="@+id/name"
+                        android:id="@+id/nameDevice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/userName"
                         android:inputType="text"
                         android:maxLines="1"
+                        android:gravity="center_horizontal"
                         android:singleLine="true" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -108,7 +109,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <TextView
 
@@ -137,7 +138,7 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <ImageView
-                    android:id="@+id/imageView3"
+                    android:id="@+id/qr_code_btn"
                     android:layout_width="match_parent"
                     android:layout_height="293dp"
                     android:paddingLeft="50dp"
@@ -151,13 +152,14 @@
                     android:paddingBottom="40dp">
 
                     <EditText
-                        android:id="@+id/identifier"
+                        android:id="@+id/identifierID"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/deviceIdentifier"
                         android:inputType="number"
                         android:maxLength="10"
                         android:maxLines="1"
+                        android:gravity="center_horizontal"
                         android:singleLine="true" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -168,7 +170,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <TextView
 
@@ -209,6 +211,7 @@
                         android:inputType="phone"
                         android:maxLength="11"
                         android:maxLines="1"
+                        android:gravity="center_horizontal"
                         android:singleLine="false" />
 
                 </android.support.design.widget.TextInputLayout>

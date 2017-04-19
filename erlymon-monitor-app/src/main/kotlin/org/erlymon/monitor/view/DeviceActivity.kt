@@ -18,8 +18,13 @@
  */
 package org.erlymon.monitor.view
 
+import android.Manifest
+import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_device.*
@@ -31,9 +36,14 @@ import org.erlymon.core.view.DeviceView
 import org.erlymon.monitor.R
 import org.slf4j.LoggerFactory
 import android.view.View
+import com.google.android.gms.vision.barcode.Barcode
 import kotlinx.android.synthetic.main.content_intro.*
+import kotlinx.android.synthetic.main.list_device.*
 
 class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
+
+    val REQUEST_CODE = 100
+    val PERMISSION_REQUEST = 200
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here. The action bar will
@@ -107,6 +117,18 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
 
         })
 
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), PERMISSION_REQUEST)
+        }
+
+        qr_code_btn.setOnClickListener {
+            val intent = Intent(this@DeviceActivity, ScanActivity::class.java)
+//            identifierID.setText("11111111")
+            startActivityForResult(intent, REQUEST_CODE)
+
+//            makeToast(toolbar,"click")
+        }
+
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
@@ -115,13 +137,26 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
 
         val device = intent.getParcelableExtra<Device>("device")
         logger.debug("DEVICE ID: " + device?.id + " DEVICE: " + device?.toString())
-        name.setText(device?.name)
-        identifier.setText(device?.uniqueId)
+        nameDevice.setText(device?.name)
+        identifierID.setText(device?.uniqueId)
         category.setText(device?.category)
         sim.setText(device?.phone)
+
         fab_device_save.setOnClickListener {
             presenter?.onSaveButtonClick()
         }
+    }
+
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
+    //    super.onActivityResult(requestCode, resultCode, data)
+   //     if (requestCode === REQUEST_CODE && resultCode === Activity.RESULT_OK) {
+            if (data != null) {
+                val barcode = data.getParcelableExtra <Barcode>("barcode")
+   //             identifierID.post(Runnable { identifierID.setText(barcode.displayValue) })
+        identifierID.setText(barcode.displayValue)
+
+            }
+     //   }
     }
 
     override fun showData(data: Device) {
@@ -147,8 +182,8 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
         if (device == null) {
             device = Device()
         }
-        device.name = name.text.toString()
-        device.uniqueId = identifier.text.toString()
+        device.name = nameDevice.text.toString()
+        device.uniqueId = identifierID.text.toString()
         device.category = "arrow"
         device.status = "unknown"
         device.phone = sim.text.toString()

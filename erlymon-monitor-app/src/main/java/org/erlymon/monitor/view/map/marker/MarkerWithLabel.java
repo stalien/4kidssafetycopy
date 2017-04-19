@@ -17,22 +17,23 @@
  * along with Erlymon Monitor.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.erlymon.monitor.view.map.marker;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.support.design.widget.Snackbar;
-
 import org.erlymon.core.model.data.Position;
 import org.erlymon.monitor.view.Utils;
 import org.osmdroid.util.TileSystem;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
 
+
 /**
  * Created by sergey on 6/25/16.
  */
+
 public class MarkerWithLabel extends Marker {
     Paint textPaint = null;
     Paint circlePaint = null;
