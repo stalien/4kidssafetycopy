@@ -226,9 +226,10 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
             marker.snippet = ("id=" + device.id +
                                  ", uniqueId='" + device.uniqueId + '\'' +
                                 ", status='" + device.status + '\'' +
-                                ", accuracy=" + position.accuracy)
+                                ", accuracy=" + position.accuracy +
+                                ", lastFix=" + position.fixTime.toString())
             if (position.fixTime != null) {
-                marker.snippet = position.fixTime.toString()
+//                marker.snippet = position.fixTime.toString()
             }
 
             if (device.status == "online"){

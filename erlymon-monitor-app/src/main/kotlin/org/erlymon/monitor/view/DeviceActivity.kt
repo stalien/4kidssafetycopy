@@ -73,27 +73,28 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
         btn_next.setOnClickListener({
 
 
-                if (status == 1) {
+                if (status == 1 && validateName()) {
                     status = 2
                     name_layout.visibility = View.GONE
                     identifier_layout.visibility = View.VISIBLE
                     input_identifier.requestFocus();
                     sim_layout.visibility = View.GONE
                 } else {
-                    if (status == 2) {
+                    if (status == 2 && validateID()) {
                         status = 3
                         name_layout.visibility = View.GONE
                         identifier_layout.visibility = View.GONE
                         sim_layout.visibility = View.VISIBLE
                         input_sim.requestFocus();
                         btn_next.setText("СОХРАНИТЬ");
-                    }else{ if (status == 3) {presenter?.onSaveButtonClick()}}
+                    }else{ if (status == 3 && validateSim()) {presenter?.onSaveButtonClick()}}
                 }
 
 
         })
 
         btn_back.setOnClickListener({
+
             if (status == 1) {
                 onBackPressed()
 
@@ -117,13 +118,15 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
 
         })
 
+
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), PERMISSION_REQUEST)
         }
 
         qr_code_btn.setOnClickListener {
             val intent = Intent(this@DeviceActivity, ScanActivity::class.java)
-//            identifierID.setText("11111111")
+
             startActivityForResult(intent, REQUEST_CODE)
 
 //            makeToast(toolbar,"click")
@@ -144,6 +147,45 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
 
         fab_device_save.setOnClickListener {
             presenter?.onSaveButtonClick()
+        }
+    }
+
+    fun validateName(): Boolean {
+
+        if(nameDevice.text.toString().isEmpty()){
+            nameDevice.setError("Поле не может быть пустым")
+            return false
+        } else {
+//            input_name.isErrorEnabled = false
+            return true
+        }
+    }
+
+    fun validateID(): Boolean {
+
+        if(identifierID.text.toString().isEmpty()){
+            identifierID.setError("Поле не может быть пустым")
+            return false
+        } else if (identifierID.text.toString().length != 10){
+            identifierID.setError("ID состоит из 10 цифр")
+            return false
+        }else {
+//            input_name.isErrorEnabled = false
+            return true
+        }
+    }
+
+    fun validateSim(): Boolean {
+
+        if(sim.text.toString().isEmpty()){
+            sim.setError("Поле не может быть пустым")
+            return false
+        } else if (sim.text.toString().length != 11){
+            sim.setError("SIM состоит из 11 цифр")
+            return false
+        }else {
+//            input_name.isErrorEnabled = false
+            return true
         }
     }
 

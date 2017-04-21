@@ -75,9 +75,9 @@ public class ApiModule {
     public void init(Context context, String dns, boolean sslOrTls, double protocolVersion) {
         // init gson
         gson = new GsonBuilder()
-                //.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                //.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'") 2017-04-20T08:17:04.429+0000
                 .registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
-                    final DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
+                    final DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.ENGLISH);
                     @Override
                     public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
                         try {
