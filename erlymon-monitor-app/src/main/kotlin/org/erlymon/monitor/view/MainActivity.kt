@@ -268,7 +268,7 @@ class MainActivity : BaseActivity<MainPresenter>(),
     }
 
     override fun onEditDevice(device: Device) {
-        val intent = Intent(this@MainActivity, DeviceActivity::class.java)
+        val intent = Intent(this@MainActivity, DeviceThisActivity::class.java)
                 .putExtra("session", intent.getParcelableExtra<User>("session"))
                 .putExtra("device", device)
         startActivity(intent)
