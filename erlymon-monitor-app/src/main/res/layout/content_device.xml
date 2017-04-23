@@ -53,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <TextView
 
@@ -95,10 +95,10 @@
                         android:id="@+id/nameDevice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
                         android:hint="@string/userName"
                         android:inputType="text"
                         android:maxLines="1"
-                        android:gravity="center_horizontal"
                         android:singleLine="true" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -109,7 +109,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <TextView
 
@@ -155,11 +155,11 @@
                         android:id="@+id/identifierID"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
                         android:hint="@string/deviceIdentifier"
                         android:inputType="number"
                         android:maxLength="10"
                         android:maxLines="1"
-                        android:gravity="center_horizontal"
                         android:singleLine="true" />
 
                 </android.support.design.widget.TextInputLayout>

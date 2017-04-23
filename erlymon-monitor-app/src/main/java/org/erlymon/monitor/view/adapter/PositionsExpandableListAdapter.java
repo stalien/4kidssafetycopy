@@ -106,8 +106,8 @@ public class PositionsExpandableListAdapter extends BaseExpandableListAdapter {
         Position item = getGroup(groupPosition);
 
         try{
-//        viewHolder.time.setText(item.getFixTime().toString());}
-            viewHolder.time.setText(item.getAccuracy().toString());}
+        viewHolder.time.setText(item.getFixTime().toString());}
+//            viewHolder.time.setText(item.getAccuracy().toString());}
         catch (Exception e) {
 
         }
