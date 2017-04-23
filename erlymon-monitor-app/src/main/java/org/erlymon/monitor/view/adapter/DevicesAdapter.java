@@ -41,6 +41,7 @@ public class DevicesAdapter extends RealmBaseAdapter<Device> implements ListAdap
 
     public DevicesAdapter(Context context, OrderedRealmCollection<Device> data) {
         super(context, data);
+
     }
 
     /**
@@ -58,6 +59,8 @@ public class DevicesAdapter extends RealmBaseAdapter<Device> implements ListAdap
             name = (TextView) itemView.findViewById(R.id.name);
             identifier = (TextView) itemView.findViewById(R.id.identifier);
             sim = (TextView) itemView.findViewById(R.id.sim);
+
+
         }
     }
 
@@ -78,6 +81,8 @@ public class DevicesAdapter extends RealmBaseAdapter<Device> implements ListAdap
  //       viewHolder.layout.setBackgroundResource(getStatusColorId(item.getStatus()));
         viewHolder.quickContactBadge.setBackgroundResource(getStatusColorId(item.getStatus()));
         return convertView;
+
+
     }
 
 

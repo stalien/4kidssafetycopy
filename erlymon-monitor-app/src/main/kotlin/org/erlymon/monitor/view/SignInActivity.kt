@@ -76,6 +76,11 @@ class SignInActivity : BaseActivity<SignInPresenter>(), SignInView, SettingsDial
             startActivity(intent)
 
         }
+        btn_forgot.setOnClickListener {
+            val intent = Intent(this@SignInActivity, ForgotActivity::class.java)
+            startActivity(intent)
+
+        }
 
         serverConfig.setOnClickListener({
             val popupMenu = PopupMenu(this@SignInActivity, serverConfig)

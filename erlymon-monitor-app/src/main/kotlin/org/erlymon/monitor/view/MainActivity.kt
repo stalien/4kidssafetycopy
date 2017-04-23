@@ -38,6 +38,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.fragment_map.*
+import kotlinx.android.synthetic.main.list_device.*
 import org.erlymon.core.model.data.*
 import org.erlymon.core.presenter.MainPresenter
 import org.erlymon.core.presenter.MainPresenterImpl

@@ -23,12 +23,11 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_about.*
+import kotlinx.android.synthetic.main.activity_signup.*
 import kotlinx.android.synthetic.main.content_about.*
-import kotlinx.android.synthetic.main.content_intro.*
-import kotlinx.android.synthetic.main.content_signin.*
 import org.erlymon.monitor.R
 
-class IntroActivity : AppCompatActivity() {
+class ForgotActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here. The action bar will
@@ -47,13 +46,17 @@ class IntroActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_intro)
+        setContentView(R.layout.activity_forgot)
 
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-       btn_enter.setOnClickListener({
-           val intent = Intent(this@IntroActivity, SignInActivity::class.java)
-           startActivity(intent)
-       })
+        btn_back.setOnClickListener {
+            val intent = Intent(this@ForgotActivity, SignInActivity::class.java)
+            startActivity(intent)
 
+        }
     }
+
+
 }

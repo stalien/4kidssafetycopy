@@ -18,11 +18,13 @@
  */
 package org.erlymon.monitor.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.util.Pair
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_devices.*
 import kotlinx.android.synthetic.main.content_devices.*
+import kotlinx.android.synthetic.main.list_device.*
 import org.erlymon.core.model.data.Device
 import org.erlymon.core.model.data.Permission
 import org.erlymon.core.model.data.User
@@ -57,6 +59,7 @@ class DevicesActivity : BaseActivity<PermissionsPresenter>(), PermissionsView {
 
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
 
         presenter = PermissionsPresenterImpl(this, this)
         presenter?.onLoadDevices()

@@ -53,6 +53,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".view.ForgotActivity"
+            android:label="@string/registerTitle"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".view.MainActivity"
             android:label="@string/appName"
             android:screenOrientation="portrait"
@@ -74,6 +79,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.DeviceActivity"
+            android:label="@string/deviceTitle"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.DeviceThisActivity"
             android:label="@string/deviceTitle"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

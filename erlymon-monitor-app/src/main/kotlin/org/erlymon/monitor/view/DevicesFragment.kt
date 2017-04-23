@@ -19,6 +19,7 @@
 package org.erlymon.monitor.view
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.PopupMenu
 import android.view.LayoutInflater
@@ -30,12 +31,16 @@ import io.realm.RealmResults
 import org.slf4j.LoggerFactory
 
 import kotlinx.android.synthetic.main.fragment_devices.*
+import kotlinx.android.synthetic.main.list_device.*
 import org.erlymon.core.model.data.Device
 import org.erlymon.core.presenter.DevicesListPresenter
 import org.erlymon.core.presenter.DevicesListPresenterImpl
 import org.erlymon.core.view.DevicesListView
 import org.erlymon.monitor.R
 import org.erlymon.monitor.view.adapter.DevicesAdapter
+import android.support.v4.content.ContextCompat.startActivity
+
+
 
 /**
  * Created by Sergey Penkovsky <sergey.penkovsky@gmail.com> on 4/7/16.
@@ -71,14 +76,19 @@ class DevicesFragment : BaseFragment<DevicesListPresenter>(), DevicesListView {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
+
         // Inflate the layout for this fragment
         return inflater!!.inflate(R.layout.fragment_devices, container, false)
+
+
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         presenter = DevicesListPresenterImpl(context, this)
+
 
         //lv_devices.adapter = DevicesAdapter(context, storage.devicesSorted)
         lv_devices.onItemClickListener = object : AdapterView.OnItemClickListener {

@@ -62,7 +62,7 @@
         android:layout_row="1" />
 
     <ImageView
-        android:id="@+id/imageButton"
+        android:id="@+id/device_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_column="2"
