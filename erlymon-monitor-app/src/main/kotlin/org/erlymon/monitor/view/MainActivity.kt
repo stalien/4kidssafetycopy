@@ -72,6 +72,7 @@ class MainActivity : BaseActivity<MainPresenter>(),
         setContentView(R.layout.activity_main)
 
 
+
         setSupportActionBar(toolbar)
 
         presenter = MainPresenterImpl(this, this, R.string.sharedLoading)

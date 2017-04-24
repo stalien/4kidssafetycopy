@@ -142,7 +142,7 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
         logger.debug("DEVICE ID: " + device?.id + " DEVICE: " + device?.toString())
         nameDevice.setText(device?.name)
         identifierID.setText(device?.uniqueId)
-        category.setText(device?.category)
+//        category.setText(device?.category)
         sim.setText(device?.phone)
 
         fab_device_save.setOnClickListener {

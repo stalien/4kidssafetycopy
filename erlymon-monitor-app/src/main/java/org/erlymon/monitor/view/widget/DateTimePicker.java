@@ -57,7 +57,8 @@ public class DateTimePicker extends LinearLayout {
 
         gmtDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        iso8601DateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+   //     iso8601DateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        iso8601DateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.ENGLISH);
         iso8601DateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DateTimePickerOption);

@@ -22,6 +22,7 @@ package org.erlymon.core.model.api.util;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Sergey Penkovsky <sergey.penkovsky@gmail.com> on 5/23/16.
@@ -29,7 +30,8 @@ import java.util.Date;
 public class QueryDate {
     private static final ThreadLocal<DateFormat> DF = new ThreadLocal<DateFormat>() {
         @Override public DateFormat initialValue() {
-            return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+      //      return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.ENGLISH);
         }
     };
 

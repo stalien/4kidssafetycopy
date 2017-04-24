@@ -24,12 +24,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".view.DeviceThisActivity"
     tools:showIn="@layout/activity_thisdevice">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -38,42 +36,312 @@
             android:id="@+id/sign_up_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="70dp"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/sim"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="250dp"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:hint="@string/deviceSim"
-                android:inputType="phone"
-                android:maxLength="11"
-                android:maxLines="1"
-                android:singleLine="false" />
+                android:background="@drawable/hnd_back"
+                android:gravity="top"
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/nameDevice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:hint="@string/userName"
-                android:inputType="text"
-                android:maxLines="1"
-                android:singleLine="true" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingTop="16dp">
 
-            <EditText
-                android:id="@+id/identifierID"
+                    <TextView
+                        android:id="@+id/device_status_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="online"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/textView15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:elevation="1dp"
+                        android:gravity="end"
+                        android:paddingRight="10dp"
+                        android:text="17%"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:elevation="0dp"
+                        app:srcCompat="@drawable/battery_empty" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView14"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="bottom|start"
+                            android:text="Статус:"
+                            android:textColor="@android:color/background_light" />
+
+                        <TextView
+                            android:id="@+id/onHandStatusTV"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.2"
+                            android:gravity="left|center"
+                            android:text="НАДЕТЫ"
+                            android:textColor="@color/colorPrimary" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/showOnMapBtn"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/show_on_map_btn" />
+
+                    <Button
+                        android:id="@+id/callOnDeviceBtn"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/call_on_device" />
+
+                    <Button
+                        android:id="@+id/sendMsgBtn"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="@drawable/send_message" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:hint="@string/deviceIdentifier"
-                android:inputType="number"
-                android:maxLength="10"
-                android:maxLines="1"
-                android:singleLine="true" />
+                android:padding="16dp"
+                android:text="Настройки"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <Switch
+                        android:id="@+id/showOnMapSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:text="Показывать на карте" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <Switch
+                        android:id="@+id/pedometrSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:text="Шагомер" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="16dp"
+                android:text="Уведомления"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <Switch
+                        android:id="@+id/checkBatterySwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:text="Следить за батареей" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <Switch
+                        android:id="@+id/onHandSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:text="Уведомлять о снятии" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="16dp"
+                android:text="О часах"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Имя" />
+
+                    <EditText
+                        android:id="@+id/nameDeviceEdit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:hint="@string/userName"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:singleLine="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Номер SIM" />
+
+                    <EditText
+                        android:id="@+id/simEdit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:hint="@string/deviceSim"
+                        android:inputType="phone"
+                        android:maxLength="11"
+                        android:maxLines="1"
+                        android:singleLine="false" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ID устройства" />
+
+                    <TextView
+                        android:id="@+id/identifierIDEdit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:hint="@string/deviceIdentifier"
+                        android:maxLength="10"
+                        android:maxLines="1"
+                        android:singleLine="true" />
+                </LinearLayout>
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/category"
