@@ -348,13 +348,13 @@ public class Position extends RealmObject implements Parcelable {
     public static List<String> createList(Position position) {
         List<String> array = new ArrayList<>();
         array.add("" + position.getReal());
-//        array.add("" + position.getFixTime().toString());
-        array.add("" + position.getAccuracy().toString());
+        array.add("" + position.getFixTime().toString());
         array.add("" + position.getLatitude());
         array.add("" + position.getLongitude());
         array.add("" + position.getAltitude());
         array.add("" + position.getSpeed());
         array.add("" + position.getCourse());
+        array.add("" + position.getAccuracy().toString());
         return array;
     }
 

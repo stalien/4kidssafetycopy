@@ -147,6 +147,8 @@ class MainActivity : BaseActivity<MainPresenter>(),
                 }
             }
         }
+
+
     }
 
     override fun onBackPressed() {

@@ -64,12 +64,14 @@
     <ImageView
         android:id="@+id/device_info"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_column="2"
         android:layout_gravity="center|end"
         android:layout_rowSpan="2"
         android:alpha="0.5"
         android:clickable="true"
+        android:longClickable="true"
+        android:scaleType="centerInside"
         android:visibility="visible"
         app:srcCompat="@drawable/ic_settings" />
 

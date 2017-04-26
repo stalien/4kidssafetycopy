@@ -20,6 +20,7 @@ package org.erlymon.monitor.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_device.*
@@ -31,8 +32,9 @@ import org.erlymon.core.presenter.DevicePresenterImpl
 import org.erlymon.core.view.DeviceView
 import org.erlymon.monitor.R
 import org.slf4j.LoggerFactory
+import java.util.*
 
- class DeviceThisActivity : BaseActivity<DevicePresenter>(),
+class DeviceThisActivity : BaseActivity<DevicePresenter>(),
         DeviceView
       //  ,DevicesFragment.OnActionDeviceListener
 {
@@ -102,6 +104,7 @@ import org.slf4j.LoggerFactory
 //        device.category = "arrow"
 //        device.status = "unknown"
         device.phone = simEdit.text.toString()
+        device.lastUpdate = null
         return device
     }
 

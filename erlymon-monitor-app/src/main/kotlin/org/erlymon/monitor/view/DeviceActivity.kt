@@ -39,6 +39,8 @@ import android.view.View
 import com.google.android.gms.vision.barcode.Barcode
 import kotlinx.android.synthetic.main.content_intro.*
 import kotlinx.android.synthetic.main.list_device.*
+import org.erlymon.core.model.data.User
+import java.util.*
 
 class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
 
@@ -66,7 +68,7 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
 
         var status = 1;
         name_layout.visibility = View.VISIBLE
-        input_name.requestFocus();
+//        input_name.requestFocus();
         identifier_layout.visibility = View.GONE
         sim_layout.visibility = View.GONE
 
@@ -77,7 +79,7 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
                     status = 2
                     name_layout.visibility = View.GONE
                     identifier_layout.visibility = View.VISIBLE
-                    input_identifier.requestFocus();
+//                    input_identifier.requestFocus();
                     sim_layout.visibility = View.GONE
                 } else {
                     if (status == 2 && validateID()) {
@@ -85,7 +87,7 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
                         name_layout.visibility = View.GONE
                         identifier_layout.visibility = View.GONE
                         sim_layout.visibility = View.VISIBLE
-                        input_sim.requestFocus();
+//                        input_sim.requestFocus();
                         btn_next.setText("СОХРАНИТЬ");
                     }else{ if (status == 3 && validateSim()) {presenter?.onSaveButtonClick()}}
                 }
@@ -180,8 +182,8 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
         if(sim.text.toString().isEmpty()){
             sim.setError("Поле не может быть пустым")
             return false
-        } else if (sim.text.toString().length != 11){
-            sim.setError("SIM состоит из 11 цифр")
+        } else if (sim.text.toString().length != 10){
+            sim.setError("SIM состоит из 10 цифр")
             return false
         }else {
 //            input_name.isErrorEnabled = false
@@ -228,7 +230,7 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
         device.uniqueId = identifierID.text.toString()
         device.category = "arrow"
         device.status = "unknown"
-        device.phone = sim.text.toString()
+        device.phone = "+7" + sim.text.toString()
         return device
     }
 

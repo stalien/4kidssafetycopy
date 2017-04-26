@@ -58,6 +58,7 @@ public class MarkerWithLabel extends Marker {
         circlePaint.setAlpha(30);
         circlePaint.setStyle(Paint.Style.FILL);
 
+
 /*        public void drawCircle(final Canvas c, final MapView osmv) {
             Paint circlePaint = new Paint();
             Point p = this.mPositionPixels;
@@ -98,7 +99,7 @@ public class MarkerWithLabel extends Marker {
 
 
     public void draw(final Canvas c, final MapView osmv, boolean shadow) {
-//        drawCircle(position, c, osmv);
+//        drawCircle(c, osmv);
         draw( c, osmv);
 
     }
@@ -126,11 +127,12 @@ public class MarkerWithLabel extends Marker {
 
     }
 
-    public void drawCircle( Position position, final Canvas c, final MapView osmv) {
+    public void drawCircle( final Canvas c, final MapView osmv) {
         super.draw( c, osmv, false);
 
 //               Position position = new Position();
-               final float radius = position.getAccuracy() / (float) TileSystem.GroundResolution(mPosition.getLatitude(), osmv.getZoomLevel());
+
+               final float radius = 20.0F / (float) TileSystem.GroundResolution(mPosition.getLatitude(), osmv.getZoomLevel());
 
         Point p = this.mPositionPixels;
         c.save();

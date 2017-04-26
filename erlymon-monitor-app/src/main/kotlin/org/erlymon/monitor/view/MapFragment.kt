@@ -20,6 +20,7 @@ package org.erlymon.monitor.view
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
@@ -218,7 +219,9 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
             }
 
             marker.title = device.name
-            marker.setRaduis(position.accuracy)
+
+
+//            marker.setRaduis(position.accuracy)
 
 
 //            marker.title = position.fixTime.toString()
