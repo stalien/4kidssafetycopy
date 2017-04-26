@@ -48,13 +48,13 @@ public class DevicesAdapter extends RealmBaseAdapter<Device> implements ListAdap
      * Реализация класса ViewHolder, хранящего ссылки на виджеты.
      */
     class ViewHolder {
-        private GridLayout layout;
+        private GridLayout gridLayout;
         private QuickContactBadge quickContactBadge;
         private TextView name;
         private TextView identifier;
         private TextView sim;
         public ViewHolder(View itemView) {
-            layout = (GridLayout) itemView.findViewById(R.id.layout);
+            gridLayout = (GridLayout) itemView.findViewById(R.id.gridLayout);
             quickContactBadge = (QuickContactBadge) itemView.findViewById(R.id.quickContactBadge);
             name = (TextView) itemView.findViewById(R.id.name);
             identifier = (TextView) itemView.findViewById(R.id.identifier);
@@ -78,7 +78,7 @@ public class DevicesAdapter extends RealmBaseAdapter<Device> implements ListAdap
         Device item = adapterData.get(position);
         viewHolder.name.setText(item.getName());
         viewHolder.identifier.setText(item.getUniqueId());
- //       viewHolder.layout.setBackgroundResource(getStatusColorId(item.getStatus()));
+ //       viewHolder.gridLayout.setBackgroundResource(getStatusColorId(item.getStatus()));
         viewHolder.quickContactBadge.setBackgroundResource(getStatusColorId(item.getStatus()));
         return convertView;
 
