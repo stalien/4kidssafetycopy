@@ -93,8 +93,9 @@
 
         </FrameLayout>
 
-
     </LinearLayout>
+
+
 
 
     <LinearLayout
@@ -105,13 +106,13 @@
         android:weightSum="1">
 
         <Button
-            android:id="@+id/btn_back"
+            android:id="@+id/btn_send"
             style="@android:style/Widget.Holo.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.03"
             android:background="@color/colorAccent"
-            android:text="НАЗАД"
+            android:text="ОТПРАВИТЬ"
             android:textColor="@color/colorWhite"
             android:textSize="14sp"
             android:textStyle="bold" />

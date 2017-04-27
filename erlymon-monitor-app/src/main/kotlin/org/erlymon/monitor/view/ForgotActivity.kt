@@ -25,6 +25,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.android.synthetic.main.activity_signup.*
 import kotlinx.android.synthetic.main.content_about.*
+import kotlinx.android.synthetic.main.content_forgot.*
 import org.erlymon.monitor.R
 
 class ForgotActivity : AppCompatActivity() {
@@ -51,9 +52,10 @@ class ForgotActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        btn_back.setOnClickListener {
+        btn_send.setOnClickListener {
             val intent = Intent(this@ForgotActivity, SignInActivity::class.java)
             startActivity(intent)
+
 
         }
     }

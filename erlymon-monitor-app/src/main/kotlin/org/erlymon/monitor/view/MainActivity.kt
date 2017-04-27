@@ -86,9 +86,15 @@ class MainActivity : BaseActivity<MainPresenter>(),
         mAccountEmailView?.text = session?.email
 
         val toggle = ActionBarDrawerToggle(
-                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer_layout.addDrawerListener(toggle)
-        toggle.syncState()
+                  this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+          drawer_layout.addDrawerListener(toggle)
+          toggle.syncState()
+
+       val toggle_right = ActionBarDrawerToggle(
+                this, drawer_layout2, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer_layout2.addDrawerListener(toggle_right)
+        toggle_right.syncState()
+
 
         nav_view.setNavigationItemSelectedListener(this)
 
