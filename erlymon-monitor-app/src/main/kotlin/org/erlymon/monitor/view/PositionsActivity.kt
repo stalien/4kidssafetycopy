@@ -196,7 +196,7 @@ class PositionsActivity : BaseActivity<PositionsPresenter>(), PositionsView, Dat
     fun createTrack(positions: Array<out Position>) {
         val points = ArrayList<GeoPoint>()
         for (position in positions) {
-            if (position.accuracy.toFloat() < 50.0F) {points.add(GeoPoint(position.latitude!!, position.longitude!!))}
+            if (position.accuracy.toFloat() < 31.0F) {points.add(GeoPoint(position.latitude!!, position.longitude!!))}
         }
         pathOverlay!!.points = points
         mapview.zoomToBoundingBox(BoundingBoxE6.fromGeoPoints(points))

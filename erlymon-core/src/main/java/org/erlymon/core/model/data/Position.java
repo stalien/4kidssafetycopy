@@ -18,6 +18,7 @@
  */
 package org.erlymon.core.model.data;
 
+import android.database.DataSetObservable;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.SystemClock;
@@ -27,11 +28,14 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 import com.google.gson.annotations.Until;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import io.realm.RealmCollection;
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -83,15 +87,17 @@ public class Position extends RealmObject implements Parcelable {
 
     @Since(3.4)
     private Float accuracy;
-
 /*
+    @Since(3.2)
+    private RealmCollection attributes;
+
+
     @Since(3.0)
     @Until(3.2)
     private String other;
-
-    @Since(3.2)
-    private Map<String, Object> attributes;
 */
+
+
     public Position() {
     }
 
@@ -227,6 +233,7 @@ public class Position extends RealmObject implements Parcelable {
         this.other = other;
     }
 
+
     public String getAttributes() {
         return attributes;
     }
@@ -234,7 +241,9 @@ public class Position extends RealmObject implements Parcelable {
     public void setAttributes(String attributes) {
         this.attributes = attributes;
     }
+
 */
+
     protected Position(Parcel in) {
         id = in.readByte() == 0x00 ? null : in.readLong();
         protocol = in.readString();
@@ -260,7 +269,7 @@ public class Position extends RealmObject implements Parcelable {
         address = in.readString();
         accuracy = in.readFloat();
         //other = in.readString();
-//        attributes = in.readString();
+        //attributes = in.readString();
     }
 
     @Override
@@ -354,7 +363,8 @@ public class Position extends RealmObject implements Parcelable {
         array.add("" + position.getAltitude());
         array.add("" + position.getSpeed());
         array.add("" + position.getCourse());
-        array.add("" + position.getAccuracy().toString());
+//        array.add("" + position.getAttributes());
+//        array.add("" + position.getAccuracy().toString());
         return array;
     }
 

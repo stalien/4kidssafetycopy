@@ -90,10 +90,10 @@ class MainActivity : BaseActivity<MainPresenter>(),
           drawer_layout.addDrawerListener(toggle)
           toggle.syncState()
 
-       val toggle_right = ActionBarDrawerToggle(
-                this, drawer_layout2, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer_layout2.addDrawerListener(toggle_right)
-        toggle_right.syncState()
+ //                        val toggle_right = ActionBarDrawerToggle(
+  //              this, drawer_layout2, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+  //      drawer_layout2.addDrawerListener(toggle_right)
+ //       toggle_right.syncState()
 
 
         nav_view.setNavigationItemSelectedListener(this)
