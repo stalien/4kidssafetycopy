@@ -44,18 +44,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:layout_marginLeft="56dp"
-            android:layout_marginRight="56dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/sprite_0038_rect"
-            android:text="@string/loginSubmit"
-            android:textColor="@color/colorWhite"
-            android:textStyle="bold" />
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

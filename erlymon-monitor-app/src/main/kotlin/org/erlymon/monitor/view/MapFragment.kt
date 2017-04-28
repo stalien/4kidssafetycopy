@@ -21,10 +21,13 @@ package org.erlymon.monitor.view
 import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -127,8 +130,36 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
         mapview.controller.animateTo(GeoPoint(MainPref.defaultLatitude.toDouble(), MainPref.defaultLongitude.toDouble()))
         mapview.controller.setZoom(MainPref.defaultZoom)
 
+        myPlace.setOnClickListener{
+            RxPermissions.getInstance(context)
+                    .request(Manifest.permission.ACCESS_FINE_LOCATION).subscribe({ granted ->
+                if (granted) {
 
-        RxView.clicks(myPlace)
+            mLocationOverlay?.enableFollowLocation()
+            mLocationOverlay?.enableMyLocation()
+            mLocationOverlay?.runOnFirstFix {
+                mapview.post {
+                    try {
+                        mapview.controller.setZoom(MainPref.defaultZoom)
+                        mapview.controller.animateTo(GeoPoint(
+                                mLocationOverlay!!.lastFix.latitude,
+                                mLocationOverlay!!.lastFix.longitude
+                        ))
+                        mapview.postInvalidate()
+                    } catch (e: Exception) {
+
+                        // try find position error
+                        //makeToast(myPlace, error(e))
+
+                    }
+                }
+            }}
+
+
+        })}
+
+
+        /*RxView.clicks(myPlace)
                 .compose(RxPermissions.getInstance(context).ensure(Manifest.permission.ACCESS_COARSE_LOCATION))
                 .subscribe({ granted ->
                     if (granted) {
@@ -162,7 +193,7 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
                         myPlace.isChecked = false
                         makeToast(myPlace, getString(R.string.errorPermissionCoarseLocation))
                     }
-                })
+                })*/
     }
 
     override fun onResume() {

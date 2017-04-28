@@ -40,12 +40,7 @@
         android:orientation="vertical"
         android:baselineAligned="false">
 
-        <CheckBox
-            android:id="@+id/myPlace"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|center"
-            android:button="@drawable/checkbox_myplace" />
+
 
         <ImageView
             android:id="@+id/btnZoomIn"
@@ -64,6 +59,13 @@
             android:layout_height="90dp"
             android:clickable="true"
             app:srcCompat="@drawable/zoom_out_button" />
+
+        <Button
+            android:id="@+id/myPlace"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/current_place_btn" />
 
     </LinearLayout>
 
