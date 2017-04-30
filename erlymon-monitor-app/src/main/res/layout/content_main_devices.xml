@@ -24,12 +24,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".view.DevicesActivity"
-    tools:showIn="@layout/activity_devices">
+    tools:context=".view.MainDevicesActivity"
+   >
 
     <ListView
         android:id="@+id/devices"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="match_parent"/>
 </GridLayout>

@@ -43,6 +43,8 @@ import org.erlymon.core.model.data.*
 import org.erlymon.core.presenter.MainPresenter
 import org.erlymon.core.presenter.MainPresenterImpl
 import org.erlymon.core.view.MainView
+import org.erlymon.monitor.view.DevicesActivity
+import org.erlymon.monitor.view.DevicesFragment
 import org.erlymon.monitor.MainPref
 import org.erlymon.monitor.R
 import org.erlymon.monitor.view.adapter.CustomFragmentPagerAdapter

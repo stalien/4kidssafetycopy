@@ -63,6 +63,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".view.MainDevicesActivity"
+            android:label="@string/appName"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".view.ServerActivity"
             android:label="@string/settingsServer"
             android:screenOrientation="portrait"
