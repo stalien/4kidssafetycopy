@@ -48,7 +48,6 @@ class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
        // setSupportActionBar(toolbar)
-
         btn_back.setOnClickListener {
             val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
             startActivity(intent)
