@@ -33,6 +33,7 @@ import org.erlymon.core.view.UserView
 import org.erlymon.monitor.R
 import android.widget.EditText
 import kotlinx.android.synthetic.main.activity_user.*
+import kotlinx.android.synthetic.main.content_device.*
 import kotlinx.android.synthetic.main.content_signin.*
 import org.erlymon.monitor.MainPref
 import android.text.util.Linkify
@@ -68,8 +69,51 @@ class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
 
 
         presenter = UserPresenterImpl(this, this)
-        btn_save.setOnClickListener { presenter?.onSaveButtonClick() }
+        btn_save.setOnClickListener {
+            if (validateName() && validateEmail() && validatePass()){
+                Snackbar.make(btn_save, "Новый пользователь зарегистрирован", Snackbar.LENGTH_LONG).show()
+                presenter?.onSaveButtonClick()}
+        }
         //fab_account_save.setOnClickListener { v -> presenter?.onSaveButtonClick() }
+    }
+
+    fun validateName(): Boolean {
+
+        if(name.text.toString().isEmpty()){
+            this.name.setError("Поле не может быть пустым")
+            return false
+        } else {
+//            input_name.isErrorEnabled = false
+            return true
+        }
+    }
+
+    fun validateEmail(): Boolean {
+
+        if(email.text.toString().isEmpty()){
+            email.setError("Поле не может быть пустым")
+            return false
+        } else if (!isEmailValid(email.text.toString())){
+            email.setError("Введите правильный e-mail")
+            return false
+        }else {
+//            input_name.isErrorEnabled = false
+            return true
+        }
+    }
+
+    fun validatePass(): Boolean {
+
+        if(password.text.toString().isEmpty()){
+            password.setError("Поле не может быть пустым")
+            return false
+        } else if (password.text.toString().length < 6){
+            password.setError("Пароль должен быть не короче 6 символов")
+            return false
+        }else {
+//            input_name.isErrorEnabled = false
+            return true
+        }
     }
 
     override fun showData(data: User) {
@@ -80,7 +124,7 @@ class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
     }
 
     override fun getUserId(): Long {
-        return 1
+        return 0
     }
 
 
@@ -96,23 +140,24 @@ class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
     override fun getUser(): User? {
         val user = User()
 
-        val em = email.text.toString()
-        if (em.isEmpty()) {
+//        val em = email.text.toString()
+//        if (em.isEmpty()) {
 
-            makeToast(btn_save, "пустая строка")
-        } else
-            if (isEmailValid(em)) {
+//            makeToast(btn_save, "пустая строка")
+//        } else
+//            if (isEmailValid(em)) {
 
-                user.id = 0;
+               // user.id = 0;
                 user.name = name.text.toString()
                 user.email = email.text.toString()
                 user.password = password.text.toString()
                 MainPref.email = email.text.toString()
                 MainPref.password = ""
-            } else {// ошибка валидации
-                Snackbar.make(btn_save, "ошибка валидации: e-mail", Snackbar.LENGTH_LONG).show()
+
+//            } else {// ошибка валидации
+//                Snackbar.make(btn_save, "ошибка валидации: e-mail", Snackbar.LENGTH_LONG).show()
  //               makeToast(btn_save, "ошибка валидации")
-            }
+//            }
 
 
             return user;
@@ -120,7 +165,7 @@ class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
 
 
     override fun showError(error: String) {
-     //   makeToast(toolbar, error)
+       // makeToast(toolbar, error)
     }
 
     companion object {

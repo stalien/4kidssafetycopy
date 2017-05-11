@@ -77,6 +77,7 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
     private var mRadiusMarkerClusterer: DevicesMarkerClusterer? = null
     private var markers: MutableMap<Long, MarkerWithLabel> = HashMap()
     private var mLocationOverlay: MyLocationNewOverlay? = null
+    private var mMarker: Marker? = null
     private var mPosition: Position? = null
 
 
@@ -129,6 +130,8 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
 
         mapview.controller.animateTo(GeoPoint(MainPref.defaultLatitude.toDouble(), MainPref.defaultLongitude.toDouble()))
         mapview.controller.setZoom(MainPref.defaultZoom)
+
+
 
         myPlace.setOnClickListener{
             RxPermissions.getInstance(context)
@@ -231,6 +234,10 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
         super.onPause()
     }
 
+    fun mMarker() {
+
+    }
+
     fun animateTo(geoPoint: GeoPoint, zoom: Int) {
         mapview.controller.setZoom(zoom)
 //        MainPref.defaultZoom = zoom
@@ -250,6 +257,7 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
             }
 
             marker.title = device.name
+
 
 
 //            marker.setRaduis(position.accuracy)

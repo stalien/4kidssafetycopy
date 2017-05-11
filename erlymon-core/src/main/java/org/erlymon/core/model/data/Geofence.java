@@ -148,9 +148,9 @@ public class Geofence extends RealmObject implements Parcelable {
         return "Geofence{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", phone='" + description + '\'' +
-                ", status='" + area + '\'' +
-                ", dataId=" + calendarId +
+                ", description='" + description + '\'' +
+                ", area='" + area + '\'' +
+                ", calendarId=" + calendarId +
                 '}';
     }
 }
