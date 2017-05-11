@@ -30,15 +30,18 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import io.realm.RealmResults
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.content_intro.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.android.synthetic.main.list_device.*
+import kotlinx.android.synthetic.main.nav_header_main.*
 import org.erlymon.core.model.data.*
 import org.erlymon.core.presenter.MainPresenter
 import org.erlymon.core.presenter.MainPresenterImpl
@@ -59,7 +62,7 @@ import org.slf4j.LoggerFactory
 class MainActivity : BaseActivity<MainPresenter>(),
         MainView,
         NavigationView.OnNavigationItemSelectedListener,
-        DevicesFragment.OnActionDeviceListener,
+        DevicesFragment.OnActionDeviceListener, DevicesToolboxFragment.OnActionDeviceListener,
         UsersFragment.OnActionUserListener,
         ConfirmDialogFragment.ConfirmDialogListener,
         SendCommandDialogFragment.SendCommandDialogListener {
@@ -92,10 +95,26 @@ class MainActivity : BaseActivity<MainPresenter>(),
           drawer_layout.addDrawerListener(toggle)
           toggle.syncState()
 
+
  //                        val toggle_right = ActionBarDrawerToggle(
   //              this, drawer_layout2, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
   //      drawer_layout2.addDrawerListener(toggle_right)
  //       toggle_right.syncState()
+
+        var to_account = linearLayout.findViewById(R.id.tv_account_name) as TextView
+        var to_account2 = linearLayout.findViewById(R.id.tv_account_email) as TextView
+
+        to_account.setOnClickListener {
+            val intent = Intent(this@MainActivity, UserActivity::class.java)
+                .putExtra("session", intent.getParcelableExtra<User>("session"))
+                .putExtra("user", intent.getParcelableExtra<User>("session"))
+            startActivityForResult(intent, REQUEST_CODE_UPDATE_ACCOUNT)}
+
+        to_account2.setOnClickListener {
+            val intent = Intent(this@MainActivity, UserActivity::class.java)
+                    .putExtra("session", intent.getParcelableExtra<User>("session"))
+                    .putExtra("user", intent.getParcelableExtra<User>("session"))
+            startActivityForResult(intent, REQUEST_CODE_UPDATE_ACCOUNT)}
 
 
         nav_view.setNavigationItemSelectedListener(this)
@@ -103,10 +122,10 @@ class MainActivity : BaseActivity<MainPresenter>(),
         (nav_view.menu.findItem(R.id.nav_users) as MenuItem).isVisible = session?.admin!!
         (nav_view.menu.findItem(R.id.nav_server) as MenuItem).isVisible = session.admin!!
 
-
         pagerAdapter = CustomFragmentPagerAdapter(supportFragmentManager)
         pagerAdapter?.addPage(MapFragment())
         pagerAdapter?.addPage(DevicesFragment())
+        pagerAdapter?.addPage(DevicesToolboxFragment())
         pagerAdapter?.addPage(UsersFragment())
         view_pager.setAdapter(pagerAdapter)
 
@@ -138,6 +157,7 @@ class MainActivity : BaseActivity<MainPresenter>(),
 //                Toast.makeText(baseContext, "Scroll", Toast.LENGTH_SHORT).show()
             }
         })
+
 
         fab.setOnClickListener {
             when (view_pager.currentItem) {

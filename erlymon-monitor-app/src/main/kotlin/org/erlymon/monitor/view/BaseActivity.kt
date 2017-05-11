@@ -18,6 +18,7 @@
  */
 package org.erlymon.monitor.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -48,4 +49,5 @@ open class BaseActivity<P : Presenter> : AppCompatActivity() {
     }
 
     open fun OnActivityResult(requestCode: Int, resultCode: Int, data: Intent) {}
+    open fun onAttach(context: Context?) {}
 }

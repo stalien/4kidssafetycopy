@@ -26,8 +26,8 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent">
+        android:layout_height="118dp"
+        android:background="@color/colorWhite">
 
         <LinearLayout
             android:orientation="vertical"
@@ -37,7 +37,7 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="117dp"
                 android:padding="20dp"
                 >
 
@@ -73,6 +73,19 @@
         android:layout_alignParentBottom="true"
         android:weightSum="1"
         >
+
+        <TextView
+            android:id="@+id/politics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.12"
+            android:autoLink="web"
+            android:linksClickable="true"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite" />
 
         <Button
             android:id="@+id/btn_save"

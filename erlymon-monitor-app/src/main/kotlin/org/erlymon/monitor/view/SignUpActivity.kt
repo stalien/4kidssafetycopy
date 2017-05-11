@@ -35,6 +35,10 @@ import android.widget.EditText
 import kotlinx.android.synthetic.main.activity_user.*
 import kotlinx.android.synthetic.main.content_signin.*
 import org.erlymon.monitor.MainPref
+import android.text.util.Linkify
+import android.widget.TextView
+
+
 
 
 class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
@@ -47,8 +51,21 @@ class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
         btn_back.setOnClickListener {
             val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
             startActivity(intent)
-
         }
+
+        val tvDisplay = findViewById(R.id.politics) as TextView
+
+
+        val data = "" +
+                "Регистрируясь в приложении 4kids - Безопасность, Вы принимаете условия " +
+        "Пользовательского соглашения" + " и " + "Политики конфиденциальности"+
+                "\n"
+
+        if (tvDisplay != null) {
+            tvDisplay.text = data
+            Linkify.addLinks(tvDisplay, Linkify.ALL)
+        }
+
 
         presenter = UserPresenterImpl(this, this)
         btn_save.setOnClickListener { presenter?.onSaveButtonClick() }
