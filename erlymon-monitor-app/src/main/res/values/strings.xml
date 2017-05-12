@@ -24,6 +24,7 @@
     <string name="settingsTitle">Settings</string>
 
     <!-- Strings related to login -->
+    <string name="soglashenie">Регистрируясь в приложении 4kids, Вы принимаете условия <a href="activityhref://sogActivity">Пользовательского соглашения</a> и <a href="activityhref://polActivity">Политики конфиденциальности</a>.\n\n <a href="activityhref://sinActivity">Уже зарегистрированы?</a></string>
     <string name="userPassword">Password</string>
     <string name="loginSubmit">Sign in</string>
     <string name="serverConfigHost">DNS or IP:PORT</string>
@@ -129,6 +130,7 @@
     <string name="aboutDescription">4kids is an Android  application. It can work with Traccar open source server software.</string>
     <string name="aboutLicense">This application is free and open source, source code is licensed under GNU General Public License, Version 3.0 and available on GitHub.</string>
     <string name="aboutWeb">For more information visit\nwww.4kidssafety.ru</string>
-    <string name="aboutTitle">About</string>
+    <string name="aboutSoglashenie">License agreement</string>
+    <string name="aboutPolitika">Privacy policy </string>
     <string name="userTitle">User</string>
 </resources>

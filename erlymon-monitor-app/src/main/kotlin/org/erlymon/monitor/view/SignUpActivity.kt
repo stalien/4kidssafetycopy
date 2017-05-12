@@ -38,6 +38,11 @@ import kotlinx.android.synthetic.main.content_signin.*
 import org.erlymon.monitor.MainPref
 import android.text.util.Linkify
 import android.widget.TextView
+import android.text.Html
+import android.text.method.LinkMovementMethod
+import android.system.Os.link
+
+
 
 
 
@@ -53,18 +58,10 @@ class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
             startActivity(intent)
         }
 
+
+
         val tvDisplay = findViewById(R.id.politics) as TextView
-
-
-        val data = "" +
-                "Регистрируясь в приложении 4kids - Безопасность, Вы принимаете условия " +
-        "Пользовательского соглашения" + " и " + "Политики конфиденциальности"+
-                "\n"
-
-        if (tvDisplay != null) {
-            tvDisplay.text = data
-            Linkify.addLinks(tvDisplay, Linkify.ALL)
-        }
+        tvDisplay.movementMethod = LinkMovementMethod.getInstance()
 
 
         presenter = UserPresenterImpl(this, this)

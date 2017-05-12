@@ -79,13 +79,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.12"
-            android:autoLink="web"
+            android:autoLink="none"
             android:linksClickable="true"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:text="TextView"
+            android:text="@string/soglashenie"
             android:textAlignment="center"
-            android:textColor="@color/colorWhite" />
+            android:textColor="@color/colorWhite"
+            android:textColorLink="@color/colorWhite"/>
 
         <Button
             android:id="@+id/btn_save"
