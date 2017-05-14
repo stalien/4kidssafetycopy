@@ -41,8 +41,10 @@
             android:title="@string/settingsUsers" />
     </group>
 
-    <item android:title="@string/settingsTitle">
-        <menu>
+    <item android:title="Дополнительно"
+
+        >
+        <menu >
             <item
                 android:id="@+id/nav_server"
                 android:icon="@drawable/ic_server"
@@ -54,7 +56,7 @@
                 android:title="@string/settingsAccount" />
             <item
                  android:id="@+id/nav_about"
-                 android:icon="@drawable/ic_about"
+                 android:icon="@drawable/ic_share"
                  android:title="Поделиться" />
              <item
                  android:id="@+id/nav_sign_out"

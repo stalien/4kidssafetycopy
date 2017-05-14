@@ -22,7 +22,7 @@
     <string name="soglashenie">Регистрируясь в приложении 4kids, Вы принимаете условия <a href="activityhref://sogActivity">Пользовательского соглашения</a> и <a href="activityhref://polActivity">Политики конфиденциальности</a>.\n\n <a href="activityhref://sinActivity">Уже зарегистрированы?</a></string>
     <string name="appName">4kids - Безопасность</string>
     <string name="safety">Ваши дети под присмотром!</string>
-    <string name="settingsAccount">Аккаунт</string>
+    <string name="settingsAccount">Настройки</string>
     <string name="sharedEdit">Редактировать</string>
     <string name="sharedRemove">Удалить</string>
     <string name="devicesTitle">Устройства</string>
@@ -97,6 +97,7 @@
     <string name="positionStop">Stop Reporting</string>
     <string name="userAdmin">Администратор</string>
     <string name="settingsUsers">Пользователи</string>
+    <string name="settingsMenu">Настройки</string>
     <string name="serverReadOnly">Только чтение</string>
     <string name="serverRegistration">Регистрация</string>
     <string name="serverZoom">Приближение</string>

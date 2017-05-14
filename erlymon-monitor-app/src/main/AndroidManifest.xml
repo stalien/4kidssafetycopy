@@ -113,7 +113,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.ScanActivity"
-            android:label="@string/aboutTitle"
+            android:label="@string/userTitle"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".view.SettingsActivity"
+            android:label="@string/settingsMenu"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity

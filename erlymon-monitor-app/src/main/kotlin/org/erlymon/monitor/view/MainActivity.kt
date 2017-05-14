@@ -39,6 +39,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_intro.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.content_main_devices.*
 import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.android.synthetic.main.list_device.*
 import kotlinx.android.synthetic.main.nav_header_main.*
@@ -103,7 +104,7 @@ class MainActivity : BaseActivity<MainPresenter>(),
 
         var to_account = linearLayout.findViewById(R.id.tv_account_name) as TextView
         var to_account2 = linearLayout.findViewById(R.id.tv_account_email) as TextView
-
+        
         to_account.setOnClickListener {
             val intent = Intent(this@MainActivity, UserActivity::class.java)
                 .putExtra("session", intent.getParcelableExtra<User>("session"))
@@ -175,6 +176,7 @@ class MainActivity : BaseActivity<MainPresenter>(),
                 }
             }
         }
+
 
 
     }
@@ -260,13 +262,25 @@ class MainActivity : BaseActivity<MainPresenter>(),
                 startActivityForResult(intent, REQUEST_CODE_UPDATE_SERVER)
             }
             R.id.nav_account -> {
-                val intent = Intent(this@MainActivity, UserActivity::class.java)
+                val intent = Intent(this@MainActivity, SettingsActivity::class.java)
                         .putExtra("session", intent.getParcelableExtra<User>("session"))
                         .putExtra("user", intent.getParcelableExtra<User>("session"))
                 startActivityForResult(intent, REQUEST_CODE_UPDATE_ACCOUNT)
             }
             R.id.nav_about -> {
-                startActivity(Intent(this@MainActivity, AboutActivity::class.java))
+              /*  startActivity(Intent(this@MainActivity, AboutActivity::class.java))*/
+                try {
+                    val i = Intent(Intent.ACTION_SEND)
+                    i.type = "text/plain"
+                    i.putExtra(Intent.EXTRA_SUBJECT, "4kids")
+                    var sAux = "\nРекомендую установить приложение 4kids - Безопасность\n\n"
+                    sAux = sAux + "https://play.google.com/store/apps/details?id=ru.rusmobilecontent.forkidssafety \n\n"
+                    i.putExtra(Intent.EXTRA_TEXT, sAux)
+                    startActivity(Intent.createChooser(i, "Выберите приложение"))
+                } catch (e: Exception) {
+                    //e.toString();
+                }
+
             }
             R.id.nav_sign_out -> {
                 presenter?.onDeleteSessionButtonClick()
