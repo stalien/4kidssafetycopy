@@ -50,16 +50,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_column="1"
-        android:layout_gravity="center_vertical"
-        android:layout_row="0" />
+        android:layout_gravity="left|center_vertical"
+        android:layout_row="0"
+        android:paddingLeft="10dp"
+        android:text="name"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/identifier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_column="1"
-        android:layout_gravity="center_vertical"
-        android:layout_row="1" />
+        android:layout_gravity="left|center_vertical"
+        android:layout_row="1"
+        android:paddingLeft="10dp"
+        android:text="id"
+        android:textSize="12sp" />
 
     <ImageView
         android:id="@+id/device_info"
@@ -70,9 +76,12 @@
         android:layout_rowSpan="2"
         android:alpha="0.5"
         android:clickable="true"
-        android:longClickable="true"
+        android:longClickable="false"
         android:scaleType="centerInside"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
         android:visibility="visible"
-        app:srcCompat="@drawable/ic_settings" />
+        app:srcCompat="@drawable/ic_settings"
+        tools:ignore="ContentDescription" />
 
 </GridLayout>

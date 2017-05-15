@@ -41,4 +41,5 @@
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_devices" />
+
 </android.support.design.widget.CoordinatorLayout>

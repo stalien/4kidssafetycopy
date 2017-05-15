@@ -39,6 +39,7 @@ import io.realm.Realm
 import io.realm.RealmChangeListener
 import io.realm.RealmResults
 import kotlinx.android.synthetic.main.content_devices.*
+import kotlinx.android.synthetic.main.content_main.*
 
 import org.osmdroid.bonuspack.clustering.RadiusMarkerClusterer
 import org.osmdroid.util.GeoPoint
@@ -120,6 +121,9 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
             if (mapview.canZoomOut()) {
                 mapview.controller.zoomOut()
                 MainPref.defaultZoom = mapview.zoomLevel
+
+
+
 //                makeToast(mapview, "zoomLevel: " + mapview.zoomLevel)
             }
 //            else  makeToast(mapview, "maximum_zoomOut" + mapview.minZoomLevel)
@@ -250,17 +254,19 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
             logger.debug("UPDATE MARKER: device: $device position: $position")
             var marker: MarkerWithLabel? = markers[device.id]
             if (marker == null) {
-                marker = MarkerWithLabel(mapview, device.name)
+                marker = MarkerWithLabel(mapview, device.name, 0.0F)
                 mRadiusMarkerClusterer?.add(marker)
                 markers.put(device.id, marker)
 
             }
 
+//            marker = MarkerWithLabel(mapview, device.name, position.accuracy)
+
+            if(device.status == "online"){
+            marker.setRaduis(position.accuracy)
+            } else marker.setRaduis(0.0F)
+
             marker.title = device.name
-
-
-
-//            marker.setRaduis(position.accuracy)
 
 
 //            marker.title = position.fixTime.toString()
@@ -270,8 +276,8 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
                                 ", status='" + device.status + '\'' +
                                 ", accuracy=" + position.accuracy +
                                 ", lastFix=" + position.fixTime.toString())
-            if (position.fixTime != null) {
-//                marker.snippet = position.fixTime.toString()
+            if (device.status == "offline") {
+                marker.snippet = "Device offline"
             }
 
             if (device.status == "online"){
@@ -286,6 +292,8 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
                // marker.rotation = position.course
             }
             marker.position = GeoPoint(position.latitude, position.longitude)
+
+
 
 // override default lattitude & longitude
             MainPref.defaultLatitude = position.latitude.toString()
@@ -321,6 +329,10 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
 
     override fun showError(error: String) {
         makeToast(mapview, error)
+    }
+
+    fun Marker.OnMarkerDragListener(){
+
     }
 
     companion object {

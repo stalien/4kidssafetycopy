@@ -20,6 +20,7 @@ package org.erlymon.monitor.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.SystemClock
 import android.support.design.widget.Snackbar
 
 import org.slf4j.LoggerFactory
@@ -68,6 +69,7 @@ class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
         btn_save.setOnClickListener {
             if (validateName() && validateEmail() && validatePass()){
                 Snackbar.make(btn_save, "Новый пользователь зарегистрирован", Snackbar.LENGTH_LONG).show()
+                SystemClock.sleep(2000)
                 presenter?.onSaveButtonClick()}
         }
         //fab_account_save.setOnClickListener { v -> presenter?.onSaveButtonClick() }
@@ -77,6 +79,7 @@ class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
 
         if(name.text.toString().isEmpty()){
             this.name.setError("Поле не может быть пустым")
+            name.requestFocus()
             return false
         } else {
 //            input_name.isErrorEnabled = false
@@ -88,9 +91,11 @@ class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
 
         if(email.text.toString().isEmpty()){
             email.setError("Поле не может быть пустым")
+            email.requestFocus()
             return false
         } else if (!isEmailValid(email.text.toString())){
             email.setError("Введите правильный e-mail")
+            email.requestFocus()
             return false
         }else {
 //            input_name.isErrorEnabled = false
@@ -102,9 +107,11 @@ class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
 
         if(password.text.toString().isEmpty()){
             password.setError("Поле не может быть пустым")
+            password.requestFocus()
             return false
         } else if (password.text.toString().length < 6){
             password.setError("Пароль должен быть не короче 6 символов")
+            password.requestFocus()
             return false
         }else {
 //            input_name.isErrorEnabled = false

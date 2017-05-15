@@ -137,7 +137,9 @@ class SignInActivity : BaseActivity<SignInPresenter>(), SignInView, SettingsDial
 
     override fun showError(error: String) {
      //Тут ошибки всякие
-        makeToast(ll_sign_in, error)
+        if(error == "HTTP 401 Unauthorized"){
+        makeToast(ll_sign_in, "Логин или пароль неправильные")
+        }
     }
 
     override fun getEmail(): String {

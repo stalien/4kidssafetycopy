@@ -48,20 +48,19 @@
         </android.support.design.widget.NavigationView>
 
 
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:fitsSystemWindows="true">
 
-
-        <android.support.design.widget.NavigationView
-            android:id="@+id/nav_view2"
+        <include
+            layout="@layout/activity_divicelist"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:fitsSystemWindows="true">
+            android:layout_height="match_parent" />
 
-            <include
-                layout="@layout/content_main_devices"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-        </android.support.design.widget.NavigationView>
+    </android.support.design.widget.NavigationView>
 
 
 

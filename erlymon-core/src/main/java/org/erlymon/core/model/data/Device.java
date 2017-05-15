@@ -28,7 +28,9 @@ import com.google.gson.annotations.Since;
 import java.util.Date;
 
 import io.realm.RealmObject;
+import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
+import kotlin.jvm.Transient;
 
 /**
  * Created by Sergey Penkovsky <sergey.penkovsky@gmail.com> on 5/4/16.
@@ -79,6 +81,9 @@ public class Device extends RealmObject implements Parcelable {
     @SerializedName("dataId")
     @Expose
     private Long dataId;
+
+    @Transient
+    private Boolean showOnMap;
 
     public Device() {}
 
@@ -149,6 +154,14 @@ public class Device extends RealmObject implements Parcelable {
 
     public Long getDataId() {
         return dataId;
+    }
+
+    public void setShowOnMap(Boolean showOnMap) {
+        this.showOnMap = showOnMap;
+    }
+
+    public Boolean getShowOnMap() {
+        return showOnMap;
     }
 
     public void setDataId(Long dataId) {

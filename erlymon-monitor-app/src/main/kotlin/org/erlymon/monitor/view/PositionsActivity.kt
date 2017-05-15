@@ -37,6 +37,7 @@ import org.erlymon.core.model.data.Position
 import org.erlymon.core.presenter.PositionsPresenter
 import org.erlymon.core.presenter.PositionsPresenterImpl
 import org.erlymon.core.view.PositionsView
+import org.erlymon.monitor.MainPref
 import org.erlymon.monitor.R
 import org.erlymon.monitor.view.adapter.PositionsExpandableListAdapter
 import org.erlymon.monitor.view.fragment.DatePickerDialogFragment
@@ -129,6 +130,9 @@ class PositionsActivity : BaseActivity<PositionsPresenter>(), PositionsView, Dat
 
         mapview.isTilesScaledToDpi = true
         mapview.setMultiTouchControls(true)
+        mapview.minZoomLevel = 4
+        mapview.controller.animateTo(GeoPoint(MainPref.defaultLatitude.toDouble(), MainPref.defaultLongitude.toDouble()))
+        mapview.controller.setZoom(MainPref.defaultZoom)
 
         mapview.setLayerType(MapView.LAYER_TYPE_SOFTWARE, null)
 
@@ -143,6 +147,7 @@ class PositionsActivity : BaseActivity<PositionsPresenter>(), PositionsView, Dat
         pathOverlay!!.color = resources.getColor(R.color.colorRed)
         pathOverlay!!.paint.strokeWidth = 5f
         pathOverlay!!.title = deviceId.toString()
+
 //        pathOverlay!!.isGeodesic = true
         mapview.overlays.add(pathOverlay)
     }

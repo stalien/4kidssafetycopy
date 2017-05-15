@@ -201,6 +201,7 @@ public class MainPresenterImpl implements MainPresenter {
         try {
             if (!subscription.isUnsubscribed()) {
                 subscription.unsubscribe();
+
             }
 
             subscription = realmdb.where(Position.class).equalTo("id", view.getPositionId()).findFirst().asObservable()

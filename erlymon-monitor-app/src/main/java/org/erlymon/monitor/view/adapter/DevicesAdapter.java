@@ -77,6 +77,7 @@ public class DevicesAdapter extends RealmBaseAdapter<Device> implements ListAdap
 
         Device item = adapterData.get(position);
         viewHolder.name.setText(item.getName());
+  //      viewHolder.identifier.setText(item.getUniqueId());
         viewHolder.identifier.setText(item.getUniqueId());
  //       viewHolder.gridLayout.setBackgroundResource(getStatusColorId(item.getStatus()));
         viewHolder.quickContactBadge.setBackgroundResource(getStatusColorId(item.getStatus()));

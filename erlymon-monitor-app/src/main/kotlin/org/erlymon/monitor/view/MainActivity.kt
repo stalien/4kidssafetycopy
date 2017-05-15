@@ -59,11 +59,13 @@ import org.erlymon.monitor.view.fragment.SendCommandDialogFragment
 import org.osmdroid.util.GeoPoint
 
 import org.slf4j.LoggerFactory
+import org.erlymon.monitor.view.SettingsActivity
 
 class MainActivity : BaseActivity<MainPresenter>(),
         MainView,
         NavigationView.OnNavigationItemSelectedListener,
         DevicesFragment.OnActionDeviceListener, DevicesToolboxFragment.OnActionDeviceListener,
+        DeviceThisActivity.OnActionDeviceThisListener,
         UsersFragment.OnActionUserListener,
         ConfirmDialogFragment.ConfirmDialogListener,
         SendCommandDialogFragment.SendCommandDialogListener {
@@ -96,7 +98,6 @@ class MainActivity : BaseActivity<MainPresenter>(),
           drawer_layout.addDrawerListener(toggle)
           toggle.syncState()
 
-
  //                        val toggle_right = ActionBarDrawerToggle(
   //              this, drawer_layout2, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
   //      drawer_layout2.addDrawerListener(toggle_right)
@@ -104,7 +105,7 @@ class MainActivity : BaseActivity<MainPresenter>(),
 
         var to_account = linearLayout.findViewById(R.id.tv_account_name) as TextView
         var to_account2 = linearLayout.findViewById(R.id.tv_account_email) as TextView
-        
+
         to_account.setOnClickListener {
             val intent = Intent(this@MainActivity, UserActivity::class.java)
                 .putExtra("session", intent.getParcelableExtra<User>("session"))
@@ -123,10 +124,11 @@ class MainActivity : BaseActivity<MainPresenter>(),
         (nav_view.menu.findItem(R.id.nav_users) as MenuItem).isVisible = session?.admin!!
         (nav_view.menu.findItem(R.id.nav_server) as MenuItem).isVisible = session.admin!!
 
+
         pagerAdapter = CustomFragmentPagerAdapter(supportFragmentManager)
         pagerAdapter?.addPage(MapFragment())
         pagerAdapter?.addPage(DevicesFragment())
-        pagerAdapter?.addPage(DevicesToolboxFragment())
+//        pagerAdapter?.addPage(DevicesToolboxFragment())
         pagerAdapter?.addPage(UsersFragment())
         view_pager.setAdapter(pagerAdapter)
 
@@ -159,7 +161,6 @@ class MainActivity : BaseActivity<MainPresenter>(),
             }
         })
 
-
         fab.setOnClickListener {
             when (view_pager.currentItem) {
                 1 -> {
@@ -176,7 +177,6 @@ class MainActivity : BaseActivity<MainPresenter>(),
                 }
             }
         }
-
 
 
     }
@@ -262,7 +262,7 @@ class MainActivity : BaseActivity<MainPresenter>(),
                 startActivityForResult(intent, REQUEST_CODE_UPDATE_SERVER)
             }
             R.id.nav_account -> {
-                val intent = Intent(this@MainActivity, SettingsActivity::class.java)
+                val intent = Intent(this@MainActivity, UserActivity::class.java)
                         .putExtra("session", intent.getParcelableExtra<User>("session"))
                         .putExtra("user", intent.getParcelableExtra<User>("session"))
                 startActivityForResult(intent, REQUEST_CODE_UPDATE_ACCOUNT)

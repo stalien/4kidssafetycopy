@@ -24,6 +24,7 @@ import com.appunite.websocket.rx.object.messages.RxObjectEvent;
 
 import org.erlymon.core.model.data.Command;
 import org.erlymon.core.model.data.Device;
+import org.erlymon.core.model.data.Geofence;
 import org.erlymon.core.model.data.Permission;
 import org.erlymon.core.model.data.Position;
 import org.erlymon.core.model.data.Server;
@@ -63,6 +64,19 @@ public interface Model {
     Observable<Device> updateDevice(long id, Device device);
 
     Observable<Void> deleteDevice(long id);
+
+    //Geofence
+    Observable<Geofence[]> getGeofences();
+
+    Observable<Geofence[]> getGeofences(boolean all);
+
+    Observable<Geofence[]> getGeofences(long userId);
+
+    Observable<Geofence> createGeofence(Geofence geofence);
+
+    Observable<Geofence> updateGeofence(long id, Geofence geofence);
+
+    Observable<Void> deleteGeofence(long id);
 
     Observable<Position[]> getPositions(long deviceId, Date from, Date to);
 

@@ -39,13 +39,15 @@ import org.erlymon.core.view.DevicesListView
 import org.erlymon.monitor.R
 import org.erlymon.monitor.view.adapter.DevicesAdapter
 import android.support.v4.content.ContextCompat.startActivity
+import kotlinx.android.synthetic.main.activity_divicelist.*
+import kotlinx.android.synthetic.main.fragment_devicelist.*
 import kotlinx.android.synthetic.main.list_device.view.*
 
 
 /**
  * Created by Sergey Penkovsky <sergey.penkovsky@gmail.com> on 4/7/16.
  */
-class DevicesFragment : BaseFragment<DevicesListPresenter>(), DevicesListView {
+class DevicesListFragment : BaseFragment<DevicesListPresenter>(), DevicesListView {
 
     interface OnActionDeviceListener {
         fun onEditDevice(device: Device)
@@ -79,7 +81,7 @@ class DevicesFragment : BaseFragment<DevicesListPresenter>(), DevicesListView {
 
 
         // Inflate the layout for this fragment
-        return inflater!!.inflate(R.layout.fragment_devices, container, false)
+        return inflater!!.inflate(R.layout.fragment_devicelist, container, false)
 
 
     }
@@ -91,9 +93,9 @@ class DevicesFragment : BaseFragment<DevicesListPresenter>(), DevicesListView {
 
 
         //lv_devices.adapter = DevicesAdapter(context, storage.devicesSorted)
-        lv_devices.onItemClickListener = object : AdapterView.OnItemClickListener {
+        lv_devicelist.onItemClickListener = object : AdapterView.OnItemClickListener {
             override fun onItemClick(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
-                val device = lv_devices.getItemAtPosition(position) as Device
+                val device = lv_devicelist.getItemAtPosition(position) as Device
                /* val popupMenu = PopupMenu(context, view)
                 popupMenu.inflate(R.menu.fragment_devices_popupmenu)
                 popupMenu.setOnMenuItemClickListener(OnExecPopupMenuItem(device))
@@ -102,10 +104,10 @@ class DevicesFragment : BaseFragment<DevicesListPresenter>(), DevicesListView {
             }
         }
 
-        lv_devices.onItemLongClickListener = object : AdapterView.OnItemLongClickListener {
+        lv_devicelist.onItemLongClickListener = object : AdapterView.OnItemLongClickListener {
             override fun onItemLongClick(parent: AdapterView<*>?, view: View, position: Int, id: Long): Boolean {
                 //To change body of created functions use File | Settings | File Templates.
-                val device = lv_devices.getItemAtPosition(position) as Device
+                val device = lv_devicelist.getItemAtPosition(position) as Device
                 val popupMenu = PopupMenu(context, view)
                 popupMenu.inflate(R.menu.fragment_devices_popupmenu)
                 popupMenu.setOnMenuItemClickListener(OnExecPopupMenuItem(device))
@@ -124,11 +126,11 @@ class DevicesFragment : BaseFragment<DevicesListPresenter>(), DevicesListView {
     }
 
     override fun showData(data: RealmResults<Device>) {
-        lv_devices.adapter = DevicesAdapter(context, data)
+        lv_devicelist.adapter = DevicesAdapter(context, data)
     }
 
     override fun showError(error: String) {
-        makeToast(lv_devices, error)
+        makeToast(lv_devicelist, error)
     }
 
     private inner class OnExecPopupMenuItem(internal var device: Device) : PopupMenu.OnMenuItemClickListener {
@@ -167,7 +169,7 @@ class DevicesFragment : BaseFragment<DevicesListPresenter>(), DevicesListView {
         }
     }
 
-    /*
+
     companion object {
         private val logger = LoggerFactory.getLogger(DevicesFragment::class.java)
 
@@ -178,5 +180,5 @@ class DevicesFragment : BaseFragment<DevicesListPresenter>(), DevicesListView {
             fragment.arguments = args
             return fragment;
         }
-    }*/
+    }
 }

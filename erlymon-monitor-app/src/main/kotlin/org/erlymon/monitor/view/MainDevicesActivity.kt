@@ -57,8 +57,8 @@ class MainDevicesActivity  : BaseActivity<PermissionsPresenter>(), PermissionsVi
         super.onCreate(savedInstanceState)
         setContentView(R.layout.content_main_devices)
 
-        setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+//        setSupportActionBar(toolbar)
+//        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
 
         presenter = PermissionsPresenterImpl(this, this)
@@ -89,7 +89,7 @@ class MainDevicesActivity  : BaseActivity<PermissionsPresenter>(), PermissionsVi
     }
 
     override fun showError(error: String) {
-        makeToast(toolbar, error)
+//        makeToast(toolbar, error)
     }
 
     override fun getPermission(): Permission? {

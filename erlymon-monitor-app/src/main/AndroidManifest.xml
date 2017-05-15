@@ -100,50 +100,54 @@
         <activity android:name=".view.AboutActivity"
             android:label="@string/aboutTitle"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.SignInActivity"
-            android:label="@string/aboutTitle"
+            android:label="SingIn"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <data android:host="sinActivity" android:scheme="activityhref" />
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
+        <intent-filter>
+            <data android:host="sinActivity" android:scheme="activityhref" />
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+        </intent-filter>
         </activity>
-        <activity android:name=".view.ScanActivity"
-            android:label="@string/userTitle"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".view.SettingsActivity"
-            android:label="@string/settingsMenu"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity
+    <activity android:name=".view.ScanActivity"
+        android:label="Scan"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme.NoActionBar"/>
+    <activity android:name=".view.SettingsActivity"
+        android:label="@string/settingsMenu"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme.NoActionBar"/>
+    <activity
         android:name=".view.SoglashenieActivity"
-            android:label="@string/aboutSoglashenie"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" >
+        android:label="@string/aboutSoglashenie"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme.NoActionBar" >
         <intent-filter>
             <data android:host="sogActivity" android:scheme="activityhref" />
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.DEFAULT" />
             <category android:name="android.intent.category.BROWSABLE" />
         </intent-filter>
-            </activity>
-        <activity
-            android:name=".view.PoliticsActivity"
-            android:label="@string/aboutPolitika"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" >
-            <intent-filter>
-                <data android:host="polActivity" android:scheme="activityhref" />
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
-        </activity>
-    </application>
+    </activity>
+    <activity
+        android:name=".view.PoliticsActivity"
+        android:label="@string/aboutPolitika"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme.NoActionBar" >
+        <intent-filter>
+            <data android:host="polActivity" android:scheme="activityhref" />
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+        </intent-filter>
+    </activity>
+    <activity
+        android:name=".view.SharedPreferences"
+        android:label="@string/title_activity_settings"
+        android:parentActivityName=".view.AboutActivity"/>
+</application>
 
-</manifest>
+    </manifest>

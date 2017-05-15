@@ -23,12 +23,15 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.SystemClock;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Since;
 import com.google.gson.annotations.Until;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,6 +40,7 @@ import java.util.Map;
 import io.realm.RealmCollection;
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
 
 /**
@@ -88,6 +92,11 @@ public class Position extends RealmObject implements Parcelable {
     @Since(3.4)
     private Float accuracy;
 /*
+    private String attributes;
+
+    @Ignore
+    private Map<String, Object> attributesMap;
+
     @Since(3.2)
     private RealmCollection attributes;
 
@@ -216,6 +225,23 @@ public class Position extends RealmObject implements Parcelable {
     }
 
     public void setAccuracy(Float accuracy) { this.accuracy = accuracy; }
+/*
+    public String getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(String attributes) {
+        this.attributes = attributes;
+    }
+
+    public Map<Integer, Integer> getAttributesMap() {
+        Type type = new TypeToken<Map<String, Object>>(){}.getType();
+        return new Gson().fromJson(getAttributes(), type);
+    }
+
+    public void setAttributesMap(Map<String, Object> attributesMap) {
+        setAttributes(new Gson().toJson(attributesMap));
+    } */
 
 //    public void setAttributes(Map<String, Object> attributes) {
 //        this.attributes = attributes;

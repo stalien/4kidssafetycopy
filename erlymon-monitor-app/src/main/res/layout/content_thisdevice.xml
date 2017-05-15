@@ -194,6 +194,7 @@
                         android:text="Шагомер" />
                 </LinearLayout>
 
+
             </LinearLayout>
 
             <TextView

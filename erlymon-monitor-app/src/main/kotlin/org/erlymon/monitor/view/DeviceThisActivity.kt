@@ -18,6 +18,7 @@
  */
 package org.erlymon.monitor.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.SystemClock
@@ -38,6 +39,17 @@ class DeviceThisActivity : BaseActivity<DevicePresenter>(),
         DeviceView
       //  ,DevicesFragment.OnActionDeviceListener
 {
+    interface OnActionDeviceThisListener {
+        fun onEditDevice(device: Device)
+        fun onRemoveDevice(device: Device)
+        fun onLoadPositions(device: Device)
+        fun onShowOnMap(device: Device)
+        fun onSendCommand(device: Device)
+        fun onCallDevice(device: Device)
+    }
+
+    private var listener: DeviceThisActivity.OnActionDeviceThisListener? = null
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here. The action bar will
@@ -77,6 +89,7 @@ class DeviceThisActivity : BaseActivity<DevicePresenter>(),
 
         showOnMapBtn.setOnClickListener {
 //            onShowOnMap(device)
+            listener!!.onShowOnMap(device)
         }
     }
 
@@ -105,6 +118,7 @@ class DeviceThisActivity : BaseActivity<DevicePresenter>(),
 //        device.status = "unknown"
         device.phone = simEdit.text.toString()
         device.lastUpdate = null
+        device.showOnMap = showOnMapSwitch.isChecked
         return device
     }
 

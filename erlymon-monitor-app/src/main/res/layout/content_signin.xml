@@ -149,27 +149,34 @@
 
                 </android.support.design.widget.TextInputLayout>
 
-                <Button
-                    android:id="@+id/sign_in_button"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="46dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginLeft="56dp"
-                    android:layout_marginRight="56dp"
-                    android:text="@string/loginSubmit"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorWhite"
-                    android:background="@drawable/sprite_0038_rect" />
-                <TextView
-                    android:id="@+id/sign_up_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/registerTitle"
-                    android:textStyle="bold"
-                    android:padding="10dp"
-                    android:layout_gravity="center"
-                    android:textColor="@color/colorWhite"/>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
+                    <Button
+                        android:id="@+id/sign_in_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_marginLeft="56dp"
+                        android:layout_marginRight="56dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/sprite_0038_rect"
+                        android:text="@string/loginSubmit"
+                        android:textColor="@color/colorWhite"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/sign_up_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:paddingTop="30dp"
+                        android:text="@string/registerTitle"
+                        android:textColor="@color/colorWhite" />
+
+                </LinearLayout>
 
 
             </LinearLayout>

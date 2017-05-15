@@ -18,6 +18,7 @@
  */
 package org.erlymon.monitor.view.map.marker;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -40,11 +41,13 @@ public class MarkerWithLabel extends Marker {
     String mLabel = null;
     MapView mMapView;
     private Bitmap bmpText;
-    private Position position;
+    private Float mAccuracy;
 
 
 
-    public MarkerWithLabel(MapView mapView, String label) {
+
+
+    public MarkerWithLabel(MapView mapView, String label, Float accuracy) {
         super( mapView);
         mLabel = label;
         mMapView = mapView;
@@ -57,6 +60,8 @@ public class MarkerWithLabel extends Marker {
         circlePaint.setColor(Color.BLUE);
         circlePaint.setAlpha(30);
         circlePaint.setStyle(Paint.Style.FILL);
+        mAccuracy = accuracy;
+
 
 
 /*        public void drawCircle(final Canvas c, final MapView osmv) {
@@ -79,11 +84,7 @@ public class MarkerWithLabel extends Marker {
 
     public void setRaduis(Float raduis) {
 
-        Canvas canvas = new Canvas();
-        Position position = new Position();
-        MapView mapView ;
-
-        mapView = mMapView;
+        mAccuracy = raduis;
 
 //        drawCircle(raduis, canvas, mapView);
 //        Snackbar.make(mMapView, "радиус: "+ raduis, Snackbar.LENGTH_LONG).show();
@@ -99,7 +100,8 @@ public class MarkerWithLabel extends Marker {
 
 
     public void draw(final Canvas c, final MapView osmv, boolean shadow) {
-//        drawCircle(c, osmv);
+
+        drawCircle(c, osmv);
         draw( c, osmv);
 
     }
@@ -132,7 +134,8 @@ public class MarkerWithLabel extends Marker {
 
 //               Position position = new Position();
 
-               final float radius = 20.0F / (float) TileSystem.GroundResolution(mPosition.getLatitude(), osmv.getZoomLevel());
+
+        final float radius = mAccuracy / (float) TileSystem.GroundResolution(mPosition.getLatitude(), osmv.getZoomLevel());
 
         Point p = this.mPositionPixels;
         c.save();
@@ -140,4 +143,5 @@ public class MarkerWithLabel extends Marker {
         c.restore();
 
     }
+
 }

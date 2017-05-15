@@ -27,6 +27,7 @@ import org.erlymon.core.model.api.ApiModule;
 import org.erlymon.core.model.api.util.QueryDate;
 import org.erlymon.core.model.data.Command;
 import org.erlymon.core.model.data.Device;
+import org.erlymon.core.model.data.Geofence;
 import org.erlymon.core.model.data.Permission;
 import org.erlymon.core.model.data.Position;
 import org.erlymon.core.model.data.Server;
@@ -121,6 +122,39 @@ public class ModelImpl implements Model {
     public Observable<Void> deleteDevice(long id) {
         return apiModule.getApi().deleteDevice(id);
     }
+
+    //Geofence
+    @Override
+    public Observable<Geofence[]> getGeofences() {
+        return apiModule.getApi().getGeofences();
+    }
+
+    @Override
+    public Observable<Geofence[]> getGeofences(boolean all) {
+        return apiModule.getApi().getGeofences(all);
+    }
+
+    @Override
+    public Observable<Geofence[]> getGeofences(long userId) {
+        return apiModule.getApi().getGeofences(userId);
+    }
+
+    @Override
+    public Observable<Geofence> createGeofence(Geofence geofence) {
+        return apiModule.getApi().createGeofence(geofence);
+    }
+
+    @Override
+    public Observable<Geofence> updateGeofence(long id, Geofence geofence) {
+        return apiModule.getApi().updateGeofence(id, geofence);
+    }
+
+    @Override
+    public Observable<Void> deleteGeofence(long id) {
+        return apiModule.getApi().deleteGeofence(id);
+    }
+
+    //
 
     @Override
     public Observable<Position[]> getPositions(long deviceId, Date from, Date to) {
