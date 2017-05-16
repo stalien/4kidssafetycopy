@@ -19,6 +19,7 @@
 package org.erlymon.monitor.view
 
 import android.Manifest
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -138,7 +139,14 @@ class SignInActivity : BaseActivity<SignInPresenter>(), SignInView, SettingsDial
     override fun showError(error: String) {
      //Тут ошибки всякие
         if(error == "HTTP 401 Unauthorized"){
-        makeToast(ll_sign_in, "Логин или пароль неправильные")
+
+            val alert = AlertDialog.Builder(this@SignInActivity)
+            alert.setTitle("Ошибка")
+            alert.setMessage("Логин или пароль введены неверно!")
+            alert.setPositiveButton("Повторить", null)
+            alert.show()
+
+            //makeToast(ll_sign_in, "Логин или пароль неправильные")
         }
     }
 

@@ -19,7 +19,7 @@
   -->
 
 <resources>
-    <string name="soglashenie">Регистрируясь в приложении 4kids, Вы принимаете условия <a href="activityhref://sogActivity"><u>Пользовательского соглашения</u></a> и <a href="activityhref://polActivity"><u>Политики конфиденциальности</u></a>.\n\n <a href="activityhref://sinActivity">Уже зарегистрированы?</a></string>
+    <string name="soglashenie">Регистрируясь в приложении 4kids, Вы принимаете условия <a href="activityhref://sogActivity"><u>Пользовательского соглашения</u></a> и <a href="activityhref://polActivity"><u>Политики конфиденциальности</u></a>.</string>
     <string name="appName">4kids - Безопасность</string>
     <string name="safety">Ваши дети под присмотром!</string>
     <string name="settingsAccount">Настройки</string>

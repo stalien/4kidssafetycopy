@@ -36,5 +36,5 @@
         android:title="@string/sharedSendCommand"/>
     <item
         android:id="@+id/action_call_device"
-        android:title="Call Device"/>
+        android:title="Позвонить"/>
 </menu>

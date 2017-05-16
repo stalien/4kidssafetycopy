@@ -89,7 +89,8 @@
                     android:baselineAligned="false"
                     android:paddingBottom="40dp"
                     android:paddingTop="40dp"
-                    android:visibility="visible">
+                    android:visibility="visible"
+                    android:inputType="textPersonName|textCapWords">
 
                     <EditText
                         android:id="@+id/nameDevice"

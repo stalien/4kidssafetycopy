@@ -59,9 +59,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/userName"
-                    android:inputType="text"
-                    android:textColor="@color/colorWhite"
-                    android:maxLines="1"/>
+                    android:inputType="text|textCapSentences"
+                    android:maxLines="1"
+                    android:textColor="@color/colorWhite" />
 
             </android.support.design.widget.TextInputLayout>
 
