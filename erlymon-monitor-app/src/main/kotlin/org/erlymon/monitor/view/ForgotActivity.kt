@@ -18,6 +18,7 @@
  */
 package org.erlymon.monitor.view
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -27,6 +28,7 @@ import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.android.synthetic.main.activity_signup.*
 import kotlinx.android.synthetic.main.content_about.*
 import kotlinx.android.synthetic.main.content_forgot.*
+import kotlinx.android.synthetic.main.content_signup.*
 import org.erlymon.monitor.R
 
 class ForgotActivity : AppCompatActivity() {
@@ -52,14 +54,25 @@ class ForgotActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-
         btn_send.setOnClickListener {
-            val intent = Intent(this@ForgotActivity, SignInActivity::class.java)
-
-            startActivity(intent)
 
 
+
+            //alert.setTitle("")
+
+            if(forgot_mail.text.toString().isEmpty())
+            {
+                forgot_mail.setError("Поле не может быть пустым")
+                forgot_mail.requestFocus()
+            }
+            else{
+            val alert = AlertDialog.Builder(this@ForgotActivity)
+            alert.setMessage("На введённый Email было отправлено письмо для сброса пароля.")
+            alert.setPositiveButton("Ок",  { dialog, whichButton ->   val intent = Intent(this@ForgotActivity, SignInActivity::class.java)
+                startActivity(intent) })
+            alert.show()}
         }
+
     }
 
 

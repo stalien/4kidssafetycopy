@@ -26,6 +26,7 @@
     <!-- Strings related to login -->
     <string name="soglashenie">Регистрируясь в приложении 4kids, Вы принимаете условия <a href="activityhref://sogActivity">Пользовательского соглашения</a> и <a href="activityhref://polActivity">Политики конфиденциальности</a>.</string>
     <string name="userPassword">Password</string>
+    <string name="userConfirmPassword">Confirm password</string>
     <string name="loginSubmit">Sign in</string>
     <string name="serverConfigHost">DNS or IP:PORT</string>
     <string name="userName">Name</string>
@@ -135,6 +136,7 @@
     <string name="aboutPolitika">Privacy policy </string>
     <string name="userTitle">User</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="aboutTitle">About</string>
 
     <!-- Strings related to Settings -->
 

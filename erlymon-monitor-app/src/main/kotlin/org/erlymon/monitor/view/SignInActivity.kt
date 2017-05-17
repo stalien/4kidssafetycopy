@@ -73,6 +73,7 @@ class SignInActivity : BaseActivity<SignInPresenter>(), SignInView, SettingsDial
                 })
 
         sign_up_button.setOnClickListener {
+
             val intent = Intent(this@SignInActivity, SignUpActivity::class.java)
             startActivity(intent)
 

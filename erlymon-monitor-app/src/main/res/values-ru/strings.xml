@@ -45,6 +45,7 @@
     <string name="userName">Имя</string>
     <string name="loginTitle">Вход</string>
     <string name="userPassword">Пароль</string>
+    <string name="userConfirmPassword">Подтвердите пароль</string>
     <string name="registerTitle">РЕГИСТРАЦИЯ</string>
     <string name="deviceTitle">Устройство</string>
     <string name="devicePositionsTitle">Трек</string>

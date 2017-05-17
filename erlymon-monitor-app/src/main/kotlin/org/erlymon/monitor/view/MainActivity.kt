@@ -79,7 +79,12 @@ class MainActivity : BaseActivity<MainPresenter>(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
+        val alert = AlertDialog.Builder(this@MainActivity)
+        alert.setTitle("Устройства отсутствуют")
+        alert.setMessage("Вы хотите добавить новое устройство?")
+        alert.setPositiveButton("Добавить",  { dialog, whichButton ->  startActivity(Intent(this@MainActivity, DeviceActivity::class.java)) })
+        alert.setNegativeButton("Отмена", null )
+        alert.show()
 
         setSupportActionBar(toolbar)
 
@@ -99,7 +104,7 @@ class MainActivity : BaseActivity<MainPresenter>(),
           toggle.syncState()
 
  //                        val toggle_right = ActionBarDrawerToggle(
-  //              this, drawer_layout2, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+ //              this, drawer_layout2, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
   //      drawer_layout2.addDrawerListener(toggle_right)
  //       toggle_right.syncState()
 
@@ -191,6 +196,8 @@ class MainActivity : BaseActivity<MainPresenter>(),
             } else {
                 Toast.makeText(baseContext, getString(R.string.sharedBackPressed), Toast.LENGTH_SHORT).show()
                 backPressed = System.currentTimeMillis()
+                finish();
+                System.exit(0);
             }
         }
     }
@@ -273,7 +280,7 @@ class MainActivity : BaseActivity<MainPresenter>(),
                     val i = Intent(Intent.ACTION_SEND)
                     i.type = "text/plain"
                     i.putExtra(Intent.EXTRA_SUBJECT, "4kids")
-                    var sAux = "\nРекомендую установить приложение 4kids - Безопасность\n\n"
+                    var sAux = "Рекомендую установить приложение 4kids - Безопасность\n\n"
                     sAux = sAux + "https://play.google.com/store/apps/details?id=ru.rusmobilecontent.forkidssafety \n\n"
                     i.putExtra(Intent.EXTRA_TEXT, sAux)
                     startActivity(Intent.createChooser(i, "Выберите приложение"))
