@@ -61,7 +61,7 @@
                     android:id="@+id/text_soglashenie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Текст пользовательского соглашения." />
+                    android:text="@string/textPolitika"  />
             </LinearLayout>
         </ScrollView>
 

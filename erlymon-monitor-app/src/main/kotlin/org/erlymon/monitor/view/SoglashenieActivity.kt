@@ -20,7 +20,10 @@ package org.erlymon.monitor.view
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
+import android.text.method.LinkMovementMethod
 import android.view.MenuItem
+import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.android.synthetic.main.content_about.*
 import org.erlymon.monitor.R
@@ -47,6 +50,10 @@ class SoglashenieActivity : AppCompatActivity() {
         setContentView(R.layout.activity_soglashenie)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        val  text_sogl = findViewById(R.id.text_soglashenie) as TextView
+
+        text_sogl.movementMethod = LinkMovementMethod.getInstance()
     }
 
 
