@@ -61,6 +61,7 @@
                     android:id="@+id/text_soglashenie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:autoLink="web|email"
                     android:text="@string/textPolitika"  />
             </LinearLayout>
         </ScrollView>
