@@ -21,9 +21,12 @@ package org.erlymon.monitor.view
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.ActionBarDrawerToggle
@@ -50,6 +53,7 @@ import org.erlymon.core.view.MainView
 import org.erlymon.monitor.view.DevicesActivity
 import org.erlymon.monitor.view.DevicesFragment
 import org.erlymon.monitor.MainPref
+import org.erlymon.monitor.Manifest
 import org.erlymon.monitor.R
 import org.erlymon.monitor.view.adapter.CustomFragmentPagerAdapter
 import org.erlymon.monitor.view.adapter.DevicesAdapter
@@ -79,12 +83,12 @@ class MainActivity : BaseActivity<MainPresenter>(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val alert = AlertDialog.Builder(this@MainActivity)
+       /* val alert = AlertDialog.Builder(this@MainActivity)
         alert.setTitle("Устройства отсутствуют")
         alert.setMessage("Вы хотите добавить новое устройство?")
         alert.setPositiveButton("Добавить",  { dialog, whichButton ->  startActivity(Intent(this@MainActivity, DeviceActivity::class.java)) })
         alert.setNegativeButton("Отмена", null )
-        alert.show()
+        alert.show()*/
 
         setSupportActionBar(toolbar)
 
@@ -97,6 +101,8 @@ class MainActivity : BaseActivity<MainPresenter>(),
         val session = intent.getParcelableExtra<User>("session")
         mAccountNameView?.text = session?.name
         mAccountEmailView?.text = session?.email
+
+
 
         val toggle = ActionBarDrawerToggle(
                   this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
@@ -190,14 +196,14 @@ class MainActivity : BaseActivity<MainPresenter>(),
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            //super.onBackPressed();
+            super.onBackPressed();
             if (backPressed + 2000 > System.currentTimeMillis()) {
+
                 presenter?.onDeleteSessionButtonClick()
             } else {
                 Toast.makeText(baseContext, getString(R.string.sharedBackPressed), Toast.LENGTH_SHORT).show()
                 backPressed = System.currentTimeMillis()
-                finish();
-                System.exit(0);
+
             }
         }
     }
@@ -344,10 +350,15 @@ class MainActivity : BaseActivity<MainPresenter>(),
         presenter?.onGetPostionByCache()
     }
 
-    override fun onCallDevice(device: Device) {
-        val callIntent = Intent(Intent.ACTION_CALL)
+    override fun onCallDevice(device: Device)  {
+       /* val callIntent = Intent(Intent.ACTION_CALL)
         callIntent.data = Uri.parse("tel:" + device.phone.toString())
-        startActivity(callIntent)
+        startActivity(callIntent)*/
+            val callIntent = Intent(Intent.ACTION_DIAL)
+            callIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_NO_USER_ACTION
+            callIntent.data = Uri.parse("tel:" + device.phone.toString())
+            startActivity(callIntent)
+
     }
 
     override fun onSendCommand(device: Device) {

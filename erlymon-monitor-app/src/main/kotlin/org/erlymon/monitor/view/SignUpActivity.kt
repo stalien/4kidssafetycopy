@@ -42,10 +42,7 @@ import android.widget.TextView
 import android.text.Html
 import android.text.method.LinkMovementMethod
 import android.system.Os.link
-
-
-
-
+import android.text.InputType
 
 
 class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
@@ -58,8 +55,6 @@ class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
             val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
             startActivity(intent)
         }
-
-
 
         val tvDisplay = findViewById(R.id.politics) as TextView
         tvDisplay.movementMethod = LinkMovementMethod.getInstance()

@@ -232,9 +232,9 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
         mLocationOverlay?.disableFollowLocation()
         mLocationOverlay?.disableMyLocation()
 
-//        mapview.overlays.remove(mLocationOverlay)
-//        mapview.overlays.remove(mRadiusMarkerClusterer)
-//        markers.clear()
+        mapview.overlays.remove(mLocationOverlay)
+      mapview.overlays.remove(mRadiusMarkerClusterer)
+      markers.clear()
         super.onPause()
     }
 

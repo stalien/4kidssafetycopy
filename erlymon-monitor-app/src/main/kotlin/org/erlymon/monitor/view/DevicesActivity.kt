@@ -19,7 +19,10 @@
 package org.erlymon.monitor.view
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.support.v4.util.Pair
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_devices.*
@@ -60,6 +63,11 @@ class DevicesActivity : BaseActivity<PermissionsPresenter>(), PermissionsView {
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
+        val PERMISSION_REQUEST = 200
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CALL_PHONE), PERMISSION_REQUEST)
+
+        }
 
         presenter = PermissionsPresenterImpl(this, this)
         presenter?.onLoadDevices()

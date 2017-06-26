@@ -124,7 +124,12 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), PERMISSION_REQUEST)
+
         }
+
+
+
+
 
         qr_code_btn.setOnClickListener {
             val intent = Intent(this@DeviceActivity, ScanActivity::class.java)

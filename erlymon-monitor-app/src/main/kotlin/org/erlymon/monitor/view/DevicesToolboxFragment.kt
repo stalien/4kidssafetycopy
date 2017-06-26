@@ -18,9 +18,13 @@
  */
 package org.erlymon.monitor.view
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.PopupMenu
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -121,6 +125,7 @@ class DevicesToolboxFragment : BaseFragment<DevicesListPresenter>(), DevicesList
             // Toast.makeText(PopupMenuDemoActivity.this,
             // item.toString(), Toast.LENGTH_LONG).show();
             // return true;
+
             when (item.itemId) {
                 R.id.action_device_edit -> {
                     listener!!.onEditDevice(device)

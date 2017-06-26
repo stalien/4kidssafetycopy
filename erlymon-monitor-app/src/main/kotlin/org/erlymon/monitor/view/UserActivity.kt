@@ -51,32 +51,32 @@ class UserActivity : BaseActivity<UserPresenter>(), UserView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user)
+         setContentView(R.layout.activity_user)
 
-        setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+         setSupportActionBar(toolbar)
+         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        presenter = UserPresenterImpl(this, this)
+         presenter = UserPresenterImpl(this, this)
 
-        val session = intent.getParcelableExtra<User>("session")
-        val user = intent.getParcelableExtra<User>("user")
-        logger.debug("USER ID: " + user?.id + " USER: " + user?.toString())
-        name.setText(user?.name)
-        email.setText(user?.email)
-        password.setText(user?.password)
-        admin.isChecked = if (user?.admin != null) user.admin else false
-        admin.isEnabled = session?.admin as Boolean
-        map.setText(user?.map)
-        distanceUnit.setText(user?.distanceUnit)
-        speedUnit.setText(user?.speedUnit)
-        latitude.setText(if (user?.latitude != null) user.latitude.toString() else 0.0.toString())
-        longitude.setText(if (user?.longitude != null) user.longitude.toString() else 0.0.toString())
-        zoom.setText(if (user?.zoom != null) user.zoom.toString() else 0.toString())
-        twelveHourFormat.isChecked = if (user?.twelveHourFormat != null) user.twelveHourFormat else false
+         val session = intent.getParcelableExtra<User>("session")
+         val user = intent.getParcelableExtra<User>("user")
+         logger.debug("USER ID: " + user?.id + " USER: " + user?.toString())
+         name.setText(user?.name)
+         email.setText(user?.email)
+         password.setText(user?.password)
+         admin.isChecked = if (user?.admin != null) user.admin else false
+         admin.isEnabled = session?.admin as Boolean
+         map.setText(user?.map)
+         distanceUnit.setText(user?.distanceUnit)
+         speedUnit.setText(user?.speedUnit)
+         latitude.setText(if (user?.latitude != null) user.latitude.toString() else 0.0.toString())
+         longitude.setText(if (user?.longitude != null) user.longitude.toString() else 0.0.toString())
+         zoom.setText(if (user?.zoom != null) user.zoom.toString() else 0.toString())
+         twelveHourFormat.isChecked = if (user?.twelveHourFormat != null) user.twelveHourFormat else false
 
-        fab_account_save.setOnClickListener {
-            presenter?.onSaveButtonClick()
-        }
+         fab_account_save.setOnClickListener {
+             presenter?.onSaveButtonClick()
+         }
     }
 
     override fun showData(data: User) {

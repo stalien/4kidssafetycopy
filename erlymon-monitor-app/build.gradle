@@ -70,7 +70,7 @@ android {
         applicationId "ru.rusmobilecontent.forkidssafety"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 17
+        versionCode 18
         //versionCode getVersionCode()
         versionName getVersionName()
         //archivesBaseName = "erlymon-monitor-$versionName"
