@@ -148,6 +148,11 @@
         android:name=".view.SharedPreferences"
         android:label="@string/title_activity_settings"
         android:parentActivityName=".view.AboutActivity"/>
+    <activity android:name=".view.GeofenceActivity"
+            android:label="@string/userTitle"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
 </application>
 
     </manifest>

@@ -27,6 +27,7 @@ import org.erlymon.core.model.api.ApiModule;
 import org.erlymon.core.model.api.util.QueryDate;
 import org.erlymon.core.model.data.Command;
 import org.erlymon.core.model.data.Device;
+import org.erlymon.core.model.data.DeviceSettings;
 import org.erlymon.core.model.data.Geofence;
 import org.erlymon.core.model.data.Permission;
 import org.erlymon.core.model.data.Position;
@@ -123,6 +124,38 @@ public class ModelImpl implements Model {
         return apiModule.getApi().deleteDevice(id);
     }
 
+    // DeviceSettings
+
+    @Override
+    public Observable<DeviceSettings[]> getDeviceSettings() {
+        return null;
+    }
+
+    @Override
+    public Observable<DeviceSettings[]> getDeviceSettings(boolean all) {
+        return null;
+    }
+
+    @Override
+    public Observable<DeviceSettings[]> getDeviceSettings(long deviceId) {
+        return null;
+    }
+
+    @Override
+    public Observable<DeviceSettings> createDeviceSettings(DeviceSettings deviceSettings) {
+        return null;
+    }
+
+    @Override
+    public Observable<DeviceSettings> updateDeviceSettings(long id, DeviceSettings deviceSettings) {
+        return null;
+    }
+
+    @Override
+    public Observable<Void> deleteDeviceSettings(long id) {
+        return null;
+    }
+
     //Geofence
     @Override
     public Observable<Geofence[]> getGeofences() {
@@ -183,4 +216,5 @@ public class ModelImpl implements Model {
     public Observable<Void> deletePermission(Permission permission) {
         return apiModule.getApi().deletePermission(permission);
     }
+
 }

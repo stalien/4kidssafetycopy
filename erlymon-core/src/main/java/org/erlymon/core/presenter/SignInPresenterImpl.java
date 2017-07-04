@@ -26,7 +26,9 @@ import android.util.Log;
 import org.erlymon.core.model.Model;
 import org.erlymon.core.model.ModelImpl;
 import org.erlymon.core.model.api.util.tuple.Triple;
+import org.erlymon.core.model.api.util.tuple.Triple2;
 import org.erlymon.core.model.data.Device;
+import org.erlymon.core.model.data.Geofence;
 import org.erlymon.core.model.data.Server;
 import org.erlymon.core.model.data.User;
 import org.erlymon.core.view.SignInView;
@@ -109,12 +111,15 @@ public class SignInPresenterImpl implements SignInPresenter {
                 .subscribeOn(Schedulers.io())
                 .flatMap(user -> {
                     if (user.getAdmin()) {
-                        return Observable.zip(model.getDevices(), model.getUsers(), (devices, users) -> new Triple<>(user, devices, users)).asObservable();
+                        return Observable.zip(
+                                model.getDevices(),
+                                model.getGeofences(),
+                                (devices, geofences) -> new Triple2<>(user, devices, geofences)).asObservable();
                     } else {
-                        return model.getDevices().flatMap(devices -> {
-                            User[] users = new User[] { user };
-                            return Observable.just(new Triple<>(user, devices, users));
-                        });
+                        return Observable.zip(
+                                model.getDevices(),
+                                model.getGeofences(),
+                                (devices, geofences) -> new Triple2<>(user, devices, geofences)).asObservable();
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
@@ -123,7 +128,7 @@ public class SignInPresenterImpl implements SignInPresenter {
                     realm.copyToRealmOrUpdate(Arrays.asList(triple.second));
                     realm.copyToRealmOrUpdate(Arrays.asList(triple.third));
                 }))
-                .subscribe(new Observer<Triple<User, Device[], User[]>>() {
+                .subscribe(new Observer<Triple2<User, Device[], Geofence[]>>() {
                     @Override
                     public void onCompleted() {
 
@@ -137,11 +142,15 @@ public class SignInPresenterImpl implements SignInPresenter {
                     }
 
                     @Override
-                    public void onNext(Triple<User, Device[], User[]> data) {
+                    public void onNext(Triple2<User, Device[], Geofence[]> data) {
                         progressDialog.hide();
                         view.showSession(data.first);
                     }
                 });
+
+
+
+
     }
 
     @Override
@@ -156,12 +165,15 @@ public class SignInPresenterImpl implements SignInPresenter {
                 .subscribeOn(Schedulers.io())
                 .flatMap(user -> {
                     if (user.getAdmin()) {
-                        return Observable.zip(model.getDevices(), model.getUsers(), (devices, users) -> new Triple<>(user, devices, users)).asObservable();
+                        return Observable.zip(
+                                model.getDevices(),
+                                model.getGeofences(),
+                                (devices, geofences) -> new Triple2<>(user, devices, geofences)).asObservable();
                     } else {
-                        return model.getDevices().flatMap(devices -> {
-                            User[] users = new User[] { user };
-                            return Observable.just(new Triple<>(user, devices, users));
-                        });
+                        return Observable.zip(
+                                model.getDevices(),
+                                model.getGeofences(),
+                                (devices, geofences) -> new Triple2<>(user, devices, geofences)).asObservable();
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
@@ -170,7 +182,7 @@ public class SignInPresenterImpl implements SignInPresenter {
                     realm.copyToRealmOrUpdate(Arrays.asList(triple.second));
                     realm.copyToRealmOrUpdate(Arrays.asList(triple.third));
                 }))
-                .subscribe(new Observer<Triple<User, Device[], User[]>>() {
+                .subscribe(new Observer<Triple2<User, Device[], Geofence[]>>() {
                     @Override
                     public void onCompleted() {
 
@@ -184,11 +196,13 @@ public class SignInPresenterImpl implements SignInPresenter {
                     }
 
                     @Override
-                    public void onNext(Triple<User, Device[], User[]> data) {
+                    public void onNext(Triple2<User, Device[], Geofence[]> data) {
                         progressDialog.hide();
                         view.showSession(data.first);
                     }
                 });
+
+
     }
 
     @Override

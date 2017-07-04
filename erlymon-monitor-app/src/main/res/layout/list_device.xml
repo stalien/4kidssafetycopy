@@ -22,7 +22,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/gridLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="80dp"
     android:clickable="false"
     android:columnCount="3"
     android:orientation="vertical"
@@ -31,26 +31,31 @@
     android:rowCount="2"
     android:useDefaultMargins="true">
 
-    <QuickContactBadge
-        android:id="@+id/quickContactBadge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+    <ImageView
+        android:id="@+id/device_picture"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
         android:layout_column="0"
         android:layout_gravity="center_vertical"
         android:layout_rowSpan="2"
-        android:maxHeight="51dp"
-        android:maxWidth="51dp"
-        android:minHeight="50dp"
-        android:minWidth="50dp"
-        android:src="@drawable/ic_users"
-        app:srcCompat="@drawable/bg_label" />
+        android:alpha="1"
+        android:background="@drawable/shape_round"
+        android:clickable="true"
+        android:longClickable="false"
+        android:scaleType="centerInside"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:visibility="visible"
+        app:srcCompat="@drawable/devicelist_icon"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_column="1"
-        android:layout_gravity="left|center_vertical"
+        android:layout_gravity="bottom|left"
         android:layout_row="0"
         android:paddingLeft="10dp"
         android:text="name"
@@ -65,6 +70,7 @@
         android:layout_row="1"
         android:paddingLeft="10dp"
         android:text="id"
+        android:textColor="@color/colorUnknownStatus"
         android:textSize="12sp" />
 
     <ImageView

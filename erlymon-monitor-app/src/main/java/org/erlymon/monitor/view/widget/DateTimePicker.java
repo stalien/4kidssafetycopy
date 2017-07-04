@@ -55,52 +55,54 @@ public class DateTimePicker extends LinearLayout {
     public DateTimePicker(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        gmtDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        if (!isInEditMode()) {
+            gmtDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-   //     iso8601DateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        iso8601DateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.ENGLISH);
-        iso8601DateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+            //     iso8601DateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            iso8601DateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.ENGLISH);
+            iso8601DateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
 
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DateTimePickerOption);
+            TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DateTimePickerOption);
 
-        dateFormat = new SimpleDateFormat(a.getString(R.styleable.DateTimePickerOption_format));
+            dateFormat = new SimpleDateFormat(a.getString(R.styleable.DateTimePickerOption_format));
 
-        a.recycle();
+            a.recycle();
 
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.widget_date_time_picker, this, true);
-        LinearLayout layout = (LinearLayout) getChildAt(0);
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            inflater.inflate(R.layout.widget_date_time_picker, this, true);
+            LinearLayout layout = (LinearLayout) getChildAt(0);
 
-        mDate = (ButtonTextView) layout.getChildAt(0);
-        mTime = (ButtonTextView) layout.getChildAt(1);
-
-
-        c = Calendar.getInstance();
-        c.set(Calendar.MILLISECOND, 0);
+            mDate = (ButtonTextView) layout.getChildAt(0);
+            mTime = (ButtonTextView) layout.getChildAt(1);
 
 
-        String[] dateTimeArr = dateFormat.format(c.getTime()).split(" ");
+            c = Calendar.getInstance();
+            c.set(Calendar.MILLISECOND, 0);
 
-        mDate.setText(dateTimeArr[0]);
-        mTime.setText(dateTimeArr[1]);
 
-        mDate.setDrawableClickListener(new DrawableClickListener() {
-            @Override
-            public void onClick(DrawablePosition target) {
-                if (mDate.isEnabled() && onDateClickListener != null) {
-                    onDateClickListener.onClick(target);
+            String[] dateTimeArr = dateFormat.format(c.getTime()).split(" ");
+
+            mDate.setText(dateTimeArr[0]);
+            mTime.setText(dateTimeArr[1]);
+
+            mDate.setDrawableClickListener(new DrawableClickListener() {
+                @Override
+                public void onClick(DrawablePosition target) {
+                    if (mDate.isEnabled() && onDateClickListener != null) {
+                        onDateClickListener.onClick(target);
+                    }
                 }
-            }
-        });
+            });
 
-        mTime.setDrawableClickListener(new DrawableClickListener() {
-            @Override
-            public void onClick(DrawablePosition target) {
-                if (mTime.isEnabled() && onTimeClickListener != null) {
-                    onTimeClickListener.onClick(target);
+            mTime.setDrawableClickListener(new DrawableClickListener() {
+                @Override
+                public void onClick(DrawablePosition target) {
+                    if (mTime.isEnabled() && onTimeClickListener != null) {
+                        onTimeClickListener.onClick(target);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     public long getUtcTimestamp() {

@@ -41,6 +41,8 @@
         android:focusableInTouchMode="false"
         android:isScrollContainer="false">
 
+
+
         <LinearLayout
             android:id="@+id/sign_up_form"
             android:layout_width="match_parent"
@@ -61,6 +63,23 @@
                     android:hint="@string/userName"
                     android:textAllCaps="true"
                     android:inputType="text|textCapSentences"
+                    android:maxLines="1"
+                    android:textColor="@color/colorWhite" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/singUpPhonelLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:theme="@style/EditTextHintSingUp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/userPhone"
+                    android:inputType="phone"
                     android:maxLines="1"
                     android:textColor="@color/colorWhite" />
 
@@ -136,6 +155,58 @@
             </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
+
+
     </ScrollView>
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:gravity="bottom|center"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <TextView
+        android:id="@+id/politics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.12"
+        android:autoLink="none"
+        android:linksClickable="true"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="@string/soglashenie"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textColorLink="@color/colorWhite" />
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="190dp"
+            android:layout_height="33dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="56dp"
+            android:layout_marginRight="56dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="0.03"
+            android:background="@drawable/sprite_0038_rect"
+            android:text="Зарегистрироваться"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_weight="0.02"
+        android:background="@color/colorWhite"
+        android:text="НАЗАД"
+        android:textColor="@color/colorAccent"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+
+</LinearLayout>
 
 </RelativeLayout>

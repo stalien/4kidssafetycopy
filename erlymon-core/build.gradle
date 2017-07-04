@@ -50,6 +50,12 @@ dependencies { compile 'uk.co.chrisjenx:calligraphy:2.2.0'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:25.1.0'
 
+    // database
+    compile 'com.pushtorefresh.storio:sqlite:1.12.0'
+    compile 'com.pushtorefresh.storio:sqlite-annotations:1.12.0'
+    // We recommend to use Android Gradle Apt plugin: https://bitbucket.org/hvisser/android-apt
+    // apt 'com.pushtorefresh.storio:sqlite-annotations-processor:1.12.0'
+
     //RxAndroid
     compile 'io.reactivex:rxandroid:1.1.0'
     // Because RxAndroid releases are few and far between, it is recommended you also

@@ -43,6 +43,7 @@
     <string name="deviceCategory">Категория</string>
     <string name="deviceSim">Номер SIM карты</string>
     <string name="userName">Имя</string>
+    <string name="userPhone">Номер телефона</string>
     <string name="loginTitle">Вход</string>
     <string name="userPassword">Пароль</string>
     <string name="userConfirmPassword">Подтвердите пароль</string>
@@ -478,6 +479,7 @@
     <string name="errorPermissionWriteStorage">Доступ на запись к внутренней памяти необходим для кеширования карт.</string>
     <string name="errorPermissionCoarseLocation">Доступ к местоположению необходим для отображение авшего местоположения на карте.</string>
     <string name="title_activity_settings">Настройки</string>
+    <string name="settingsGeofences">Геозоны</string>
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->

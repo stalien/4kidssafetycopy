@@ -24,11 +24,13 @@ import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 
 import org.erlymon.core.model.data.Device;
+import org.erlymon.monitor.MainPref;
 import org.erlymon.monitor.R;
 
 import io.realm.OrderedRealmCollection;
@@ -49,13 +51,13 @@ public class DevicesAdapter extends RealmBaseAdapter<Device> implements ListAdap
      */
     class ViewHolder {
         private GridLayout gridLayout;
-        private QuickContactBadge quickContactBadge;
+        private ImageView devicePicture;
         private TextView name;
         private TextView identifier;
         private TextView sim;
         public ViewHolder(View itemView) {
             gridLayout = (GridLayout) itemView.findViewById(R.id.gridLayout);
-            quickContactBadge = (QuickContactBadge) itemView.findViewById(R.id.quickContactBadge);
+            devicePicture = (ImageView) itemView.findViewById(R.id.device_picture);
             name = (TextView) itemView.findViewById(R.id.name);
             identifier = (TextView) itemView.findViewById(R.id.identifier);
             sim = (TextView) itemView.findViewById(R.id.sim);
@@ -78,9 +80,10 @@ public class DevicesAdapter extends RealmBaseAdapter<Device> implements ListAdap
         Device item = adapterData.get(position);
         viewHolder.name.setText(item.getName());
   //      viewHolder.identifier.setText(item.getUniqueId());
-        viewHolder.identifier.setText(item.getUniqueId());
+        viewHolder.identifier.setText(item.getStatus());
  //       viewHolder.gridLayout.setBackgroundResource(getStatusColorId(item.getStatus()));
-        viewHolder.quickContactBadge.setBackgroundResource(getStatusColorId(item.getStatus()));
+        viewHolder.identifier.setTextColor(getStatusColorId(item.getStatus()));
+        viewHolder.devicePicture.setBackgroundResource(getStatusPictureId(item.getStatus()));
         return convertView;
 
 
@@ -88,11 +91,33 @@ public class DevicesAdapter extends RealmBaseAdapter<Device> implements ListAdap
 
 
     private int getStatusColorId(String status) {
-        switch (status) {
-            case "online": return R.color.colorOnlineStatus;
-            case "offline": return R.color.colorOfflineStatus;
-            case "unknown": return R.color.colorUnknownStatus;
-            default: return R.color.colorUnknownStatus;
-        }
+        if(status != null) {
+            switch (status) {
+                case "online":
+                    return R.color.colorOnlineStatus;
+                case "offline":
+                    return R.color.colorOfflineStatus;
+                case "unknown":
+                    return R.color.colorUnknownStatus;
+                default:
+                    return R.color.colorUnknownStatus;
+            }
+        } else return R.color.colorUnknownStatus;
     }
+
+    private int getStatusPictureId(String status) {
+        if(status != null) {
+            switch (status) {
+                case "online":
+                    return R.drawable.shape_round_online;
+                case "offline":
+                    return R.drawable.shape_round_offline;
+                case "unknown":
+                    return R.drawable.shape_round_unknown;
+                default:
+                    return R.drawable.shape_round_unknown;
+            }
+        } else return R.drawable.shape_round_unknown;
+    }
+
 }

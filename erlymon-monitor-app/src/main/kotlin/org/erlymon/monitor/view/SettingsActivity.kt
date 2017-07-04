@@ -102,11 +102,11 @@ class SettingsActivity : BaseActivity<UserPresenter>(), UserView {
         return if (user != null) user.id else 0
     }
 
-    override fun getUser(): User {
+   override fun getUser(): User {
         var user = intent.getParcelableExtra<User>("user")
         if (user == null) {
             user = User()
-        }
+        }/*
         user.name = name.text.toString()
         user.email = email.text.toString()
         user.password = password.text.toString()
@@ -115,10 +115,10 @@ class SettingsActivity : BaseActivity<UserPresenter>(), UserView {
         user.language = Locale.getDefault().language
         user.distanceUnit = distanceUnit.text.toString()
         user.speedUnit = speedUnit.text.toString()
-        user.latitude = if (latitude.text.isNotEmpty()) latitude.text.toString().toDouble() else 0.0
-        user.longitude = if (longitude.text.isNotEmpty()) longitude.text.toString().toDouble() else 0.0
-        user.zoom = if (zoom.text.isNotEmpty()) zoom.text.toString().toInt() else 0
-        user.twelveHourFormat = twelveHourFormat.isChecked
+//        user.latitude = if (latitude.text.isNotEmpty()) latitude.text.toString().toDouble() else 0.0
+//        user.longitude = if (longitude.text.isNotEmpty()) longitude.text.toString().toDouble() else 0.0
+//        user.zoom = if (zoom.text.isNotEmpty()) zoom.text.toString().toInt() else 0
+        user.twelveHourFormat = twelveHourFormat.isChecked*/
         return user
     }
 

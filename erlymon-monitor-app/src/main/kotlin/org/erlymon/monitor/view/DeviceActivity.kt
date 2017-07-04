@@ -40,6 +40,7 @@ import com.google.android.gms.vision.barcode.Barcode
 import kotlinx.android.synthetic.main.content_intro.*
 import kotlinx.android.synthetic.main.list_device.*
 import org.erlymon.core.model.data.User
+import org.erlymon.monitor.MainPref
 import java.util.*
 
 class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
@@ -89,7 +90,11 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
                         sim_layout.visibility = View.VISIBLE
 //                        input_sim.requestFocus();
                         btn_next.setText("СОХРАНИТЬ");
-                    }else{ if (status == 3 && validateSim()) {presenter?.onSaveButtonClick()}}
+                    }else{ if (status == 3 && validateSim()) {
+                        MainPref.devices++
+                        presenter?.onSaveButtonClick()
+
+                    }}
                 }
 
 
@@ -236,6 +241,7 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
         device.category = "arrow"
         device.status = "unknown"
         device.phone = "+7" + sim.text.toString()
+        device.showOnMap = true
         return device
     }
 

@@ -18,13 +18,16 @@
  */
 package org.erlymon.monitor.view
 
+import android.app.ActivityManager
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
@@ -33,13 +36,11 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import io.realm.RealmResults
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.content_devices.*
 import kotlinx.android.synthetic.main.content_intro.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.content_main_devices.*
@@ -69,8 +70,9 @@ class MainActivity : BaseActivity<MainPresenter>(),
         MainView,
         NavigationView.OnNavigationItemSelectedListener,
         DevicesFragment.OnActionDeviceListener, DevicesToolboxFragment.OnActionDeviceListener,
-        DeviceThisActivity.OnActionDeviceThisListener,
+        DeviceThisActivity.OnActionDeviceListener,
         UsersFragment.OnActionUserListener,
+        GeofencesFragment.OnActionGeofenceListener,
         ConfirmDialogFragment.ConfirmDialogListener,
         SendCommandDialogFragment.SendCommandDialogListener {
 
@@ -83,12 +85,14 @@ class MainActivity : BaseActivity<MainPresenter>(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-       /* val alert = AlertDialog.Builder(this@MainActivity)
+        if(MainPref.devices == 0){
+        val alert = AlertDialog.Builder(this@MainActivity)
         alert.setTitle("Устройства отсутствуют")
         alert.setMessage("Вы хотите добавить новое устройство?")
         alert.setPositiveButton("Добавить",  { dialog, whichButton ->  startActivity(Intent(this@MainActivity, DeviceActivity::class.java)) })
-        alert.setNegativeButton("Отмена", null )
-        alert.show()*/
+        alert.setNegativeButton("Отмена", { dialog, whichButton ->  MainPref.devices++ } )
+        alert.show()
+        }
 
         setSupportActionBar(toolbar)
 
@@ -102,8 +106,6 @@ class MainActivity : BaseActivity<MainPresenter>(),
         mAccountNameView?.text = session?.name
         mAccountEmailView?.text = session?.email
 
-
-
         val toggle = ActionBarDrawerToggle(
                   this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
           drawer_layout.addDrawerListener(toggle)
@@ -116,6 +118,14 @@ class MainActivity : BaseActivity<MainPresenter>(),
 
         var to_account = linearLayout.findViewById(R.id.tv_account_name) as TextView
         var to_account2 = linearLayout.findViewById(R.id.tv_account_email) as TextView
+        var pic_loader = linearLayout.findViewById(R.id.tv_app_name) as TextView
+
+        var imageView = linearLayout.findViewById(R.id.iw4Kids) as ImageView
+
+        val bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.family)
+        val roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(),bitmap)
+        roundedBitmapDrawable.isCircular = true
+        imageView.setImageDrawable(roundedBitmapDrawable)
 
         to_account.setOnClickListener {
             val intent = Intent(this@MainActivity, UserActivity::class.java)
@@ -129,6 +139,11 @@ class MainActivity : BaseActivity<MainPresenter>(),
                     .putExtra("user", intent.getParcelableExtra<User>("session"))
             startActivityForResult(intent, REQUEST_CODE_UPDATE_ACCOUNT)}
 
+        pic_loader.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            startActivityForResult(intent, REQUEST_CODE_USER_PIC)}
+
 
         nav_view.setNavigationItemSelectedListener(this)
 
@@ -141,6 +156,7 @@ class MainActivity : BaseActivity<MainPresenter>(),
         pagerAdapter?.addPage(DevicesFragment())
 //        pagerAdapter?.addPage(DevicesToolboxFragment())
         pagerAdapter?.addPage(UsersFragment())
+        pagerAdapter?.addPage(GeofencesFragment())
         view_pager.setAdapter(pagerAdapter)
 
         view_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -159,6 +175,10 @@ class MainActivity : BaseActivity<MainPresenter>(),
                     2 -> {
                         fab.visibility = View.VISIBLE
                         supportActionBar?.setTitle(R.string.settingsUsers)
+                    }
+                    3 -> {
+                        fab.visibility = View.VISIBLE
+                        supportActionBar?.setTitle(R.string.settingsGeofences)
                     }
                 }
             }
@@ -186,8 +206,16 @@ class MainActivity : BaseActivity<MainPresenter>(),
                             .putExtra("session", intent.getParcelableExtra<User>("session"))
                     startActivity(intent)
                 }
+                3 -> {
+                    logger.debug("Start GeofenceActivity")
+                    val intent = Intent(this@MainActivity, GeofenceActivity::class.java)
+                            .putExtra("session", intent.getParcelableExtra<User>("session"))
+                    startActivity(intent)
+                }
             }
         }
+
+
 
 
     }
@@ -196,14 +224,14 @@ class MainActivity : BaseActivity<MainPresenter>(),
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed();
+            //super.onBackPressed();
             if (backPressed + 2000 > System.currentTimeMillis()) {
-
                 presenter?.onDeleteSessionButtonClick()
             } else {
                 Toast.makeText(baseContext, getString(R.string.sharedBackPressed), Toast.LENGTH_SHORT).show()
                 backPressed = System.currentTimeMillis()
-
+                finish();
+                System.exit(0);
             }
         }
     }
@@ -227,6 +255,10 @@ class MainActivity : BaseActivity<MainPresenter>(),
         intent.putExtra("deviceId", 0)
     }
 
+    override fun showRemoveGeofenceCompleted() {
+        intent.putExtra("geofenceId", 0)
+    }
+
     override fun showRemoveUserCompleted() {
         intent.putExtra("userId", 0)
     }
@@ -237,6 +269,10 @@ class MainActivity : BaseActivity<MainPresenter>(),
 
     override fun getDeviceId(): Long {
         return intent.getLongExtra("deviceId", 0)
+    }
+
+    override fun getGeofenceId(): Long {
+        return intent.getLongExtra("geofenceId", 0)
     }
 
     override fun getPositionId(): Long {
@@ -251,6 +287,23 @@ class MainActivity : BaseActivity<MainPresenter>(),
 
     override fun showError(error: String) {
         makeToast(toolbar, error)
+
+        if (error.contains("Attempt to invoke" )){
+        val alert = AlertDialog.Builder(this@MainActivity)
+        alert.setTitle("Предупреждение")
+        alert.setMessage("Устройство еще не передавало данных на сервер")
+        alert.setPositiveButton("Подождать", null)
+        alert.show()
+        }
+
+        if (error.contains("401" )){
+            val alert = AlertDialog.Builder(this@MainActivity)
+            alert.setTitle("Предупреждение")
+            alert.setMessage("Вы хотите выйти?")
+            alert.setPositiveButton("Нет", null)
+            alert.show()
+           startActivity(Intent(this@MainActivity, SignInActivity::class.java))
+        }
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -267,6 +320,9 @@ class MainActivity : BaseActivity<MainPresenter>(),
             }
             R.id.nav_users -> {
                 view_pager.setCurrentItem(2)
+            }
+            R.id.nav_geofences -> {
+                view_pager.setCurrentItem(3)
             }
             R.id.nav_server -> {
                 val intent = Intent(this@MainActivity, ServerActivity::class.java)
@@ -321,6 +377,11 @@ class MainActivity : BaseActivity<MainPresenter>(),
                 }
             REQUEST_CODE_CREATE_OR_UPDATE_DEVICE ->
                 if (resultCode == RESULT_OK) {
+                }
+            REQUEST_CODE_USER_PIC ->
+                if (resultCode == RESULT_OK && data != null) {
+                    val selectedImage = data?.getData()
+                    iw4Kids.setImageURI(selectedImage)
                 }
         }
     }
@@ -388,12 +449,33 @@ class MainActivity : BaseActivity<MainPresenter>(),
         startActivity(intent)
     }
 
+    override fun onShowOnMapGeofence(geofence: Geofence) {
+         //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onLoadPositions(geofence: Geofence) {
+         //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onRemoveGeofence(geofence: Geofence) {
+        intent.putExtra("geofenceId", geofence.id)
+        val dialogFragment = ConfirmDialogFragment.newInstance(R.string.deviceTitle, R.string.sharedRemoveConfirm)
+        dialogFragment.show(supportFragmentManager, "remove_item_dialog")
+    }
+
+    override fun onEditGeofence(geofence: Geofence) {
+         //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun onPositiveClick(dialog: DialogInterface, which: Int) {
         if (deviceId > 0) {
             presenter?.onDeleteDeviceButtonClick()
         }
         if (userId > 0) {
             presenter?.onDeleteUserButtonClick()
+        }
+        if (getGeofenceId() > 0) {
+            presenter?.onDeleteGeofenceButtonClick()
         }
     }
 
@@ -403,9 +485,9 @@ class MainActivity : BaseActivity<MainPresenter>(),
     }
 
     private fun calculateMapCenter() :Pair<GeoPoint, Int> {
-//        val user = intent.getParcelableExtra<User>("session")
+       //val user = intent.getParcelableExtra<User>("session")
 //        if (user.latitude === 0.0 && user.longitude === 0.0 && user.zoom === 0) {
-//            val server = intent.getParcelableExtra<Server>("server")
+          //  val server = intent.getParcelableExtra<Server>("server")
 //            if (server.latitude === 0.0 && server.longitude === 0.0 && server.zoom === 0) {
 //                return Pair(GeoPoint(server.latitude, server.longitude), server.zoom)
 //            }
@@ -423,5 +505,6 @@ class MainActivity : BaseActivity<MainPresenter>(),
         val REQUEST_CODE_UPDATE_SERVER = 1
         val REQUEST_CODE_UPDATE_ACCOUNT = 2
         val REQUEST_CODE_CREATE_OR_UPDATE_DEVICE = 3
+        val REQUEST_CODE_USER_PIC = 4
     }
 }

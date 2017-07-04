@@ -24,6 +24,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
@@ -56,15 +57,54 @@ import org.erlymon.monitor.MainPref
 import org.erlymon.monitor.R
 import org.erlymon.monitor.view.map.marker.MarkerWithLabel
 import org.osmdroid.api.IMapController
+import org.osmdroid.bonuspack.overlays.GroundOverlay
+import org.osmdroid.events.MapEventsReceiver
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.BoundingBoxE6
+import org.osmdroid.views.overlay.MapEventsOverlay
 import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.Polygon
+import org.osmdroid.views.overlay.infowindow.BasicInfoWindow
+import org.osmdroid.views.overlay.infowindow.InfoWindow
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
 /**
  * Created by Sergey Penkovsky <sergey.penkovsky@gmail.com> on 4/7/16.
  */
-class MapFragment : BaseFragment<MapPresenter>(), MapView {
+class MapFragment : BaseFragment<MapPresenter>(),
+        MapView,
+        MapEventsReceiver {
+
+    override fun singleTapConfirmedHelper(p: GeoPoint?): Boolean {
+        InfoWindow.closeAllInfoWindowsOn(mapview);
+//        Toast.makeText(context, "Tapped", Toast.LENGTH_SHORT).show()
+        return true
+    }
+
+    override fun longPressHelper(p: GeoPoint?): Boolean {
+        val circle = Polygon(context)
+        circle.points = Polygon.pointsAsCircle(p, 50.0)
+        circle.setFillColor(0x1200FF00)
+        circle.setStrokeColor(Color.GREEN)
+        circle.setStrokeWidth(2.00F);
+
+       val myGroundOverlay = GroundOverlay(context);
+        myGroundOverlay.setPosition(p);
+        myGroundOverlay.setImage(getResources().getDrawable(R.drawable.logo).mutate());
+        myGroundOverlay.setDimensions(20.0f);
+        mapview.getOverlays().add(1,myGroundOverlay);
+
+        circle.setInfoWindow(BasicInfoWindow(org.osmdroid.bonuspack.R.layout.bonuspack_bubble, mapview));
+        circle.setTitle("Centered on "+ p?.getLatitude() +","+ p?.getLongitude());
+
+        mapview.getOverlays().add(1,circle);
+        mapview.postInvalidate()
+
+        return true //To change body of created functions use File | Settings | File Templates.
+    }
+
+
 
     private inner class DevicesMarkerClusterer(ctx: Context) : RadiusMarkerClusterer(ctx) {
 
@@ -97,12 +137,18 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
 
         presenter = MapPresenterImpl(context, this)
 
+        val mapEventsOverlay = MapEventsOverlay(context, this)
+
 
         arrowDrawable = resources.getDrawable(R.drawable.arrow_offline)
 
+        mapview.setTileSource(TileSourceFactory.DEFAULT_TILE_SOURCE)
         mapview.isTilesScaledToDpi = true
         mapview.setMultiTouchControls(true)
         mapview.minZoomLevel = 4
+
+        mapview.getOverlays().add(0, mapEventsOverlay)
+
 
 
 //        mapview.setBuiltInZoomControls(true)
@@ -233,8 +279,8 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
         mLocationOverlay?.disableMyLocation()
 
         mapview.overlays.remove(mLocationOverlay)
-      mapview.overlays.remove(mRadiusMarkerClusterer)
-      markers.clear()
+        mapview.overlays.remove(mRadiusMarkerClusterer)
+        markers.clear()
         super.onPause()
     }
 
@@ -271,11 +317,15 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
 
 //            marker.title = position.fixTime.toString()
 //            marker.snippet = device.id.toString()
-            marker.snippet = ("id=" + device.id +
+ /*           marker.snippet = ("id=" + device.id +
                                  ", uniqueId='" + device.uniqueId + '\'' +
                                 ", status='" + device.status + '\'' +
                                 ", accuracy=" + position.accuracy +
-                                ", lastFix=" + position.fixTime.toString())
+                                ", lastFix=" + position.fixTime.toString())  */
+
+            marker.snippet = (position.address)
+            marker.subDescription = (mapview.getOverlays().size.toString())
+
             if (device.status == "offline") {
                 marker.snippet = "Device offline"
             }
@@ -292,6 +342,8 @@ class MapFragment : BaseFragment<MapPresenter>(), MapView {
                // marker.rotation = position.course
             }
             marker.position = GeoPoint(position.latitude, position.longitude)
+
+            marker.isDraggable = true
 
 
 

@@ -43,6 +43,10 @@ import org.erlymon.monitor.view.adapter.PositionsExpandableListAdapter
 import org.erlymon.monitor.view.fragment.DatePickerDialogFragment
 import org.erlymon.monitor.view.fragment.TimePickerDialogFragment
 import org.erlymon.monitor.view.widget.DrawableClickListener
+import org.osmdroid.bonuspack.routing.OSRMRoadManager
+import org.osmdroid.bonuspack.routing.Road
+import org.osmdroid.bonuspack.routing.RoadManager
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 
 import org.osmdroid.util.BoundingBoxE6
 import org.osmdroid.util.GeoPoint
@@ -128,6 +132,7 @@ class PositionsActivity : BaseActivity<PositionsPresenter>(), PositionsView, Dat
             }
         })
 
+
         mapview.isTilesScaledToDpi = true
         mapview.setMultiTouchControls(true)
         mapview.minZoomLevel = 4
@@ -135,6 +140,8 @@ class PositionsActivity : BaseActivity<PositionsPresenter>(), PositionsView, Dat
         mapview.controller.setZoom(MainPref.defaultZoom)
 
         mapview.setLayerType(MapView.LAYER_TYPE_SOFTWARE, null)
+
+        presenter?.onLoadPositionsButtonClick()
 
         fab_load_positions.setOnClickListener{
             presenter?.onLoadPositionsButtonClick()
@@ -148,7 +155,7 @@ class PositionsActivity : BaseActivity<PositionsPresenter>(), PositionsView, Dat
         pathOverlay!!.paint.strokeWidth = 5f
         pathOverlay!!.title = deviceId.toString()
 
-//        pathOverlay!!.isGeodesic = true
+        pathOverlay!!.isGeodesic = true
         mapview.overlays.add(pathOverlay)
     }
 
@@ -199,11 +206,20 @@ class PositionsActivity : BaseActivity<PositionsPresenter>(), PositionsView, Dat
     }
 
     fun createTrack(positions: Array<out Position>) {
+
+//        val roadManager = OSRMRoadManager(this)
+
         val points = ArrayList<GeoPoint>()
         for (position in positions) {
-            if (position.accuracy.toFloat() < 31.0F) {points.add(GeoPoint(position.latitude!!, position.longitude!!))}
+            if (position.accuracy.toFloat() < 50.0F) {points.add(GeoPoint(position.latitude!!, position.longitude!!))}
         }
+
+//        val road = roadManager.getRoad(points)
+//        val roadOverlay = RoadManager.buildRoadOverlay(road,applicationContext)
+//        mapview.getOverlays().add(roadOverlay)
+
         pathOverlay!!.points = points
+
         mapview.zoomToBoundingBox(BoundingBoxE6.fromGeoPoints(points))
         mapview.postInvalidate()
     }

@@ -33,6 +33,7 @@ import io.realm.Realm
 import org.slf4j.LoggerFactory
 
 import kotlinx.android.synthetic.main.activity_signin.*
+import kotlinx.android.synthetic.main.content_devices.*
 import kotlinx.android.synthetic.main.content_forgot.*
 import kotlinx.android.synthetic.main.content_signin.*
 import org.erlymon.core.model.api.ApiModule
@@ -67,7 +68,6 @@ class SignInActivity : BaseActivity<SignInPresenter>(), SignInView, SettingsDial
                     if (granted) {
                         MainPref.email = email
                         MainPref.password = password
-
                         presenter?.onCreateSession()
                     } else {
                         makeToast(sign_in_button, getString(R.string.errorPermissionWriteStorage))

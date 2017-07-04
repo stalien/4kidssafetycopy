@@ -18,6 +18,7 @@
  */
 package org.erlymon.monitor.view
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -91,6 +92,10 @@ class DevicesFragment : BaseFragment<DevicesListPresenter>(), DevicesListView {
 
 
         //lv_devices.adapter = DevicesAdapter(context, storage.devicesSorted)
+        lv_devices.device_info?.setOnClickListener {
+            makeToast(lv_devices, "click!")
+        }
+
         lv_devices.onItemClickListener = object : AdapterView.OnItemClickListener {
             override fun onItemClick(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
                 val device = lv_devices.getItemAtPosition(position) as Device
@@ -129,6 +134,8 @@ class DevicesFragment : BaseFragment<DevicesListPresenter>(), DevicesListView {
 
     override fun showError(error: String) {
         makeToast(lv_devices, error)
+
+
     }
 
     private inner class OnExecPopupMenuItem(internal var device: Device) : PopupMenu.OnMenuItemClickListener {

@@ -40,6 +40,7 @@
     <string name="errorPermissionRationale">Contacts permissions are needed for providing email completions.</string>
     <string name="serverConfigHost">DNS or IP:PORT</string>
     <string name="userName">Name</string>
+    <string name="userPhone">Phone</string>
     <string name="registerSubmit">Sign up</string>
     <string name="settingsAccount">Account</string>
     <string name="logoutSubmit">Sign Out</string>
@@ -130,6 +131,7 @@
     <string name="errorPermissionWriteStorage">Write sotrage permissions are needed for show map.</string>
     <string name="errorPermissionCoarseLocation">Coarse location permissions are needed for show your location.</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="settingsGeofences">Geofences</string>
     <string name="textSoglashenie"><b>ПОЛЬЗОВАТЕЛЬСКОЕ СОГЛАШЕНИЕ</b>\n
 Настоящее Пользовательское соглашение (далее – Соглашение, ПС) регулирует
 отношения между Администратором и Пользователем Приложения/Сайта, возникающие

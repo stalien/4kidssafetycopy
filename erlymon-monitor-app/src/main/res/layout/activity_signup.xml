@@ -65,55 +65,5 @@
     <include layout="@layout/content_signup"
         />
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom|center"
-        android:layout_alignParentBottom="true"
-        android:weightSum="1"
-        >
-
-        <TextView
-            android:id="@+id/politics"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.12"
-            android:autoLink="none"
-            android:linksClickable="true"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:text="@string/soglashenie"
-            android:textAlignment="center"
-            android:textColor="@color/colorWhite"
-            android:textColorLink="@color/colorWhite"/>
-
-        <Button
-            android:id="@+id/btn_save"
-            android:layout_width="190dp"
-            android:layout_height="33dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="56dp"
-            android:layout_marginRight="56dp"
-            android:text="РЕГИСТРАЦИЯ"
-            android:textStyle="bold"
-            android:textColor="@color/colorWhite"
-            android:background="@drawable/sprite_0038_rect"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="0.03" />
-
-        <Button
-            android:text="НАЗАД"
-            android:textStyle="bold"
-            android:textColor="@color/colorAccent"
-            android:layout_width="match_parent"
-            android:id="@+id/btn_back"
-            android:layout_height="54dp"
-            android:background="@color/colorWhite"
-            android:textSize="14sp"
-            android:layout_weight="0.02" />
-
-
-    </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
 

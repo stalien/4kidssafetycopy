@@ -43,6 +43,11 @@ public class User extends RealmObject implements Parcelable {
     private String name;
 
     @Since(3.0)
+    @SerializedName("phone")
+    @Expose
+    private String phone;
+
+    @Since(3.0)
     @SerializedName("email")
     @Expose
     private String email;
@@ -137,6 +142,24 @@ public class User extends RealmObject implements Parcelable {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     *
+     * @return
+     * The phone
+     */
+    public String getPhone() {
+        return phone;
+    }
+
+    /**
+     *
+     * @param phone
+     * The name
+     */
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     /**

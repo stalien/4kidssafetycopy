@@ -19,6 +19,7 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="210dp"
     android:background="@drawable/hnd_back"
@@ -38,12 +39,15 @@
 
         <ImageView
             android:id="@+id/iw4Kids"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:background="@drawable/rounded"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:clickable="true"
+            android:scaleType="centerCrop"
             android:src="@mipmap/ic_launcher" />
 
         <TextView
+            android:id="@+id/tv_app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -56,9 +60,9 @@
         android:id="@+id/tv_account_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="Android Studio"
-        android:clickable="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView

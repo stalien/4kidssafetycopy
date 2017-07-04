@@ -31,6 +31,7 @@ import org.slf4j.LoggerFactory;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import io.realm.Sort;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -59,7 +60,7 @@ public class DevicesListPresenterImpl implements DevicesListPresenter {
             subscription.unsubscribe();
         }
 
-        subscription = realmdb.where(Device.class).findAllSortedAsync("name").asObservable()
+        subscription = realmdb.where(Device.class).findAllSortedAsync("lastUpdate", Sort.DESCENDING).asObservable()
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<RealmResults<Device>>() {

@@ -28,6 +28,7 @@ import android.widget.Toast;
 import org.erlymon.core.model.Model;
 import org.erlymon.core.model.ModelImpl;
 import org.erlymon.core.model.data.Device;
+import org.erlymon.core.model.data.Geofence;
 import org.erlymon.core.model.data.Position;
 import org.erlymon.core.model.data.User;
 import org.erlymon.core.view.MainView;
@@ -128,6 +129,41 @@ public class MainPresenterImpl implements MainPresenter {
                     @Override
                     public void onNext(Void data) {
                         view.showRemoveDeviceCompleted();
+                    }
+                });
+    }
+
+    @Override
+    public void onDeleteGeofenceButtonClick() {
+        if (!subscription.isUnsubscribed()) {
+            subscription.unsubscribe();
+        }
+
+        subscription = model.deleteGeofence(view.getGeofenceId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext(o -> realmdb.executeTransaction(realm -> {
+                    try {
+                        realm.where(Geofence.class).equalTo("id", view.getGeofenceId()).findFirst().deleteFromRealm();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }))
+                .subscribe(new Observer<Void>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        logger.error(Log.getStackTraceString(e));
+                        view.showError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(Void data) {
+                        view.showRemoveGeofenceCompleted();
                     }
                 });
     }

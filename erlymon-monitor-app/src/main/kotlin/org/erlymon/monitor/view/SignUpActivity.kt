@@ -147,6 +147,7 @@ class SignUpActivity : BaseActivity<UserPresenter>(), UserView {
 
                // user.id = 0;
                 user.name = name.text.toString()
+                user.phone = phone.text.toString()
                 user.email = email.text.toString()
                 user.password = password.text.toString()
                 MainPref.email = email.text.toString()

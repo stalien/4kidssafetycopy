@@ -24,6 +24,7 @@ package org.erlymon.core.presenter;
 public interface MainPresenter extends Presenter {
     void onDeleteSessionButtonClick();
     void onDeleteDeviceButtonClick();
+    void onDeleteGeofenceButtonClick();
     void onDeleteUserButtonClick();
     void onSendCommandButtonClick();
     void onGetPostionByCache();

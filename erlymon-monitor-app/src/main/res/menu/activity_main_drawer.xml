@@ -36,6 +36,10 @@
             android:icon="@drawable/ic_devices"
             android:title="@string/settingsDevices" />
         <item
+            android:id="@+id/nav_geofences"
+            android:icon="@drawable/ic_users"
+            android:title="@string/settingsGeofences" />
+        <item
             android:id="@+id/nav_users"
             android:icon="@drawable/ic_users"
             android:title="@string/settingsUsers" />

@@ -82,7 +82,7 @@ public class Device extends RealmObject implements Parcelable {
     @Expose
     private Long dataId;
 
-    @Transient
+//   @Transient
     private Boolean showOnMap;
 
     public Device() {}

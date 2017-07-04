@@ -101,23 +101,25 @@ public interface ApiInterface {
     @POST("geofences")
     Observable<Geofence> createGeofence(@Body Geofence geofence);
 
-    @PUT("devices/{id}")
+    @PUT("geofences/{id}")
     Observable<Geofence> updateGeofence(@Path("id") long id, @Body Geofence geofence);
 
     //http://web.erlymon.org/api/devices/10246?_dc=1452209536829
     //http://web.erlymon.org/api/devices/10246
     @Headers("Content-Type: application/json")
-    @DELETE("devices/{id}")
+    @DELETE("geofences/{id}")
     Observable<Void> deleteGeofence(@Path("id") long id);
 
-    @GET("devices")
+    @GET("geofences")
     Observable<Geofence[]> getGeofences();
 
-    @GET("devices")
+    @GET("geofences")
     Observable<Geofence[]> getGeofences(@Query("all") boolean all);
 
-    @GET("devices")
+    @GET("geofences")
     Observable<Geofence[]> getGeofences(@Query("userId") long userId);
+
+    //
 
     // http://web.erlymon.org/api/positions?_dc=1452345778504&deviceId=10290&from=2016-01-06T21%3A00%3A00.000Z&to=2016-01-09T20%3A45%3A00.000Z&page=1&start=0&limit=25
     @GET("positions")

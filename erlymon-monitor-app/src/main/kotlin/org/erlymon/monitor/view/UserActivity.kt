@@ -29,6 +29,7 @@ import org.erlymon.core.model.data.User
 import org.erlymon.core.presenter.UserPresenter
 import org.erlymon.core.presenter.UserPresenterImpl
 import org.erlymon.core.view.UserView
+import org.erlymon.monitor.MainPref
 import org.erlymon.monitor.R
 import org.slf4j.LoggerFactory
 import java.util.*
@@ -51,32 +52,33 @@ class UserActivity : BaseActivity<UserPresenter>(), UserView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-         setContentView(R.layout.activity_user)
+        setContentView(R.layout.activity_user)
 
-         setSupportActionBar(toolbar)
-         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-         presenter = UserPresenterImpl(this, this)
+        presenter = UserPresenterImpl(this, this)
 
-         val session = intent.getParcelableExtra<User>("session")
-         val user = intent.getParcelableExtra<User>("user")
-         logger.debug("USER ID: " + user?.id + " USER: " + user?.toString())
-         name.setText(user?.name)
-         email.setText(user?.email)
-         password.setText(user?.password)
-         admin.isChecked = if (user?.admin != null) user.admin else false
-         admin.isEnabled = session?.admin as Boolean
-         map.setText(user?.map)
-         distanceUnit.setText(user?.distanceUnit)
-         speedUnit.setText(user?.speedUnit)
-         latitude.setText(if (user?.latitude != null) user.latitude.toString() else 0.0.toString())
-         longitude.setText(if (user?.longitude != null) user.longitude.toString() else 0.0.toString())
-         zoom.setText(if (user?.zoom != null) user.zoom.toString() else 0.toString())
-         twelveHourFormat.isChecked = if (user?.twelveHourFormat != null) user.twelveHourFormat else false
+        val session = intent.getParcelableExtra<User>("session")
+        val user = intent.getParcelableExtra<User>("user")
+        logger.debug("USER ID: " + user?.id + " USER: " + user?.toString())
+        name.setText(user?.name)
+        user_phone.setText(user?.phone)
+        email.setText(user?.email)
+        password.setText(user?.password)
+        admin.isChecked = if (user?.admin != null) user.admin else false
+        admin.isEnabled = session?.admin as Boolean
+//        map.setText(user?.map)
+//        distanceUnit.setText(user?.distanceUnit)
+//        speedUnit.setText(user?.speedUnit)
+//        latitude.setText(if (user?.latitude != null) user.latitude.toString() else 0.0.toString())
+//        longitude.setText(if (user?.longitude != null) user.longitude.toString() else 0.0.toString())
+//        zoom.setText(if (user?.zoom != null) user.zoom.toString() else 0.toString())
+//        twelveHourFormat.isChecked = if (user?.twelveHourFormat != null) user.twelveHourFormat else false
 
-         fab_account_save.setOnClickListener {
-             presenter?.onSaveButtonClick()
-         }
+        fab_account_save.setOnClickListener {
+            presenter?.onSaveButtonClick()
+        }
     }
 
     override fun showData(data: User) {
@@ -101,18 +103,29 @@ class UserActivity : BaseActivity<UserPresenter>(), UserView {
         if (user == null) {
             user = User()
         }
+        user.id = userId
         user.name = name.text.toString()
+        user.phone = user_phone.text.toString()
         user.email = email.text.toString()
         user.password = password.text.toString()
         user.admin = admin.isChecked
-        user.map = map.text.toString()
-        user.language = Locale.getDefault().language
-        user.distanceUnit = distanceUnit.text.toString()
-        user.speedUnit = speedUnit.text.toString()
-        user.latitude = if (latitude.text.isNotEmpty()) latitude.text.toString().toDouble() else 0.0
-        user.longitude = if (longitude.text.isNotEmpty()) longitude.text.toString().toDouble() else 0.0
-        user.zoom = if (zoom.text.isNotEmpty()) zoom.text.toString().toInt() else 0
-        user.twelveHourFormat = twelveHourFormat.isChecked
+
+        user.distanceUnit = null
+        user.map = null
+        user.speedUnit = null
+        user.latitude = null
+        user.longitude = null
+        user.zoom = null
+        user.twelveHourFormat = null
+
+//        user.map = map.text.toString()
+//        user.language = Locale.getDefault().language
+//        user.distanceUnit = distanceUnit.text.toString()
+//        user.speedUnit = speedUnit.text.toString()
+//        user.latitude = if (latitude.text.isNotEmpty()) latitude.text.toString().toDouble() else 0.0
+//        user.longitude = if (longitude.text.isNotEmpty()) longitude.text.toString().toDouble() else 0.0
+//        user.zoom = if (zoom.text.isNotEmpty()) zoom.text.toString().toInt() else 0
+//        user.twelveHourFormat = twelveHourFormat.isChecked
         return user
     }
 

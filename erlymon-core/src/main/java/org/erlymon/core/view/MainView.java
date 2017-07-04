@@ -34,8 +34,10 @@ public interface MainView extends View {
     void showPosition(Position position);
     void showCompleted();
     void showRemoveDeviceCompleted();
+    void showRemoveGeofenceCompleted();
     void showRemoveUserCompleted();
     long getDeviceId();
+    long getGeofenceId();
     long getPositionId();
     long getUserId();
     Command getCommand();
