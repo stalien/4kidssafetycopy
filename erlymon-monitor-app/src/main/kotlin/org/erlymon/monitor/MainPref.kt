@@ -27,6 +27,7 @@ object MainPref : KotprefModel() {
     var email: String by stringPref(default = "")
     var password: String by stringPref(default = "")
     var devices: Int by intPref(default = 0)
+    var userImage: String by stringPref(default = "")
 
     var defaultLatitude: String by stringPref(default = "55.7559067")
     var defaultLongitude: String by stringPref(default = "37.6171875")

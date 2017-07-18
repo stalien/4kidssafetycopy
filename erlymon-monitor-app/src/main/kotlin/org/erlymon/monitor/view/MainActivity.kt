@@ -24,6 +24,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -33,11 +34,20 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.ActionBarDrawerToggle
+import android.util.Base64
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
+import com.android.volley.AuthFailureError
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.VolleyError
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import com.squareup.picasso.Picasso
 import io.realm.RealmResults
+
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_devices.*
@@ -65,6 +75,11 @@ import org.osmdroid.util.GeoPoint
 
 import org.slf4j.LoggerFactory
 import org.erlymon.monitor.view.SettingsActivity
+import org.json.JSONException
+import org.json.JSONObject
+import java.io.ByteArrayOutputStream
+import java.io.FileNotFoundException
+import java.util.*
 
 class MainActivity : BaseActivity<MainPresenter>(),
         MainView,
@@ -80,6 +95,8 @@ class MainActivity : BaseActivity<MainPresenter>(),
 
     private var mAccountNameView: TextView? = null
     private var mAccountEmailView: TextView? = null
+    private var bitmap: Bitmap? = null
+//    val deviceThis = intent.getParcelableExtra<User>("device")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -116,16 +133,25 @@ class MainActivity : BaseActivity<MainPresenter>(),
   //      drawer_layout2.addDrawerListener(toggle_right)
  //       toggle_right.syncState()
 
+
         var to_account = linearLayout.findViewById(R.id.tv_account_name) as TextView
         var to_account2 = linearLayout.findViewById(R.id.tv_account_email) as TextView
-        var pic_loader = linearLayout.findViewById(R.id.tv_app_name) as TextView
+//        var pic_loader = linearLayout.findViewById(R.id.tv_app_name) as TextView
+
 
         var imageView = linearLayout.findViewById(R.id.iw4Kids) as ImageView
 
-        val bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.family)
-        val roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(),bitmap)
-        roundedBitmapDrawable.isCircular = true
-        imageView.setImageDrawable(roundedBitmapDrawable)
+
+
+//        val bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.family)
+//        val roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(),bitmap)
+//        roundedBitmapDrawable.isCircular = true
+//        imageView.setImageDrawable(roundedBitmapDrawable)
+
+        Picasso.with(applicationContext)
+                .load("http://13.94.117.29/upload/" + MainPref.email + "/" + MainPref.userImage + ".jpeg")
+                .transform(CircularTransformation())
+                .into(imageView)
 
         to_account.setOnClickListener {
             val intent = Intent(this@MainActivity, UserActivity::class.java)
@@ -139,9 +165,10 @@ class MainActivity : BaseActivity<MainPresenter>(),
                     .putExtra("user", intent.getParcelableExtra<User>("session"))
             startActivityForResult(intent, REQUEST_CODE_UPDATE_ACCOUNT)}
 
-        pic_loader.setOnClickListener {
+        imageView.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK,
                     android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+               //     .putExtra("user", intent.getParcelableExtra<User>("session"))
             startActivityForResult(intent, REQUEST_CODE_USER_PIC)}
 
 
@@ -362,6 +389,8 @@ class MainActivity : BaseActivity<MainPresenter>(),
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        var imageName = ""
+        val user = intent.getParcelableExtra<User?>("user")
         when (requestCode) {
             REQUEST_CODE_UPDATE_SERVER ->
                 if (resultCode == RESULT_OK) {
@@ -380,10 +409,66 @@ class MainActivity : BaseActivity<MainPresenter>(),
                 }
             REQUEST_CODE_USER_PIC ->
                 if (resultCode == RESULT_OK && data != null) {
-                    val selectedImage = data?.getData()
-                    iw4Kids.setImageURI(selectedImage)
+                   // val selectedImage = data?.getData()
+                    //iw4Kids.setImageURI(selectedImage)
+
+                    val filePatch = data?.getData() as Uri
+                    try{
+                        val inputStream = contentResolver.openInputStream(filePatch)
+                        bitmap = BitmapFactory.decodeStream(inputStream)
+                        val roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(),bitmap)
+                        roundedBitmapDrawable.isCircular = true
+                        iw4Kids.setImageDrawable(roundedBitmapDrawable)
+
+                       } catch (e: FileNotFoundException){
+                        e.printStackTrace()
+                    }
+
+                    ////////
+                    val stringRequest = object : StringRequest(Request.Method.POST, "http://13.94.117.29/upload.php",
+                            Response.Listener<String> { response ->
+                                try {
+                                    val obj = JSONObject(response)
+                                    Toast.makeText(applicationContext, response, Toast.LENGTH_LONG).show()
+                                    MainPref.userImage = imageName
+                                    user?.map = imageName
+
+                                } catch (e: JSONException) {
+                                    e.printStackTrace()
+                                }
+                            },
+                            object : Response.ErrorListener {
+                                override fun onErrorResponse(volleyError: VolleyError) {
+                                    Toast.makeText(applicationContext, "error: " + volleyError.toString(), Toast.LENGTH_LONG).show()
+                                }
+                            }) {
+                        @Throws(AuthFailureError::class)
+                        override fun getParams(): Map<String, String> {
+                            val params = HashMap<String, String>()
+                            val imageData = imageToString(bitmap)
+                            imageName = Math.abs(Random().nextInt()).toString() + "_" + System.currentTimeMillis().toString()
+                     //       val user = data?.getParcelableExtra<User>("user")
+                            params.put("image", imageData)
+                            params.put("foldername", tv_account_email.text.toString())
+                            params.put("imagename", imageName)
+                            return params
+                                 }
+                             }
+                    val requestQueue = Volley.newRequestQueue(applicationContext)
+                    requestQueue.add(stringRequest)
+                    //////
+
                 }
         }
+    }
+
+    fun imageToString(bitmap: Bitmap?):String{
+        var outputStream = ByteArrayOutputStream()
+        bitmap?.compress(Bitmap.CompressFormat.JPEG,90,outputStream)
+        var imageBytes = outputStream.toByteArray()
+
+        var encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT)
+        return encodedImage
     }
 
     override fun onEditDevice(device: Device) {
@@ -427,6 +512,17 @@ class MainActivity : BaseActivity<MainPresenter>(),
         val dialogFragment = SendCommandDialogFragment.newInstance(device.id)
         dialogFragment.show(supportFragmentManager, "send_command_dialog")
 
+    }
+
+    override fun getUser(): User {
+        var user = intent.getParcelableExtra<User>("user")
+        if (user == null) {
+            user = User()
+        }
+
+        user?.map = MainPref.userImage
+
+        return user
     }
 
     override fun onEditUser(user: User) {

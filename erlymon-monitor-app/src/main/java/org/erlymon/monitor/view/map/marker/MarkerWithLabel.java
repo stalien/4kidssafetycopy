@@ -24,6 +24,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
+
 import org.erlymon.core.model.data.Position;
 import org.erlymon.monitor.view.Utils;
 import org.osmdroid.util.TileSystem;
@@ -75,6 +80,8 @@ public class MarkerWithLabel extends Marker {
 
 
     }
+
+
 
     public void setTitle(String title) {
         if (mTitle == null || !mTitle.equals(title)) {

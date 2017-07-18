@@ -85,6 +85,12 @@ public class Device extends RealmObject implements Parcelable {
 //   @Transient
     private Boolean showOnMap;
 
+    private Boolean pedometer;
+
+    private Boolean watchBattery;
+
+    private Boolean notifyOnRemoval;
+
     public Device() {}
 
     public Long getId() {
@@ -102,6 +108,7 @@ public class Device extends RealmObject implements Parcelable {
     public void setName(String name) {
         this.name = name;
     }
+
     public String getCategory() {
         return category;
     }
@@ -109,8 +116,6 @@ public class Device extends RealmObject implements Parcelable {
     public void setCategory(String category) {
         this.category = category;
     }
-
-
 
     public String getUniqueId() {
         return uniqueId;
@@ -156,18 +161,25 @@ public class Device extends RealmObject implements Parcelable {
         return dataId;
     }
 
-    public void setShowOnMap(Boolean showOnMap) {
-        this.showOnMap = showOnMap;
-    }
-
-    public Boolean getShowOnMap() {
-        return showOnMap;
-    }
-
     public void setDataId(Long dataId) {
         this.dataId = dataId;
     }
 
+    public void setShowOnMap(Boolean showOnMap) { this.showOnMap = showOnMap; }
+
+    public Boolean getShowOnMap() { return showOnMap; }
+
+    public void setPedometer(Boolean pedometer) { this.pedometer = pedometer; }
+
+    public Boolean getPedometer() { return pedometer; }
+
+    public void setWatchBattery(Boolean watchBattery) { this.watchBattery = watchBattery; }
+
+    public Boolean getWatchBattery() { return watchBattery; }
+
+    public void setNotifyOnRemoval(Boolean notifyOnRemoval) { this.notifyOnRemoval = notifyOnRemoval; }
+
+    public Boolean getNotifyOnRemoval() { return notifyOnRemoval; }
 
     protected Device(Parcel in) {
         id = in.readByte() == 0x00 ? null : in.readLong();
@@ -179,6 +191,14 @@ public class Device extends RealmObject implements Parcelable {
         lastUpdate = tmpLastUpdate != -1 ? new Date(tmpLastUpdate) : null;
         positionId = in.readByte() == 0x00 ? null : in.readLong();
         dataId = in.readByte() == 0x00 ? null : in.readLong();
+        byte showOnMapVal = in.readByte();
+        showOnMap = showOnMapVal == 0x02 ? null : showOnMapVal != 0x00;
+        byte pedometerVal = in.readByte();
+        pedometer = pedometerVal == 0x02 ? null : pedometerVal != 0x00;
+        byte watchBatteryVal = in.readByte();
+        watchBattery = watchBatteryVal == 0x02 ? null : watchBatteryVal != 0x00;
+        byte notifyOnRemovalVal = in.readByte();
+        notifyOnRemoval = notifyOnRemovalVal == 0x02 ? null : notifyOnRemovalVal != 0x00;
     }
 
     @Override
@@ -210,6 +230,26 @@ public class Device extends RealmObject implements Parcelable {
         } else {
             dest.writeByte((byte) (0x01));
             dest.writeLong(dataId);
+        }
+        if (showOnMap == null) {
+            dest.writeByte((byte) (0x02));
+        } else {
+            dest.writeByte((byte) (showOnMap ? 0x01 : 0x00));
+        }
+        if (pedometer == null) {
+            dest.writeByte((byte) (0x02));
+        } else {
+            dest.writeByte((byte) (pedometer ? 0x01 : 0x00));
+        }
+        if (watchBattery == null) {
+            dest.writeByte((byte) (0x02));
+        } else {
+            dest.writeByte((byte) (watchBattery ? 0x01 : 0x00));
+        }
+        if (notifyOnRemoval == null) {
+            dest.writeByte((byte) (0x02));
+        } else {
+            dest.writeByte((byte) (notifyOnRemoval ? 0x01 : 0x00));
         }
     }
 

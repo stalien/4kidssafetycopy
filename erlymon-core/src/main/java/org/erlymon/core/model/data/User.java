@@ -371,6 +371,7 @@ public class User extends RealmObject implements Parcelable {
     protected User(Parcel in) {
         id = in.readLong();
         name = in.readString();
+        phone = in.readString();
         email = in.readString();
         byte readonlyVal = in.readByte();
         readonly = readonlyVal == 0x02 ? null : readonlyVal != 0x00;
@@ -397,6 +398,7 @@ public class User extends RealmObject implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(id);
         dest.writeString(name);
+        dest.writeString(phone);
         dest.writeString(email);
         if (readonly == null) {
             dest.writeByte((byte) (0x02));

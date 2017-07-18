@@ -249,6 +249,30 @@ class MapFragment : BaseFragment<MapPresenter>(),
                 })*/
     }
 
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        makeToast(mapview, "restored")
+
+        mapview.controller.animateTo(GeoPoint(MainPref.defaultLatitude.toDouble(), MainPref.defaultLongitude.toDouble()))
+
+
+
+
+
+        mRadiusMarkerClusterer = DevicesMarkerClusterer(context)
+        mRadiusMarkerClusterer?.setIcon(BitmapFactory.decodeResource(resources, R.drawable.marker_cluster))
+
+        mapview.overlays.add(mRadiusMarkerClusterer)
+
+        mLocationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(activity), mapview)
+        mLocationOverlay?.disableFollowLocation()
+        mLocationOverlay?.disableMyLocation()
+        mapview.getOverlays().add(mLocationOverlay)
+
+        presenter?.onOpenWebSocket()
+
+    }
+
     override fun onResume() {
         super.onResume()
 
@@ -367,6 +391,7 @@ class MapFragment : BaseFragment<MapPresenter>(),
     override fun showEvent(event: Event) {
         event.devices?.forEach { device ->
             event.positions?.forEach { position ->
+//                if (device.id == position.deviceId && device.showOnMap == true) {
                 if (device.id == position.deviceId) {
                     updateUnitMarker(device, position)
                 }

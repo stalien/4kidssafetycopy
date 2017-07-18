@@ -93,12 +93,16 @@ class DeviceThisActivity : BaseActivity<DevicePresenter>(),
         identifierIDEdit.setText(device?.uniqueId)
         simEdit.setText(device?.phone)
         device_status_edit.setText(device?.status)
+//        showOnMapSwitch.setChecked(device.showOnMap)
 
         if (device.showOnMap != null) {
             showOnMapSwitch.setChecked(device.showOnMap)
-        } else{
-
         }
+
+        if (device.pedometer != null) {
+            pedometrSwitch.setChecked(device.pedometer)
+        }
+
 
         fab_device_save.setOnClickListener {
             presenter?.onSaveButtonClick()
@@ -123,6 +127,15 @@ class DeviceThisActivity : BaseActivity<DevicePresenter>(),
             }
             else {
                 device.showOnMap = false
+            }
+        }
+
+        pedometrSwitch.setOnClickListener {
+            if (pedometrSwitch.isChecked){
+                device.pedometer = true
+            }
+            else {
+                device.pedometer = false
             }
         }
 
@@ -163,6 +176,9 @@ class DeviceThisActivity : BaseActivity<DevicePresenter>(),
         device.phone = simEdit.text.toString()
         device.lastUpdate = null
         device.showOnMap = showOnMapSwitch.isChecked
+        device.pedometer = pedometrSwitch.isChecked
+        device.watchBattery = checkBatterySwitch.isChecked
+        device.notifyOnRemoval = onHandSwitch.isChecked
         return device
     }
 

@@ -23,6 +23,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_user.*
 import kotlinx.android.synthetic.main.content_user.*
 import org.erlymon.core.model.data.User
@@ -54,10 +56,17 @@ class UserActivity : BaseActivity<UserPresenter>(), UserView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
 
+        var imageView = ll_user_logo.findViewById(R.id.iv_user_logo) as ImageView
+
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         presenter = UserPresenterImpl(this, this)
+
+        Picasso.with(applicationContext)
+                .load("http://13.94.117.29/upload/" + MainPref.email + "/" + MainPref.userImage + ".jpeg")
+                .transform(CircularTransformation())
+                .into(imageView)
 
         val session = intent.getParcelableExtra<User>("session")
         val user = intent.getParcelableExtra<User>("user")
@@ -68,6 +77,8 @@ class UserActivity : BaseActivity<UserPresenter>(), UserView {
         password.setText(user?.password)
         admin.isChecked = if (user?.admin != null) user.admin else false
         admin.isEnabled = session?.admin as Boolean
+        tv_user_name.setText(user?.name)
+        tv_user_email.setText(user?.email)
 //        map.setText(user?.map)
 //        distanceUnit.setText(user?.distanceUnit)
 //        speedUnit.setText(user?.speedUnit)
@@ -107,8 +118,8 @@ class UserActivity : BaseActivity<UserPresenter>(), UserView {
         user.name = name.text.toString()
         user.phone = user_phone.text.toString()
         user.email = email.text.toString()
-        user.password = password.text.toString()
-        user.admin = admin.isChecked
+      //  user.password = password.text.toString()
+      //  user.admin = admin.isChecked
 
         user.distanceUnit = null
         user.map = null
@@ -117,6 +128,7 @@ class UserActivity : BaseActivity<UserPresenter>(), UserView {
         user.longitude = null
         user.zoom = null
         user.twelveHourFormat = null
+
 
 //        user.map = map.text.toString()
 //        user.language = Locale.getDefault().language

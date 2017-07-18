@@ -40,5 +40,6 @@ public interface MainView extends View {
     long getGeofenceId();
     long getPositionId();
     long getUserId();
+    User getUser();
     Command getCommand();
 }
