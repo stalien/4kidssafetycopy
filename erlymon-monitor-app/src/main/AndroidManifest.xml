@@ -18,8 +18,8 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.erlymon.monitor"
-    android:versionCode="18"
-    android:versionName="0.18" >
+    android:versionCode="21"
+    android:versionName="0.21b" >
     <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -148,10 +148,13 @@
         android:name=".view.SharedPreferences"
         android:label="@string/title_activity_settings"
         android:parentActivityName=".view.AboutActivity"/>
-    <activity android:name=".view.GeofenceActivity"
+    <activity
+        android:name=".view.GeofenceActivity"
             android:label="@string/userTitle"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+    <activity
+        android:name="com.soundcloud.android.crop.CropImageActivity" />
 
 </application>
 

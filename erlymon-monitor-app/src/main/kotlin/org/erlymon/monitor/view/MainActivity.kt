@@ -66,6 +66,7 @@ import org.erlymon.monitor.view.DevicesFragment
 import org.erlymon.monitor.MainPref
 import org.erlymon.monitor.Manifest
 import org.erlymon.monitor.R
+import org.erlymon.monitor.view.ImagePickerWithCrop.REQUEST_PICK
 import org.erlymon.monitor.view.adapter.CustomFragmentPagerAdapter
 import org.erlymon.monitor.view.adapter.DevicesAdapter
 import org.erlymon.monitor.view.adapter.UsersAdapter
@@ -92,11 +93,18 @@ class MainActivity : BaseActivity<MainPresenter>(),
         SendCommandDialogFragment.SendCommandDialogListener {
 
     private var pagerAdapter: CustomFragmentPagerAdapter? = null
+    private val PICK_IMAGE_ID = 234 // the number doesn't matter
 
     private var mAccountNameView: TextView? = null
     private var mAccountEmailView: TextView? = null
     private var bitmap: Bitmap? = null
 //    val deviceThis = intent.getParcelableExtra<User>("device")
+
+    public fun pickImage() {
+        val chooseImageIntent = ImagePicker.getPickImageIntent(this)
+        startActivityForResult(chooseImageIntent, PICK_IMAGE_ID)
+        //ImagePickerWithCrop.pickImage(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -149,7 +157,7 @@ class MainActivity : BaseActivity<MainPresenter>(),
 //        imageView.setImageDrawable(roundedBitmapDrawable)
 
         Picasso.with(applicationContext)
-                .load("http://13.94.117.29/upload/" + MainPref.email + "/" + MainPref.userImage + ".jpeg")
+                .load("http://13.94.117.29/upload/" + MainPref.email + "/" + MainPref.userImage)
                 .transform(CircularTransformation())
                 .into(imageView)
 
@@ -158,19 +166,27 @@ class MainActivity : BaseActivity<MainPresenter>(),
                 .putExtra("session", intent.getParcelableExtra<User>("session"))
                 .putExtra("user", intent.getParcelableExtra<User>("session"))
             startActivityForResult(intent, REQUEST_CODE_UPDATE_ACCOUNT)}
+        drawer_layout.closeDrawer(GravityCompat.START)
 
         to_account2.setOnClickListener {
             val intent = Intent(this@MainActivity, UserActivity::class.java)
                     .putExtra("session", intent.getParcelableExtra<User>("session"))
                     .putExtra("user", intent.getParcelableExtra<User>("session"))
             startActivityForResult(intent, REQUEST_CODE_UPDATE_ACCOUNT)}
+        drawer_layout.closeDrawer(GravityCompat.START)
 
         imageView.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK,
-                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-               //     .putExtra("user", intent.getParcelableExtra<User>("session"))
-            startActivityForResult(intent, REQUEST_CODE_USER_PIC)}
-
+            val intent = Intent(this@MainActivity, UserActivity::class.java)
+                    .putExtra("session", intent.getParcelableExtra<User>("session"))
+                    .putExtra("user", intent.getParcelableExtra<User>("session"))
+            startActivityForResult(intent, REQUEST_CODE_UPDATE_ACCOUNT)
+            drawer_layout.closeDrawer(GravityCompat.START)
+            //pickImage()
+            //    val intent = Intent(Intent.ACTION_PICK,
+            //          android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            //     .putExtra("user", intent.getParcelableExtra<User>("session"))
+            //   startActivityForResult(intent, REQUEST_CODE_USER_PIC)}
+        }
 
         nav_view.setNavigationItemSelectedListener(this)
 
@@ -245,6 +261,19 @@ class MainActivity : BaseActivity<MainPresenter>(),
 
 
 
+    }
+
+
+    override fun onRestart() {
+        super.onRestart()
+
+        var imageView = findViewById(R.id.iw4Kids) as ImageView
+
+        Picasso.with(applicationContext)
+                .load("http://13.94.117.29/upload/" + MainPref.email + "/" + MainPref.userImage)
+                .placeholder(R.drawable.userphoto_default)
+                .transform(CircularTransformation())
+                .into(imageView)
     }
 
     override fun onBackPressed() {
@@ -407,8 +436,8 @@ class MainActivity : BaseActivity<MainPresenter>(),
             REQUEST_CODE_CREATE_OR_UPDATE_DEVICE ->
                 if (resultCode == RESULT_OK) {
                 }
-            REQUEST_CODE_USER_PIC ->
-                if (resultCode == RESULT_OK && data != null) {
+            REQUEST_PICK ->
+               /* if (resultCode == RESULT_OK && data != null) {
                    // val selectedImage = data?.getData()
                     //iw4Kids.setImageURI(selectedImage)
 
@@ -416,6 +445,7 @@ class MainActivity : BaseActivity<MainPresenter>(),
                     try{
                         val inputStream = contentResolver.openInputStream(filePatch)
                         bitmap = BitmapFactory.decodeStream(inputStream)
+                     //   val bitmapsimplesize = Bitmap.createScaledBitmap(bitmap, 480, 480, true)
                         val roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(),bitmap)
                         roundedBitmapDrawable.isCircular = true
                         iw4Kids.setImageDrawable(roundedBitmapDrawable)
@@ -446,7 +476,7 @@ class MainActivity : BaseActivity<MainPresenter>(),
                         override fun getParams(): Map<String, String> {
                             val params = HashMap<String, String>()
                             val imageData = imageToString(bitmap)
-                            imageName = Math.abs(Random().nextInt()).toString() + "_" + System.currentTimeMillis().toString()
+                            imageName = Math.abs(Random().nextInt()).toString() + "_" + System.currentTimeMillis().toString() + ".jpeg"
                      //       val user = data?.getParcelableExtra<User>("user")
                             params.put("image", imageData)
                             params.put("foldername", tv_account_email.text.toString())
@@ -458,13 +488,123 @@ class MainActivity : BaseActivity<MainPresenter>(),
                     requestQueue.add(stringRequest)
                     //////
 
+                } */
+
+                if (resultCode == RESULT_OK && requestCode == ImagePickerWithCrop.REQUEST_PICK) {
+                    ImagePickerWithCrop.beginCrop(this, resultCode, data);
+                    Toast.makeText(applicationContext, "1", Toast.LENGTH_LONG).show()
+                } else if (requestCode == ImagePickerWithCrop.REQUEST_CROP) {
+                    Toast.makeText(applicationContext, "2", Toast.LENGTH_LONG).show()
+                    bitmap = ImagePickerWithCrop.getImageCropped(this, resultCode, data,
+                    ImagePickerWithCrop.ResizeType.FIXED_SIZE, 100);
+
+                    val roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(),bitmap)
+                    roundedBitmapDrawable.isCircular = true
+                    iw4Kids.setImageDrawable(roundedBitmapDrawable)
+
+                    ///////
+                    val stringRequest = object : StringRequest(Request.Method.POST, "http://13.94.117.29/upload.php",
+                            Response.Listener<String> { response ->
+                                try {
+                                    val obj = JSONObject(response)
+                                    Toast.makeText(applicationContext, response, Toast.LENGTH_LONG).show()
+                                    MainPref.userImage = imageName
+                                    user?.map = imageName
+
+                                } catch (e: JSONException) {
+                                    e.printStackTrace()
+                                }
+                            },
+                            object : Response.ErrorListener {
+                                override fun onErrorResponse(volleyError: VolleyError) {
+                                    Toast.makeText(applicationContext, "error: " + volleyError.toString(), Toast.LENGTH_LONG).show()
+                                }
+                            }) {
+                        @Throws(AuthFailureError::class)
+                        override fun getParams(): Map<String, String> {
+                            val params = HashMap<String, String>()
+                            val imageData = imageToString(bitmap)
+                            imageName = Math.abs(Random().nextInt()).toString() + "_" + System.currentTimeMillis().toString() + ".jpeg"
+                            //       val user = data?.getParcelableExtra<User>("user")
+                            params.put("image", imageData)
+                            params.put("foldername", tv_account_email.text.toString())
+                            params.put("imagename", imageName)
+                            return params
+                        }
+                    }
+                    val requestQueue = Volley.newRequestQueue(applicationContext)
+                    requestQueue.add(stringRequest)
+                    /////////
+
+                //    Log.d(TAG, "bitmap picked: " + bitmap);
+                } else {
+                    super.onActivityResult(requestCode, resultCode, data)
+                    Toast.makeText(applicationContext, "3", Toast.LENGTH_LONG).show()
                 }
+            PICK_IMAGE_ID ->
+                if (resultCode == RESULT_OK) {
+                    bitmap = ImagePicker.getImageFromResult(this, resultCode, data);
+                    Toast.makeText(applicationContext, "4", Toast.LENGTH_LONG).show()
+
+                    val roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(),bitmap)
+                    roundedBitmapDrawable.isCircular = true
+                    iw4Kids.setImageDrawable(roundedBitmapDrawable)
+
+                    ///////
+                    val stringRequest = object : StringRequest(Request.Method.POST, "http://13.94.117.29/upload.php",
+                            Response.Listener<String> { response ->
+                                try {
+                                    val obj = JSONObject(response)
+                                    Toast.makeText(applicationContext, response, Toast.LENGTH_LONG).show()
+                                    MainPref.userImage = imageName
+                                    user?.map = imageName
+
+                                } catch (e: JSONException) {
+                                    e.printStackTrace()
+                                }
+                            },
+                            object : Response.ErrorListener {
+                                override fun onErrorResponse(volleyError: VolleyError) {
+                                    Toast.makeText(applicationContext, "error: " + volleyError.toString(), Toast.LENGTH_LONG).show()
+                                }
+                            }) {
+                        @Throws(AuthFailureError::class)
+                        override fun getParams(): Map<String, String> {
+                            val params = HashMap<String, String>()
+                            val imageData = imageToString(bitmap)
+                            imageName = Math.abs(Random().nextInt()).toString() + "_" + System.currentTimeMillis().toString() + ".jpeg"
+                            //       val user = data?.getParcelableExtra<User>("user")
+                            params.put("image", imageData)
+                            params.put("foldername", tv_account_email.text.toString())
+                            params.put("imagename", imageName)
+                            return params
+                        }
+                    }
+                    val requestQueue = Volley.newRequestQueue(applicationContext)
+                    requestQueue.add(stringRequest)
+                    /////////
+
+                }
+
+
+
         }
     }
 
     fun imageToString(bitmap: Bitmap?):String{
         var outputStream = ByteArrayOutputStream()
-        bitmap?.compress(Bitmap.CompressFormat.JPEG,90,outputStream)
+        var bitmapsimplesize = bitmap
+        if(bitmap!!.width >= bitmap!!.height && bitmap!!.width >= 1080) {
+            val bitmapscale = Math.round((bitmap!!.width / 1080).toFloat())
+            bitmapsimplesize = Bitmap.createScaledBitmap(bitmap, bitmap!!.width / bitmapscale, bitmap!!.height / bitmapscale, false)
+        } else if(bitmap!!.width < bitmap!!.height && bitmap!!.height >= 1080){
+            val bitmapscale = Math.round((bitmap!!.height / 1080).toFloat())
+            bitmapsimplesize = Bitmap.createScaledBitmap(bitmap, bitmap!!.width / bitmapscale, bitmap!!.height / bitmapscale, false)
+        } else {
+            val bitmapscale = 1
+            bitmapsimplesize = Bitmap.createScaledBitmap(bitmap, bitmap!!.width / bitmapscale, bitmap!!.height / bitmapscale, false)
+        }
+        bitmapsimplesize.compress(Bitmap.CompressFormat.JPEG,90,outputStream)
         var imageBytes = outputStream.toByteArray()
 
         var encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT)
@@ -560,7 +700,10 @@ class MainActivity : BaseActivity<MainPresenter>(),
     }
 
     override fun onEditGeofence(geofence: Geofence) {
-         //To change body of created functions use File | Settings | File Templates.
+        val intent = Intent(this@MainActivity, GeofenceActivity::class.java)
+                .putExtra("session", intent.getParcelableExtra<User>("session"))
+                .putExtra("geofence", geofence)
+        startActivity(intent)
     }
 
     override fun onPositiveClick(dialog: DialogInterface, which: Int) {

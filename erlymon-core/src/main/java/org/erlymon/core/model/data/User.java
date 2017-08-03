@@ -97,6 +97,11 @@ public class User extends RealmObject implements Parcelable {
     @Expose
     private Integer zoom;
 
+    @Since(3.1)
+    @SerializedName("deviceLimit")
+    @Expose
+    private Integer deviceLimit;
+
     @Since(3.4)
     @SerializedName("readonly")
     @Expose
@@ -335,6 +340,24 @@ public class User extends RealmObject implements Parcelable {
     /**
      *
      * @return
+     * The deviceLimit
+     */
+    public Integer getDeviceLimit() {
+        return deviceLimit;
+    }
+
+    /**
+     *
+     * @param deviceLimit
+     * The deviceLimit
+     */
+    public void setDeviceLimit(Integer deviceLimit) {
+        this.deviceLimit = deviceLimit;
+    }
+
+    /**
+     *
+     * @return
      * The twelveHourFormat
      */
     public Boolean getTwelveHourFormat() {
@@ -384,6 +407,7 @@ public class User extends RealmObject implements Parcelable {
         latitude = in.readByte() == 0x00 ? null : in.readDouble();
         longitude = in.readByte() == 0x00 ? null : in.readDouble();
         zoom = in.readByte() == 0x00 ? null : in.readInt();
+        deviceLimit = in.readByte() == 0x00 ? null : in.readInt();
         byte twelveHourFormatVal = in.readByte();
         twelveHourFormat = twelveHourFormatVal == 0x02 ? null : twelveHourFormatVal != 0x00;
         password = in.readString();
@@ -426,11 +450,17 @@ public class User extends RealmObject implements Parcelable {
             dest.writeByte((byte) (0x01));
             dest.writeDouble(longitude);
         }
-        if (zoom == null) {
+        if (deviceLimit == null) {
             dest.writeByte((byte) (0x00));
         } else {
             dest.writeByte((byte) (0x01));
-            dest.writeInt(zoom);
+            dest.writeInt(deviceLimit);
+        }
+        if (deviceLimit == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeInt(deviceLimit);
         }
         if (twelveHourFormat == null) {
             dest.writeByte((byte) (0x02));

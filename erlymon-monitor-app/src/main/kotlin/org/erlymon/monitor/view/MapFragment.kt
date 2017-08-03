@@ -33,8 +33,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import com.jakewharton.rxbinding.view.RxView
+import com.squareup.picasso.Picasso
 import com.tbruyelle.rxpermissions.RxPermissions
 import io.realm.Realm
 import io.realm.RealmChangeListener
@@ -251,7 +253,7 @@ class MapFragment : BaseFragment<MapPresenter>(),
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
-        makeToast(mapview, "restored")
+       // makeToast(mapview, "restored")
 
         mapview.controller.animateTo(GeoPoint(MainPref.defaultLatitude.toDouble(), MainPref.defaultLongitude.toDouble()))
 
@@ -271,6 +273,25 @@ class MapFragment : BaseFragment<MapPresenter>(),
 
         presenter?.onOpenWebSocket()
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        makeToast(mapview, "start")
+
+        mapview.controller.animateTo(GeoPoint(MainPref.defaultLatitude.toDouble(), MainPref.defaultLongitude.toDouble()))
+
+        mRadiusMarkerClusterer = DevicesMarkerClusterer(context)
+        mRadiusMarkerClusterer?.setIcon(BitmapFactory.decodeResource(resources, R.drawable.marker_cluster))
+
+        mapview.overlays.add(mRadiusMarkerClusterer)
+
+        mLocationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(activity), mapview)
+        mLocationOverlay?.disableFollowLocation()
+        mLocationOverlay?.disableMyLocation()
+        mapview.getOverlays().add(mLocationOverlay)
+
+        presenter?.onOpenWebSocket()
     }
 
     override fun onResume() {
@@ -303,8 +324,8 @@ class MapFragment : BaseFragment<MapPresenter>(),
         mLocationOverlay?.disableMyLocation()
 
         mapview.overlays.remove(mLocationOverlay)
-        mapview.overlays.remove(mRadiusMarkerClusterer)
-        markers.clear()
+        // mapview.overlays.remove(mRadiusMarkerClusterer)
+        // markers.clear()
         super.onPause()
     }
 
@@ -387,6 +408,8 @@ class MapFragment : BaseFragment<MapPresenter>(),
             logger.warn(Log.getStackTraceString(e))
         }
     }
+
+
 
     override fun showEvent(event: Event) {
         event.devices?.forEach { device ->

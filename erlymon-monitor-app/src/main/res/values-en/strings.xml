@@ -558,4 +558,8 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+    <string name="pick_image_intent_text">Choose photo</string>
+    <string name="name_geofence">Name</string>
+    <string name="description_geofence">Description</string>
+    <string name="area_geofence">area</string>
 </resources>

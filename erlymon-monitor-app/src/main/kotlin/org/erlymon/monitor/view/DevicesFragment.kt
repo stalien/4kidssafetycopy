@@ -40,7 +40,10 @@ import org.erlymon.core.view.DevicesListView
 import org.erlymon.monitor.R
 import org.erlymon.monitor.view.adapter.DevicesAdapter
 import android.support.v4.content.ContextCompat.startActivity
+import android.widget.ImageView
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.list_device.view.*
+import org.erlymon.monitor.MainPref
 
 
 /**
@@ -81,6 +84,14 @@ class DevicesFragment : BaseFragment<DevicesListPresenter>(), DevicesListView {
 
         // Inflate the layout for this fragment
         return inflater!!.inflate(R.layout.fragment_devices, container, false)
+
+        var view = inflater!!.inflate(R.layout.fragment_devices, container, false)
+        var img = view.findViewById(R.id.device_picture) as ImageView
+        var c = getActivity().getApplicationContext()
+        Picasso.with(c)
+                .load("http://13.94.117.29/upload/" + MainPref.email + "/" + MainPref.userImage)
+                .transform(CircularTransformation())
+                .into(img);
 
 
     }

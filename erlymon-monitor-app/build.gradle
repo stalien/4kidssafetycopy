@@ -70,7 +70,7 @@ android {
         applicationId "ru.rusmobilecontent.forkidssafety"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 18
+        versionCode 21
         //versionCode getVersionCode()
         versionName getVersionName()
         //archivesBaseName = "erlymon-monitor-$versionName"
@@ -168,7 +168,9 @@ dependencies {
 
     compile 'com.android.volley:volley:1.0.0'
 
+    //crop
 
+    compile 'com.soundcloud.android:android-crop:1.0.1@aar'
 
 
 }

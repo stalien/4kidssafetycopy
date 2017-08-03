@@ -206,8 +206,13 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
    //     if (requestCode === REQUEST_CODE && resultCode === Activity.RESULT_OK) {
             if (data != null) {
                 val barcode = data.getParcelableExtra <Barcode>("barcode")
+                val myChar = barcode.displayValue.toCharArray()
+                var barcodestring = "123"
+                barcodestring = myChar[1].toString() + myChar[2].toString() + myChar[4].toString() + myChar[5].toString() + myChar[7].toString() + myChar[8].toString() + myChar[9].toString() + myChar[11].toString() + myChar[12].toString() + myChar[13].toString()
+
+
    //             identifierID.post(Runnable { identifierID.setText(barcode.displayValue) })
-        identifierID.setText(barcode.displayValue)
+        identifierID.setText(barcodestring)
 
             }
      //   }
@@ -241,7 +246,7 @@ class DeviceActivity : BaseActivity<DevicePresenter>(), DeviceView {
         device.category = "arrow"
         device.status = "unknown"
         device.phone = "+7" + sim.text.toString()
-        device.showOnMap = true
+//        device.showOnMap = true
         return device
     }
 

@@ -48,10 +48,14 @@ public class GeofencesAdapter extends RealmBaseAdapter<Geofence> implements List
      * Реализация класса ViewHolder, хранящего ссылки на виджеты.
      */
     class ViewHolder {
+        private GridLayout gridLayout;
+        private ImageView geofencePicture;
         private TextView name;
         private TextView description;
 
         public ViewHolder(View itemView) {
+            gridLayout = (GridLayout) itemView.findViewById(R.id.gl_geofences);
+            geofencePicture = (ImageView) itemView.findViewById(R.id.iv_geofences);
             name = (TextView) itemView.findViewById(R.id.name_geofence);
             description = (TextView) itemView.findViewById(R.id.description_geofence);
         }

@@ -19,24 +19,44 @@
 package org.erlymon.monitor.view
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory
+import android.util.Base64
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import com.android.volley.AuthFailureError
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.VolleyError
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_user.*
 import kotlinx.android.synthetic.main.content_user.*
+import kotlinx.android.synthetic.main.nav_header_main.*
+import org.erlymon.core.model.data.Server
 import org.erlymon.core.model.data.User
 import org.erlymon.core.presenter.UserPresenter
 import org.erlymon.core.presenter.UserPresenterImpl
 import org.erlymon.core.view.UserView
 import org.erlymon.monitor.MainPref
 import org.erlymon.monitor.R
+import org.json.JSONException
+import org.json.JSONObject
 import org.slf4j.LoggerFactory
+import java.io.ByteArrayOutputStream
 import java.util.*
 
 class UserActivity : BaseActivity<UserPresenter>(), UserView {
+
+    private val PICK_IMAGE_ID = 234 // the number doesn't matter
+    private var bitmap: Bitmap? = null
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -52,21 +72,40 @@ class UserActivity : BaseActivity<UserPresenter>(), UserView {
         return super.onOptionsItemSelected(item)
     }
 
+
+//    val deviceThis = intent.getParcelableExtra<User>("device")
+
+    public fun pickImage() {
+        val chooseImageIntent = ImagePicker.getPickImageIntent(this)
+        startActivityForResult(chooseImageIntent, PICK_IMAGE_ID)
+        //ImagePickerWithCrop.pickImage(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
 
-        var imageView = ll_user_logo.findViewById(R.id.iv_user_logo) as ImageView
+        var imageView = findViewById(R.id.iv_user_logo) as ImageView
 
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         presenter = UserPresenterImpl(this, this)
 
+   /*     var mCustomLayout = findViewById(R.id.user_custom_layout) as CustomLayout
         Picasso.with(applicationContext)
                 .load("http://13.94.117.29/upload/" + MainPref.email + "/" + MainPref.userImage + ".jpeg")
-                .transform(CircularTransformation())
+                .into(mCustomLayout) */
+
+        Picasso.with(applicationContext)
+                .load("http://13.94.117.29/upload/" + MainPref.email + "/" + MainPref.userImage)
+                .placeholder(R.drawable.userphoto_default)
+          //      .transform(CircularTransformation())
                 .into(imageView)
+
+        imageView.setOnClickListener {
+            pickImage()
+        }
 
         val session = intent.getParcelableExtra<User>("session")
         val user = intent.getParcelableExtra<User>("user")
@@ -79,6 +118,7 @@ class UserActivity : BaseActivity<UserPresenter>(), UserView {
         admin.isEnabled = session?.admin as Boolean
         tv_user_name.setText(user?.name)
         tv_user_email.setText(user?.email)
+        deviceLimit.setText(if (user?.deviceLimit != null) user.deviceLimit.toString() else 0.toString())
 //        map.setText(user?.map)
 //        distanceUnit.setText(user?.distanceUnit)
 //        speedUnit.setText(user?.speedUnit)
@@ -122,12 +162,13 @@ class UserActivity : BaseActivity<UserPresenter>(), UserView {
       //  user.admin = admin.isChecked
 
         user.distanceUnit = null
-        user.map = null
+        user.map = MainPref.userImage
         user.speedUnit = null
         user.latitude = null
         user.longitude = null
         user.zoom = null
         user.twelveHourFormat = null
+        user.deviceLimit = if (deviceLimit.text.isNotEmpty()) deviceLimit.text.toString().toInt() else 0
 
 
 //        user.map = map.text.toString()
@@ -139,6 +180,84 @@ class UserActivity : BaseActivity<UserPresenter>(), UserView {
 //        user.zoom = if (zoom.text.isNotEmpty()) zoom.text.toString().toInt() else 0
 //        user.twelveHourFormat = twelveHourFormat.isChecked
         return user
+    }
+
+
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        var imageName = ""
+     //   val user = intent.getParcelableExtra<User?>("user")
+        when (requestCode) {
+
+            PICK_IMAGE_ID ->
+                if (resultCode == RESULT_OK) {
+                    bitmap = ImagePicker.getImageFromResult(this, resultCode, data);
+                    Toast.makeText(applicationContext, "4", Toast.LENGTH_LONG).show()
+
+                    val roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(),bitmap)
+                    roundedBitmapDrawable.isCircular = true
+                  //  iv_user_logo.setImageDrawable(roundedBitmapDrawable)
+                    iv_user_logo.setImageBitmap(bitmap)
+
+                    ///////
+                    val stringRequest = object : StringRequest(Request.Method.POST, "http://13.94.117.29/upload.php",
+                            Response.Listener<String> { response ->
+                                try {
+                                    val obj = JSONObject(response)
+                                    Toast.makeText(applicationContext, response, Toast.LENGTH_LONG).show()
+                                    MainPref.userImage = imageName
+                                    user?.map = imageName
+
+                                } catch (e: JSONException) {
+                                    e.printStackTrace()
+                                }
+                            },
+                            object : Response.ErrorListener {
+                                override fun onErrorResponse(volleyError: VolleyError) {
+                                    Toast.makeText(applicationContext, "error: " + volleyError.toString(), Toast.LENGTH_LONG).show()
+                                }
+                            }) {
+                        @Throws(AuthFailureError::class)
+                        override fun getParams(): Map<String, String> {
+                            val params = HashMap<String, String>()
+                            val imageData = imageToString(bitmap)
+                            imageName = Math.abs(Random().nextInt()).toString() + "_" + System.currentTimeMillis().toString() + ".jpeg"
+                            //       val user = data?.getParcelableExtra<User>("user")
+                            params.put("image", imageData)
+                            params.put("foldername", user.email.toString())
+                            params.put("imagename", imageName)
+                            return params
+                        }
+                    }
+                    val requestQueue = Volley.newRequestQueue(applicationContext)
+                    requestQueue.add(stringRequest)
+                    /////////
+
+                }
+
+        
+
+        }
+    }
+
+    fun imageToString(bitmap: Bitmap?):String{
+        var outputStream = ByteArrayOutputStream()
+        var bitmapsimplesize = bitmap
+        if(bitmap!!.width >= bitmap!!.height && bitmap!!.width >= 1080) {
+            val bitmapscale = Math.round((bitmap!!.width / 1080).toFloat())
+            bitmapsimplesize = Bitmap.createScaledBitmap(bitmap, bitmap!!.width / bitmapscale, bitmap!!.height / bitmapscale, false)
+        } else if(bitmap!!.width < bitmap!!.height && bitmap!!.height >= 1080){
+            val bitmapscale = Math.round((bitmap!!.height / 1080).toFloat())
+            bitmapsimplesize = Bitmap.createScaledBitmap(bitmap, bitmap!!.width / bitmapscale, bitmap!!.height / bitmapscale, false)
+        } else {
+            val bitmapscale = 1
+            bitmapsimplesize = Bitmap.createScaledBitmap(bitmap, bitmap!!.width / bitmapscale, bitmap!!.height / bitmapscale, false)
+        }
+        bitmapsimplesize.compress(Bitmap.CompressFormat.JPEG,90,outputStream)
+        var imageBytes = outputStream.toByteArray()
+
+        var encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT)
+        return encodedImage
     }
 
     companion object {

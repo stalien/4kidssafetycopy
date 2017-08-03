@@ -84,6 +84,7 @@ class GeofenceActivity : BaseActivity<GeofencePresenter>(), GeofenceView {
         logger.debug("Geofence ID: " + geofence?.id + " GEOFENCE: " + geofence?.toString())
         geofence_name.setText(geofence?.name)
         geofence_description.setText(geofence?.description)
+        geofence_area.setText(geofence?.area)
 
         fab_geofence_save.setOnClickListener {
             presenter?.onSaveButtonClick()
@@ -118,7 +119,10 @@ class GeofenceActivity : BaseActivity<GeofencePresenter>(), GeofenceView {
         }
         geofence.name = geofence_name.text.toString()
         geofence.description = geofence_description.text.toString()
-        geofence.area = "CIRCLE (48.6914811873322 44.4939265180183, 100.0)"
+        if(!geofence_area.text.isEmpty())
+            geofence.area = geofence_area.text.toString()
+        else
+            geofence.area = "CIRCLE (48.6914811873322 44.4939265180183, 100.0)"
 
         return geofence
     }

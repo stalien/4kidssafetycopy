@@ -20,6 +20,11 @@ package org.erlymon.monitor.view.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Shader;
 import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +34,11 @@ import android.widget.ListAdapter;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
+
 import org.erlymon.core.model.data.Device;
+import org.erlymon.core.model.data.User;
 import org.erlymon.monitor.MainPref;
 import org.erlymon.monitor.R;
 
@@ -84,6 +93,8 @@ public class DevicesAdapter extends RealmBaseAdapter<Device> implements ListAdap
  //       viewHolder.gridLayout.setBackgroundResource(getStatusColorId(item.getStatus()));
         viewHolder.identifier.setTextColor(getStatusColorId(item.getStatus()));
         viewHolder.devicePicture.setBackgroundResource(getStatusPictureId(item.getStatus()));
+
+
         return convertView;
 
 

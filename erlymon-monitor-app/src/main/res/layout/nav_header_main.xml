@@ -36,8 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|center"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="@dimen/nav_header_vertical_spacing">
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/iw4Kids"
@@ -45,7 +44,7 @@
             android:layout_height="120dp"
             android:clickable="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/family" />
+            android:src="@drawable/userphoto_default" />
 
         <TextView
             android:id="@+id/tv_app_name"
